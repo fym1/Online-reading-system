@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel='stylesheet' href='/stylesheets/style.css'/>
+    </head>
+    <body class="bg">
+        <header style="width:750px;height:140px;text-align:center;margin: 0 auto;padding-top: 10px;"> 
+          <img src="./images/logo.png" style="width:120px;height:120px;float:left;margin: 0 35px;"/>
+          <p style="float:left;color:white;font-size:42px;line-height:130px;">图文期刊在线阅读管理系统</p>
+        </header>
+        <div class="left">
+            <div class="nav">
+                <a href="/user">用户管理</a>
+            </div>
+            <div class="nav">
+                <a href="/block">评论管理</a>
+            </div>
+            <div class="nav">
+                <a href="/block">期刊管理</a>
+            </div>
+            <div class="nav">
+                <a href="/score">积分管理</a>
+            </div>
+            <div class="nav">
+                <a href="/system">系统管理</a>
+            </div>
+            <div class="nav">
+                <a href="/">返回</a>
+            </div>
+        </div>
+        <div class="right">
+            <div style="width:700px;height:150px;font-size:20px;text-align:center;margin:0 auto;margin-top:130px;line-height:60px;">
+                <div style="width:200px;height:150px;background:#f1a0a0;float:left;margin-right:50px;">
+                    <p style="font-size: 35px;">1</p>
+                    <p>日注册用户数</p>
+                </div>
+                <div style="width:200px;height:150px;background:#aae5c2;float:left;margin-right:50px">
+                    <p style="font-size: 35px;">1</p>
+                    <p>累计用户数量</p>
+                </div>
+                <div style="width:200px;height:150px;background:#eeeb57;float:left">
+                    <p style="font-size: 35px">1</p>
+                    <p>累计图文期刊数量</p>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+    <script>
+        console.log(document.body.scrollHeight)
+    </script>
+</html>

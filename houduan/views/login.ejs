@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>login</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/login.css'/>
+    <!-- 后端登录 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_oswwuan5y68.css">
+  </head>
+  <body class="bg">
+    <header style="width:750px;height:140px;text-align:center;margin: 0 auto;padding-top: 10px;"> 
+      <img src="./images/logo.png" style="width:120px;height:120px;float:left;margin: 0 35px;"/>
+      <p style="float:left;color:white;font-size:42px;line-height:130px;">图文期刊在线阅读管理系统</p>
+    </header>
+    <div class="mbox">
+      <div class="login">
+        <form>
+          <div style="width: 350px;margin: 0 auto;">
+            <span style="color: white;font-size: 18px;width: 60px;margin-left: 5px;margin-right: 2px;">手&nbsp;机&nbsp;号</span>
+            <input type="text" id="userphone" >
+          </div>
+          <div style="width: 350px;margin: 0 auto; ">
+            <span style="color: white;font-size: 18px;margin-left: 5px;width: 60px;">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span>
+            <input type="password" id="password">
+            <span class="iconfont icon-eye" id="eye" style="color:white;height: 60px;"></span>
+          </div>
+          <div style="width: 350px;margin: 5px auto;">
+            <span style="color: white;font-size: 18px;width: 60px;margin-left: 5px;margin-right: 3.8px;">验&nbsp;证&nbsp;码</span>
+            <input type="text" id="code" >
+            <input type="button" id="getcode" value="获取验证码">
+          </div>
+          </br>
+          <div style="width: 120px;margin: 0 auto;text-align: center;">
+            <button type="button" id="login">登 录</button>
+          </div>
+          <h2 style="text-align: center;margin-top: 25px;margin-bottom: 20px;"><a style="color: white;font-size: 16px;" href="/resign">不是管理员？去注册</a></h2>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript"></script>
+  <script>
+    // 查看密码
+    function temp(id){
+      return document.getElementById(id);
+    }
+    temp('eye').onmouseout = function(){
+      temp('password').type="password";
+    }
+    temp('eye').onmouseover = function(){
+      temp('password').type="text";
+    }
+    // 获取验证码
+    $("#getcode").click(function() {
+      /*生成验证码*/
+      function random(max,min){
+        return Math.round(Math.random()*(max-min)+min);
+      }
+      //生成随机字符库
+      var strData = "";
+      for(var i=0;i<5;i++){
+        var num = random(0,9);//生成0-9的随机数
+        var az = String.fromCharCode(random(97,122));//生成a-z
+        strData = strData + num + az
+      }
+      //从随机字符库中随机取4个
+      var str = "";
+      for(var i=0;i<4;i++){
+        str = str + strData[random(0,strData.length-1)];
+      }
+
+      $('#getcode').val(str);
+      $('#getcode').css({
+        'font-size':'18px',
+        'font-family':'Tekton Pro'
+      });
+    });
+  </script>
+</html>

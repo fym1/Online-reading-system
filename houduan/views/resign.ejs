@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>resign</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/resign.css'/>
+    <!-- 后端登录 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_oswwuan5y68.css">
+  </head>
+  <body class="bg">
+    <header style="width:750px;height:140px;text-align:center;margin: 0 auto;padding-top: 10px;"> 
+      <img src="./images/logo.png" style="width:120px;height:120px;float:left;margin: 0 35px;"/>
+      <p style="float:left;color:white;font-size:42px;line-height:130px;">图文期刊在线阅读管理系统</p>
+    </header>
+    <div class="mbox">
+      <div class="login">
+        <form>
+            <div style="width: 350px;margin: 0 auto;">
+                <span style="color: white;font-size: 18px;width: 60px;margin-left: 5px;margin-right: 2px;">手&nbsp;机&nbsp;号</span>
+                <input type="text" id="userphone" >
+            </div>
+            <div style="width: 350px;margin: 0 auto; ">
+                <span style="color: white;font-size: 18px;margin-left: 5px;width: 60px;">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span>
+                <input type="password" id="password1">
+                <span class="iconfont icon-eye" id="eye1" style="color:white;height: 60px;"></span>
+            </div>
+            <div style="width: 350px;margin: 0 auto; ">
+                <span style="color: white;font-size: 18px;width: 60px;margin-right: 2px;">确认密码</span>
+                <input type="password" id="password2">
+                <span class="iconfont icon-eye" id="eye2" style="color:white;height: 60px;"></span>
+            </div>
+            <div style="width: 120px;margin: 0 auto;text-align: center;">
+                <button type="button" id="login">注册</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript"></script>
+  <script>
+    // 查看密码
+    function temp(id){
+      return document.getElementById(id);
+    }
+    temp('eye1').onmouseout = function(){
+      temp('password1').type="password";
+    }
+    temp('eye1').onmouseover = function(){
+      temp('password1').type="text";
+    }
+    temp('eye2').onmouseout = function(){
+      temp('password2').type="password";
+    }
+    temp('eye2').onmouseover = function(){
+      temp('password2').type="text";
+    }
+
+  </script>
+</html>
