@@ -1,15 +1,42 @@
 .block{
     padding:5px 3% 5px 3%;
-    border-bottom: 1px gray solid;
+    border-top: 1px gray solid;
     overflow: hidden;
     width: 94%;
 }
+.block2{
+  padding:5px 3% 5px 3%;
+  height: 150px;
+  border-top: 1px gray solid;
+  border-radius: 0px 0px 60px 60px;
+  overflow: hidden;
+  width: 94%;
+  background-color: #EEE3E1;
+}
+.block3{
+  padding:5px 3% 5px 3%;
+  background-color: #fff;
+  border-radius: 20px;
+  width: 94%;
+  border: 3px #eee solid;
+  width: 70%;
+  height: 110px;
+  margin: 0 auto;
+  margin-top: -90px;
+}
+.block4{
+  padding:0px 3% 5px 3%;
+  background-color: #fff;
+  border-radius: 20px;
+  width: 94%;
+  border: 3px #eee solid;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 15px;
+}
 .block1{
     padding:5px 3% 5px 3%;
-    /* overflow: hidden; */
     width: 94%;
-    /* height: 200px;
-    background-color: red; */
 }
 body{
     background-color: #fff;
@@ -97,10 +124,10 @@ body{
 .deng0{
     height:20px;
     width:50%;
-    border:1px blue solid;
+    border:1px #000 solid;
     margin-top: 5px;
     text-align:center;
-    border-radius:2px;
+    border-radius:5px;
     line-height:20px
   }
   .personal1{
