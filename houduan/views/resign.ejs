@@ -29,8 +29,9 @@
                 <span class="iconfont icon-eye" id="eye2" style="color:white;height: 60px;"></span>
             </div>
             <div style="width: 120px;margin: 0 auto;text-align: center;">
-                <button type="button" id="login">注册</button>
+                <button type="button" id="resign">注册</button>
             </div>
+            <h2 style="text-align: center;margin-top: 25px;margin-bottom: 20px;"><a style="color: white;font-size: 16px;" href="/login">去登录</a></h2>
         </form>
       </div>
     </div>
@@ -54,6 +55,35 @@
     temp('eye2').onmouseover = function(){
       temp('password2').type="text";
     }
+     //添加数据
+     $('#resign').click(function(){
+            $.ajax({
+                url:'login',
+                method:'post',
+                data:{
+                  adminPhone: $('#userphone').val(),
+                  adminPwd1: $('#password1').val(),
+                  adminPwd2: $('#password2').val(),
+                },
+                success:function(data){
+                  if(data == 'success'){
+                      window.location.href='/login';
+                  }
+                  else if(data == 'phone-error'){
+                    alert('该手机号已注册过');
+                  }
+                  else if(data == 'pwd-null'){
+                    alert('密码为空');
+                  }
+                  else if(data == 'phone-null'){
+                    alert('手机号为空');
+                  }
+                  else if(data == 'pwd-error'){
+                    alert('密码输入不一致');
+                  }
+                }
+            })
+        })
 
   </script>
 </html>

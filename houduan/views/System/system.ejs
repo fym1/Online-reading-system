@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>系统管理</title>
+        <link rel='stylesheet' href='/stylesheets/style.css'/>
+        <link rel="stylesheet" href="/stylesheets/system.css">
+    </head>
+    <body class="bg">
+        <header style="width:100%;height:140px;"> 
+          <img src="./images/logo.png" style="width:120px;height:120px;float:left;margin-left: 30px;"/>
+          <p style="float:left;color:white;font-size:42px;line-height:130px;margin-left:40px;">图文期刊在线阅读管理系统</p>
+        </header>
+        <div class="left">
+            <div class="nav">
+                <a href="/user">用户管理</a>
+            </div>
+            <div class="nav">
+                <a href="/block">评论管理</a>
+            </div>
+            <div class="nav">
+                <a href="/book">期刊管理</a>
+            </div>
+            <div class="nav">
+                <a href="/score">积分管理</a>
+            </div>
+            <div class="nav" style="background: rgba(255,255,255,0.5);">
+                <a href="/system">系统管理</a>
+            </div>
+            <div class="nav">
+                <a href="/home">返回</a>
+            </div>
+        </div>
+        <div class="right">
+            <div style="width:75%;height:420px;margin:40px auto;background: rgba(255,255,255,0.5);;font-size:20px;text-align: center;">
+                <p style="text-align:center;color:white;padding-top:20px;font-size: 30px;">当前管理员信息</p>
+                <div style="width:530px;height: 350px;margin: 0 auto;">
+                <div style="width:130px;height:300px;margin:30px 10px;float: left;">
+                    <div style="width:130px;float:left;">
+                        <img src='/images/manage.jpg' style="width:100%;border-radius:50%;margin: 10px auto;">
+                    </div>
+                    <div style="width:130px;float:left;margin-top:20px;color: white;text-align: center;">
+                        <button id="btn" class="systembianji">编辑</button>
+
+                    </div> 
+                    <a href="/">
+                        <button id="out" class="systemOut">退出登录</button>
+                    </a>
+                </div>
+                <div style="width:335px;height:300px;margin:30px 20px;text-align:left;line-height:40px;float: left;">
+                    <div class="systemText">
+                        <p>用户名：
+                            <span id="sex">222</span>
+                        </p>
+                    </div>
+                    <div class="systemText">
+                        <p>姓名：
+                            <span id="sex">222</span>
+                        </p>
+                    </div>
+                    <div class="systemText">
+                        <p>手机号：
+                            <span id="phone">15031530670</span>
+                        </p>
+                    </div>
+                    <div class="systemText">
+                        <p>邮箱：
+                            <span id="email">1643613240@qq.com</span>
+                        </p>
+                    </div>
+                    <div class="systemText">
+                        <p>性别：
+                            <span id="position">222</span>
+                        </p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div id="pop-container">
+                <div id="cover-tier" class="popPosition"></div>
+                <div id="pop-tier" class="popPosition">
+                    <i id="close-pop">&#10006;</i>
+                    <form style="margin-top:50px;" action='/system' method='POST'>
+                        <div class='text'>
+                            <h4>性别：</h4>
+                            <input type="text" name="sex" id="new-sex"/>
+                        </div>
+                        <div class='text'>
+                            <h4>手机号：</h4>
+                            <input type="text" name="phone" id="new-phone"/>
+                        </div>
+                        <div class='text'>
+                            <h4>邮箱：</h4>
+                            <input type="text" name="email" id="new-email"/>
+                        </div>
+                        <div class='text'>
+                            <h4>职位：</h4>
+                            <input type="text" name="position" id="new-position"/>
+                        </div>
+                        <button type="submit" id="save" class="systemSave">保存</button> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+    <script>
+        function temp(id) {
+            return document.getElementById(id);
+        }
+        // 点击按钮出现弹出层
+        temp('btn').onclick = function() {
+            temp('pop-container').style.display = 'block';
+            $('#new-sex').val($('#sex').html());
+            $('#new-phone').val($('#phone').html());
+            $('#new-email').val($('#email').html());
+            $('#new-position').val($('#position').html());
+        }
+        // 点击右上角X弹出层隐藏
+        temp('close-pop').onclick = function() {
+            temp('pop-container').style.display = 'none';
+        }
+    </script>
+</html>

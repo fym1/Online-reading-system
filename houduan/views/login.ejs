@@ -75,5 +75,30 @@
         'font-family':'Tekton Pro'
       });
     });
+    // 验证身份
+    $('#login').click(function(){
+      $.ajax({
+        url:'/home',
+        method:'POST',
+        data:{
+          adminPhone: $('#userphone').val(),
+          adminPwd: $('#password').val(),
+          code: $('#code').val(),
+          getcode: $('#getcode').val(),
+        },
+        success:function(data){
+          if(data == 'success'){
+            window.location.href = "/home";
+          }
+          else if(data == 'code-error'){
+            alert('验证码错误，请重新输入');
+          }
+          else if(data == 'error'){
+            alert('用户名或密码错误');
+          }
+        }
+      })
+    });
+
   </script>
 </html>
