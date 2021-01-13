@@ -31,18 +31,18 @@ body{
 }
 .left{
   float: left;
-  width: 15%;
+  width: 18%;
 }
 .right{
   float: left;
-  width: 85%;
+  width: 82%;
 }
 .nav{
   color: white;
-  width: 120px;
+  width: 150px;
   height: 50px;
   margin-top: 35px;
-  margin-left: 30px;
+  margin-left: 25px;
   font-size: 24px;
   text-align: center;
   line-height: 50px;
@@ -65,4 +65,36 @@ body{
 }
 .list a{
   color: white;
+}
+/* 搜索 */
+.box1{
+  height: 40px;
+  width:500px;
+  margin-top: 25px; 
+  margin-left: 50px;
+}
+.search{
+  float: left;
+  width: 400px;
+  height: 40px;
+  border-radius: 20px;
+  border:1px solid #eee;
+  background: #eee;
+  font-size: 18px;
+}
+.Bar{
+  float: left;
+  width: 330px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  background: #eee;
+  padding-left: 10px;
+}
+.box2{
+  height: 80px;
+  width: 500px;
+  margin-top: 5px; 
+  margin-left: 50px;
+  /* background: red; */
 }

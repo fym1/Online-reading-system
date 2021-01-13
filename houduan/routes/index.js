@@ -112,6 +112,17 @@ router.get('/deleteuser', function(req, res, next) {
 router.get('/score', function(req, res, next) {
   res.render('Score/score', { title: 'score' });
 });
+/**获取任务 */
+router.get('/score/task', function(req, res, next) {
+  con.query("select * from task",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Score/task', {taskList:result});
+     }
+  })
+});
 router.get('/system', function(req, res, next) {
   res.render('System/system', { title: '系统管理' });
 });
