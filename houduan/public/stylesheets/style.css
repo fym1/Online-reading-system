@@ -31,11 +31,11 @@ body{
 }
 .left{
   float: left;
-  width: 18%;
+  width: 17%;
 }
 .right{
   float: left;
-  width: 82%;
+  width: 83%;
 }
 .nav{
   color: white;

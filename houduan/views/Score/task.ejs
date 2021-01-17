@@ -43,14 +43,6 @@
             </div>
             <div class='Taskbox3'>
                 <ul id="all">
-                    <!-- <li>
-                        <div class='Taskhead'>
-                        <h3 class='Taskhead1'><b>任务编号</b></h3>
-                        <h3 class='Taskhead1'><b>任务内容</b></h3>
-                        <h3 class='Taskhead1'><b>分数</b></h3>
-                        <h3 class='Taskhead1'><b>操作</b></h3>
-                         </div>
-                    </li> -->
                     <% for(var i = 0 ; i < taskList.length; i++) {%>
                         <li>
                             <p class='Taskbody'><%= taskList[i]["taskId"] %></p>  
@@ -60,22 +52,21 @@
                                 <div class='Topicoperation'>
                                     <a href='/score/edit?taskId=<%= taskList[i].taskId%>'class='operation1'>
                                         <button style="color: white;border:1px solid white;width: 50px;
-                                        height: 30px;">编辑
-                                            <!-- <input type='submit' style="float: right;border:1px solid #79be3b;background-color: #79be3b;" id='bianji' name="task" value=''> -->
+                                        height: 30px;background-color: transparent;">编辑
                                             </button> 
                                     </a>
                                     <a href='/score/deletetask?taskId=<%= taskList[i]["taskId"]%>'><button  style=" width: 50px;
                                         height: 30px;
                                         background-color: #fff;
-                                        border:1px solid #888;
-                                        color: #79be3b">移除</button></a>
+                                        border:1px solid #fff;
+                                        color: black">移除</button></a>
                                 </div> 
                             </div>                               
                         </li>
                     <%}%>
                 </ul>
             </div>
-            <div style=" width: 92%;height:30px;text-align: center;margin:0px auto;"> 
+            <div style=" width: 92%;height:30px;text-align: center;margin:0px auto;color:white"> 
                 <div class="page">
                     <div id="page">
                     </div>
@@ -95,7 +86,7 @@
                     <h2 style="float:left;margin-left:20px;margin-top:25px;" >分数:</h2>
                     <input type='text' id="create" style="width:265px;height:30px;margin-top:25px;"name='score'/>
                     <br/>
-                    <input value="保存" id="save" type="submit" style="float:right;border:'1px soild #61b3ed';margin-right:20px;width:55px;height:30px;background-color:#79be3b;color:'#ffffff';margin-top: 10px;"/>
+                    <input value="保存" id="save" type="submit" style="float:right;border:'1px soild white';margin-right:20px;width:55px;height:30px;background-color:transparent;color:'#ffffff';margin-top: 10px;"/>
                 </form>
             </div>
         </div>
@@ -153,8 +144,8 @@
             pageContent +='第<span id=\"a2\">'+pageno+'</span>/';
             pageContent +='<span id="a1">'+pageall+'</span>页';
             pageContent +="<span id='a3' style='margin-left:10px'>"+ye+'</span>';
-            pageContent +='<a href="#" style="margin-left:10px;" onClick="change(--pageno)">上一页</a>';
-            pageContent +='<a href="#" style="margin-left:5px;" onClick="change(++pageno)">下一页</a>';
+            pageContent +='<a href="#" style="margin-left:10px;color:white" onClick="change(--pageno)">上一页</a>';
+            pageContent +='<a href="#" style="margin-left:5px;color:white" onClick="change(++pageno)">下一页</a>';
             $("#page").html(pageContent);
     }
         var zz=getzz()

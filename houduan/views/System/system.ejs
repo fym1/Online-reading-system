@@ -49,29 +49,30 @@
                 <div style="width:335px;height:300px;margin:30px 20px;text-align:left;line-height:40px;float: left;">
                     <div class="systemText">
                         <p>用户名：
-                            <span id="sex">222</span>
+                            <span id="username"><%= manager.adminUsername%></span>
                         </p>
                     </div>
                     <div class="systemText">
                         <p>姓名：
-                            <span id="sex">222</span>
-                        </p>
-                    </div>
-                    <div class="systemText">
-                        <p>手机号：
-                            <span id="phone">15031530670</span>
-                        </p>
-                    </div>
-                    <div class="systemText">
-                        <p>邮箱：
-                            <span id="email">1643613240@qq.com</span>
+                            <span id="name"><%= manager.adminName%></span>
                         </p>
                     </div>
                     <div class="systemText">
                         <p>性别：
-                            <span id="position">222</span>
+                            <span id="sex"><%= manager.adminSex%></span>
                         </p>
                     </div>
+                    <div class="systemText">
+                        <p>手机号：
+                            <span id="phone"><%= manager.adminPhone%></span>
+                        </p>
+                    </div>
+                    <div class="systemText">
+                        <p>邮箱：
+                            <span id="email"><%= manager.adminEmail%></span>
+                        </p>
+                    </div>
+                
                 </div>
                 </div>
             </div>
@@ -83,21 +84,22 @@
                     <i id="close-pop">&#10006;</i>
                     <form style="margin-top:50px;" action='/system' method='POST'>
                         <div class='text'>
-                            <h4>性别：</h4>
-                            <input type="text" name="sex" id="new-sex"/>
+                            <h4>用户名：</h4>
+                            <input type="text" name="username" id="new-username"/>
                         </div>
                         <div class='text'>
-                            <h4>手机号：</h4>
-                            <input type="text" name="phone" id="new-phone"/>
+                            <h4>姓名</h4>
+                            <input type="text" name="name" id="new-name"/>
+                        </div>
+                        <div class='text'>
+                            <h4>性别：</h4>
+                            <input type="text" name="sex" id="new-sex"/>
                         </div>
                         <div class='text'>
                             <h4>邮箱：</h4>
                             <input type="text" name="email" id="new-email"/>
                         </div>
-                        <div class='text'>
-                            <h4>职位：</h4>
-                            <input type="text" name="position" id="new-position"/>
-                        </div>
+                      
                         <button type="submit" id="save" class="systemSave">保存</button> 
                     </form>
                 </div>
@@ -113,10 +115,10 @@
         // 点击按钮出现弹出层
         temp('btn').onclick = function() {
             temp('pop-container').style.display = 'block';
+            $('#new-username').val($('#username').html());
+            $('#new-name').val($('#name').html());
             $('#new-sex').val($('#sex').html());
-            $('#new-phone').val($('#phone').html());
             $('#new-email').val($('#email').html());
-            $('#new-position').val($('#position').html());
         }
         // 点击右上角X弹出层隐藏
         temp('close-pop').onclick = function() {

@@ -20,7 +20,7 @@ router.get('/resign', function(req, res, next) {
   res.render('resign', { title: '注册' });
 });
 /**注册管理员 */
-router.post('/addadmin', function(req, res, next) {
+router.post('/login', function(req, res, next) {
   var data = req.body;
   var phone = data.adminPhone;
   var pwd1 = data.adminPwd1;
@@ -52,7 +52,14 @@ router.post('/addadmin', function(req, res, next) {
               if(err){
                 console.log(err);
               }else{  
-                res.end('success');
+                con.query("insert into admininflist(adminPhone) values(?)",[phone],function (err,result) {
+                  if(err){
+                    console.log(err);
+                  }else{   
+                    res.end('success');
+                  }
+                });
+                // res.end('success');
               }
             });
           }
@@ -101,12 +108,49 @@ router.get('/home', function(req, res, next) {
 //用户管理
 /**获取用户--升序（默认） */
 router.get('/user', function(req, res, next) {
-  res.render('User/user', { title: '用户管理' });
+  con.query("select * from user order by userId asc",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("User/user",{userList:result});
+    }
+  })
+});
+/**获取用户--降序 */
+router.get('/userdesc', function(req, res, next) {
+  con.query("select * from user order by userId desc",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("User/user",{userList:result});
+    }
+  })
 });
 /**删除用户 */
 router.get('/deleteuser', function(req, res, next) {
-  res.render('User/deleteUser', { title: 'deleteuser' });
- 
+  var userId=req.query.userId;
+  con.query("delete from user where userId=?",[userId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('User/deleteUser', { title: 'deleteuser' });
+    }
+  })
+});
+/**搜索用户 */
+router.post('/searchuser', function(req, res, next) {
+  var userPhone=req.body.userPhone;
+  con.query("select * from user where userPhone=?",[userPhone],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('User/searchUser', { userList:result,userPhone:userPhone });
+    }
+  })
 });
 //积分管理
 router.get('/score', function(req, res, next) {
@@ -123,7 +167,116 @@ router.get('/score/task', function(req, res, next) {
      }
   })
 });
+/**删除任务 */
+router.get('/score/deletetask', function(req, res, next) {
+  var taskId=req.query.taskId;
+  con.query("delete from task where taskId=?",[taskId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Score/deleteTask', { title: 'deletetask' });
+    }
+  })
+});
+/**搜索任务 */
+router.post('/score/searchtask', function(req, res, next) {
+  var taskId=req.body.taskId;
+  con.query("select * from task where taskId=?",[taskId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Score/searchtask",{taskList:result});
+    }
+  })
+});
+/**添加任务 */
+router.post('/score/addtask', function(req, res, next) {
+  var score=req.body.score;
+  var content=req.body.content;
+  console.log(score);
+  console.log(content);
+  con.query("insert into task(taskContent,taskScore) values(?,?)",[content,score],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{  
+      res.render('Score/addTask', { title: 'addtask'});
+    }
+  });
+});
+let taskId=0;
+/**编辑任务 */
+router.get('/score/edit', function(req, res, next) {
+  taskId=req.query.taskId;
+  console.log(taskId);
+  con.query("select * from task;select * from task where taskId=?",[taskId],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      res.render("Score/editTask",{taskList:result[0],editdata:result[1][0]});  
+    }
+  });
+});
+router.post('/score/edit', function(req, res, next) {
+  var taskContent=req.body.taskContent;
+  var taskScore=req.body.taskScore;
+  console.log(taskScore)
+  con.query("update task set taskContent=?,taskScore=? where taskId=?",[taskContent,taskScore,taskId],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      res.end('success');
+    }
+  });
+});
+/**编辑搜索任务 */
+router.get('/score/edit1', function(req, res, next) {
+  taskId=req.query.taskId;
+  console.log(taskId);
+  con.query("select * from task where taskId=?",[taskId],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      res.render("Score/editTask1",{taskList:result,editdata:result[0]});
+
+    }
+  });
+});
+/*系统管理*/
+//显示管理员信息
 router.get('/system', function(req, res, next) {
-  res.render('System/system', { title: '系统管理' });
+  con.query("select * from admininflist where adminPhone=?",[manager],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('System/system', { manager: result[0] });   
+    }
+  });
+});
+//编辑管理员信息
+router.post('/system', function(req, res, next) {
+  var data = req.body; 
+  var username = data.username;
+  var name = data.name;
+  var sex = data.sex;
+  var email = data.email;
+  console.log(data);
+  con.query("update admininflist set adminUsername=?,adminName=?,adminSex=?,adminEmail=? where adminPhone=?",[username,name,sex ,email,manager],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      con.query("select * from admininflist where adminPhone=?",[manager],function(err,result){
+        if(err){
+          console.log(err);
+        }
+        else{
+          res.render('System/system', { manager: result[0] });   
+        }
+      });   
+    }
+  });
 });
 module.exports = router;
