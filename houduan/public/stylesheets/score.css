@@ -6,30 +6,33 @@
 }
 .Listbox3{
     width:92%;
-    height: 300px;
+    height: 295px;
     margin-left: 50px;
-    margin-top: 10px;
-    border:1px solid #eee;
-    color: white;
+    margin-top: 40px;
+    background-color: rgba(255,255,255,0.5);
     margin-bottom: 10px;
+    color: white;
 }
 .Listbox3 ul{
     /* width: 1100px; */
     width: 100%;
     height: 300px;
     float: left;
+    color: white;
+
   }
 .Listbox3 li{
     width: 100%;
     height: 58px;
-    border:1px solid #eee;
+    border-bottom:1px solid rgba(255,255,255,0.7);
     float: left;
+    color: white;
+
 }
 .Listhead{
     text-align: center;
     line-height:3.7rem;
     color: white;
-    border:1px solid #eee;
     /* line-height:3rem; */
     /* background-color: pink; */
 }
@@ -47,13 +50,12 @@
 /* 个人详细积分 */
 .ListInbox3{
     width:92%;
-    height: 300px;
-    margin-top:30px;
+    height: 295px;
     margin-left: 50px;
-    /* background-color: #eee; */
-    border:1px solid #eee;
+    margin-top: 40px;
+    background-color: rgba(255,255,255,0.5);
     margin-bottom: 10px;
-    color:white
+    color: white;
 }
 .ListInbox3 ul{
     width: 100%;
@@ -63,7 +65,7 @@
 .ListInbox3 li{
     width: 100%;
     height: 58px;
-    border:1px solid #eee;
+    border-bottom:1px solid rgba(255,255,255,0.7);
     /* background-color: pink; */
     float: left;
 } 
@@ -95,10 +97,10 @@
 /* 积分对照表 */
 .Taskbox3{
     width:92%;
-    height: 300px;
+    height: 295px;
     margin-left: 50px;
-    margin-top: 10px;
-    border:1px solid #eee;
+    margin-top: 40px;
+    background-color: rgba(255,255,255,0.5);
     margin-bottom: 10px;
     color: white;
 }
@@ -112,7 +114,7 @@
 .Taskbox3 li{
     width: 100%;
     height: 58px;
-    border:1px solid #eee;
+    border-bottom:1px solid rgba(255,255,255,0.7);
     /* background-color: pink; */
     float: left;
     color: white;
@@ -129,6 +131,8 @@
     /* width: 135px; */
     width: 25%;
     color: white;
+    text-align: center;
+
 }
 .Taskbody{
     float: left;

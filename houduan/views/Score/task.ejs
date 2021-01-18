@@ -27,19 +27,15 @@
         <div class="right">
             <div class="box1">
                 <div class='search'>
-                    <form style="line-height: 2.5em;"  method="post" action="/score/searchtask">
+                    <form style="line-height: 3em;"  method="post" action="/score/searchtask">
                         <input class='Bar' placeholder="请输入要查找的任务编号" name='taskId'/>
                         <div class="iconfont icon-xiaoxi-" style="float:left;">
-                            <input type="submit" value="搜索"style="height:30px;border:none;">
+                            <input type="submit" value="搜索"style="height:30px;border:none; background:transparent; color:white;">
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="box2">
-                <p style="font-size:22px;font-weight:bold;color: #fff;">任务管理
-                    <span style="margin-left:30px" class="iconfont icon-wuuiconxiangjifangda" id="btn"></span>
-                    <span style="font-size:20px;margin-left:5px;font-weight:lighter">添加</span>
-                </p>
+                <span style="margin-left:50px;line-height:3.5em" class="iconfont icon-wuuiconxiangjifangda" id="btn"></span>
+                <span style="font-size:20px;margin-left:5px;font-weight:lighter">添加</span>
             </div>
             <div class='Taskbox3'>
                 <ul id="all">
@@ -52,13 +48,15 @@
                                 <div class='Topicoperation'>
                                     <a href='/score/edit?taskId=<%= taskList[i].taskId%>'class='operation1'>
                                         <button style="color: white;border:1px solid white;width: 50px;
-                                        height: 30px;background-color: transparent;">编辑
+                                        height: 30px;background-color: transparent;    border-radius: 10px;
+">编辑
                                             </button> 
                                     </a>
                                     <a href='/score/deletetask?taskId=<%= taskList[i]["taskId"]%>'><button  style=" width: 50px;
                                         height: 30px;
                                         background-color: #fff;
                                         border:1px solid #fff;
+                                        border-radius: 10px;
                                         color: black">移除</button></a>
                                 </div> 
                             </div>                               
@@ -66,7 +64,7 @@
                     <%}%>
                 </ul>
             </div>
-            <div style=" width: 92%;height:30px;text-align: center;margin:0px auto;color:white"> 
+            <div style=" width: 92%;height:30px;text-align: center;margin:25px auto;color:white"> 
                 <div class="page">
                     <div id="page">
                     </div>

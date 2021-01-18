@@ -98,9 +98,9 @@ body{
   margin-left: 50px;
   background: red;
 }
-input{
+/* input{
   background: transparent;
-}
+} */
 
 input::-webkit-input-placeholder {
   color: #fff;
