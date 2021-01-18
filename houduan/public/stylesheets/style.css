@@ -68,33 +68,41 @@ body{
 }
 /* 搜索 */
 .box1{
-  height: 40px;
-  width:500px;
-  margin-top: 25px; 
+  height: 55px;
+  margin-top: 40px; 
   margin-left: 50px;
+  color: #fff;
 }
 .search{
   float: left;
   width: 400px;
-  height: 40px;
+  height: 50px;
   border-radius: 20px;
-  border:1px solid #eee;
-  background: #eee;
+  border:1px solid transparent;
+  background: rgba(255,255,255,0.5);
   font-size: 18px;
 }
 .Bar{
   float: left;
   width: 330px;
-  height: 40px;
+  height: 50px;
   border-radius: 20px;
   border: none;
-  background: #eee;
+  background: transparent;
   padding-left: 10px;
 }
 .box2{
   height: 80px;
-  width: 500px;
+  width: 300px;
   margin-top: 5px; 
   margin-left: 50px;
-  /* background: red; */
+  background: red;
+}
+input{
+  background: transparent;
+}
+
+input::-webkit-input-placeholder {
+  color: #fff;
+  text-align: left;
 }

@@ -37,29 +37,26 @@
             </div>
         </div>
         <div class="right">
-            <div class="box1">
+            <div class="box1" >
                 <div class='search'>
-                    <form style="line-height: 2.5em;" method="post" action="/searchuser">
+                    <form style="line-height: 3em;" method="post" action="/searchuser">
                         <input class='Bar' placeholder="请输入要查找用户的手机号" name='userPhone' />
                         <div class="iconfont icon-xiaoxi-" style="float:left;">
-                            <input type="submit" value="搜索"style="height:30px;border:none;">
+                            <input type="submit" value="搜索"style="height:30px;border:none; color:white; background:transparent;
+                            ">
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="box2">
-                <p style="font-size:22px;font-weight:bold;color: white;" >用户管理
-                    <a href='/user' style="color: white;">
-                    <span style="margin-left:30px;font-size: 35px;line-height:1.8em" class="iconfont iconpaixu-shengxu" id="btn"></span>
+                <a href='/user' style="color: white;">
+                    <span style="margin-left:50px;font-size: 35px;line-height:1.8em" class="iconfont iconpaixu-shengxu" id="btn"></span>
                     <span style="font-size:20px;margin-left:5px;font-weight:lighter">ID升序</span>
                     </a>
                     <a href="/userdesc"  style="color: white;">
-                    <span style="margin-left:30px;font-size: 35px;line-height:1.8em" class="iconfont iconpaixu-jiangxu" id="btn"></span>
+                    <span style="margin-left:50px;font-size: 35px;line-height:1.8em" class="iconfont iconpaixu-jiangxu" id="btn"></span>
                     <span style="font-size:20px;margin-left:5px;font-weight:lighter">ID降序</span>
-                    </a>
-                </p>
+                </a>  
             </div>
-            <div class='Userbox3'>
+            <div class='Userbox3' >
                 <ul id="all" >
                     <% for(var i = 0 ; i <  userList.length; i++) {%>
                     <li>
@@ -80,7 +77,7 @@
                     <%}%>
                </ul>
             </div>
-            <div style=" width:92%;height:30px;text-align: center;margin:0px auto;color:white"> 
+            <div style=" width:92%;height:30px;text-align: center;margin:25px auto;color:white"> 
                 <div class="page">
                     <div id="page">
                     </div>
@@ -120,20 +117,20 @@
             }
             $("ul#all").html(html);
             var ye="";
-            for(var j=1;j<=pageall;j++){
-                if(e==j){
-                    ye=ye+"<span><a href='#' onClick='change("+j+")' style='color:#FF0000'>"+j+"</a></span> "
-                }else{
-                    ye=ye+"<a href='#' onClick='change("+j+")'>"+j+"</a> "
-                }
+        for(var j=1;j<=pageall;j++){
+            if(e==j){
+                ye=ye+"<span><a href='#' onClick='change("+j+")' style='background:rgba(255,255,255,0.5);color:white'>"+j+"</a></span> "
+            }else{
+                ye=ye+"<a href='#' style='color:#fff' onClick='change("+j+")'>"+j+"</a> "
             }
-            var pageContent="";
-                pageContent +='第<span id=\"a2\">'+pageno+'</span>/';
-                pageContent +='<span id="a1">'+pageall+'</span>页';
-                pageContent +="<span id='a3' style='margin-left:10px'>"+ye+'</span>';
-                pageContent +='<a href="#" style="margin-left:10px;color:white" onClick="change(--pageno)">上一页</a>';
-                pageContent +='<a href="#" style="margin-left:5px;color:white" onClick="change(++pageno)">下一页</a>';
-                $("#page").html(pageContent);
+        }
+        var pageContent="";
+            pageContent +='第<span id=\"a2\">'+pageno+'</span>/';
+            pageContent +='<span id="a1">'+pageall+'</span>页';
+            pageContent +='<a href="#" style="margin-left:10px;color:white" onClick="change(--pageno)"><</a>';
+            pageContent +="<span id='a3' style='margin-left:10px'>"+ye+'</span>';
+            pageContent +='<a href="#" style="margin-left:5px;color:white" onClick="change(++pageno)">></a>';
+            $("#page").html(pageContent);
         }
             var zz=getzz()
             var pageno=1 ; 

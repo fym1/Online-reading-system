@@ -156,6 +156,55 @@ router.post('/searchuser', function(req, res, next) {
 router.get('/score', function(req, res, next) {
   res.render('Score/score', { title: 'score' });
 });
+//积分表管理
+/**获取积分总表 */
+router.get('/score/list', function(req, res, next) {
+  con.query("select * from score order by sum desc",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Score/list",{scoreList:result});
+    }
+  })
+});
+/**获取个人积分明细表 */
+router.get('/score/slist', function(req, res, next) {
+  sum=[];
+  var sum0=0;
+  var userPhone=req.query.userPhone;
+  var userName=req.query.userName;
+  con.query("select * from slist where userName=?",[userName],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      for(var i = 0 ; i < result.length; i++) {
+        if(i==0){
+          sum[i]=parseInt(result[i].taskScore)
+        }
+        else{
+          sum[i]=parseInt(result[i].taskScore)+sum[i-1]
+        }
+      }
+      res.render("Score/listIn",{slistList:result,userName:userName,userPhone:userPhone,sum:sum});
+    }
+  })
+});
+/**搜索用户积分 */
+router.post('/searchuserscore', function(req, res, next) {
+  var userName=req.body.userName;
+  con.query("select * from score where userName=?",[userName],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Score/searchUserScore', { scoreList:result,userName:userName,});
+    }
+  })
+});
+//积分任务管理
+
 /**获取任务 */
 router.get('/score/task', function(req, res, next) {
   con.query("select * from task",function(err,result){
@@ -243,6 +292,7 @@ router.get('/score/edit1', function(req, res, next) {
     }
   });
 });
+
 /*系统管理*/
 //显示管理员信息
 router.get('/system', function(req, res, next) {
