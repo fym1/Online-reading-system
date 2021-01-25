@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>用户管理</title>
+        <title>评论管理</title>
         <link rel='stylesheet' href='/stylesheets/style.css'/>
+        <link rel='stylesheet' href='/stylesheets/block.css'/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -17,10 +18,10 @@
           <p style="float:left;color:white;font-size:42px;line-height:130px;margin-left:40px;">图文期刊在线阅读管理系统</p>
         </header>
         <div class="left">
-            <div class="nav" style="background: rgba(255,255,255,0.5);">
+            <div class="nav">
                 <a href="/user">用户管理</a>
             </div>
-            <div class="nav">
+            <div class="nav" style="background: rgba(255,255,255,0.5);">
                 <a href="/block">评论管理</a>
             </div>
             <div class="nav">
@@ -39,44 +40,25 @@
         <div class="right">
             <div class="box1" >
                 <div class='search'>
-                    <form style="line-height: 3em;" method="post" action="/searchuser">
-                        <input class='Bar' placeholder="请输入要查找用户的手机号" name='userPhone' />
+                    <form style="line-height: 3em;" method="post" action="/searchBlock">
+                        <input class='Bar' placeholder="请输入要查找的书号" name='bookId' />
                         <div class="iconfont icon-xiaoxi-" style="float:left;">
                             <input type="submit" value="搜索"style="height:30px;border:none; color:white; background:transparent;
                             ">
                         </div>
                     </form>
                 </div>
-                <a href='/user' style="color: white;">
-                    <span style="margin-left:50px;font-size: 35px;line-height:1.8em" class="iconfont iconpaixu-shengxu" id="btn"></span>
-                    <span style="font-size:20px;margin-left:5px;font-weight:lighter">ID升序</span>
-                    </a>
-                    <a href="/userdesc"  style="color: white;">
-                    <span style="margin-left:50px;font-size: 35px;line-height:1.8em" class="iconfont iconpaixu-jiangxu" id="btn"></span>
-                    <span style="font-size:20px;margin-left:5px;font-weight:lighter">ID降序</span>
-                </a>  
             </div>
-            <div class='Userbox3' >
+            <div class='Blockbox3' >
                 <ul id="all" >
-                    <% for(var i = 0 ; i <  userList.length; i++) {%>
-                    <li>
-                        <p class='Userbody'><%= userList[i]["userId"] %></p>
-                        <div class='Userbody'>
-                            <%if(userList[i]["userImage"]!="-"){%>
-                                <img class="Userimg" src='<%= userList[i]["userImage"] %>'/>
-                            <%}
-                            else{%>
-                                <img class="Userimg" src='http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png'/>
-                            <%}%>
-                        </div>
-                        <p class='Userbody'><%= userList[i]["userPhone"] %></p>
-                        <p class='Userbody'><%= userList[i]["userName"] %></p>
-                        <p class='Userbody'><%= userList[i]["userSex"] %></p>
-                        <p class='Userbody'><%= userList[i]["userBir"].slice(0,10)%></p>
-                        <p class='Userbody'><a style="text-decoration:none;color: white;" href='/subscribe?userPhone=<%= userList[i]["userPhone"]%>&&userName=<%= userList[i]["userName"]%>'>查看详情</a></p>  
-                        <p class='Userbody'><a href='/deleteuser?userPhone=<%= userList[i]["userPhone"]%>'><button class='Userdel' >移除</button></a></p>
-                    </li>
-                    <%}%>
+                    <% for(var i = 0 ; i < blockList.length; i++) {%>
+                        <li>
+                            <p class='Blockbody'><%= blockList[i]["postId"] %></p>
+                            <p class='Blockbody'><%= blockList[i]["bookId"] %></p>
+                            <p class='Blockbody'><%= blockList[i]["userPhone"]%></p>
+                            <p class='Blockbody'><a style="text-decoration:none;color: white;" href='/comment?bookId=<%= blockList[i]["bookId"] %>'>所有评论</a></p>  
+                        </li>
+                    <%}%>  
                </ul>
             </div>
             <div style=" width:92%;height:30px;text-align: center;margin:25px auto;color:white"> 
@@ -108,10 +90,10 @@
             }
             $("#all").html("");
             if(pageno==1){
-                var html=" <li><div class='Userhead'><h3 class='Userhead1'>用户ID</h3><h3 class='Userhead1'>头像</h3><h3 class='Userhead1'>手机号</h3><h3 class='Userhead1'>用户名</h3><h3 class='Userhead1'>性别</h3><h3 class='Userhead1'>生日</h3><h3 class='Userhead1'>订阅</h3><h3 class='Userhead1'>操作</h3></div></li> ";
+                var html=" <li><div class='Blockhead'><h3 class='Blockhead1'>编号</h3><h3 class='Blockhead1'>图文期刊编号</h3><h3 class='Blockhead1'>总评论数</h3><h3 class='Blockhead1'>查看详情</h3></div></li> ";
             }
             else{
-                var html=" <li><div class='Userhead'><h3 class='Userhead1'>用户ID</h3><h3 class='Userhead1'>头像</h3><h3 class='Userhead1'>手机号</h3><h3 class='Userhead1'>用户名</h3><h3 class='Userhead1'>性别</h3><h3 class='Userhead1'>生日</h3><h3 class='Userhead1'>订阅</h3><h3 class='Userhead1'>操作</h3></div></li> ";
+                var html=" <li><div class='Blockhead'><h3 class='Blockhead1'>编号</h3><h3 class='Blockhead1'>图文期刊编号</h3><h3 class='Blockhead1'>总评论数</h3><h3 class='Blockhead1'>查看详情</h3></div></li> ";
             }
             for(var i=0;i<pagesize;i++){
                 html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';

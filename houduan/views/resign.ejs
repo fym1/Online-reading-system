@@ -4,7 +4,7 @@
     <title>resign</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/resign.css'/>
-    <!-- 后端登录 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_oswwuan5y68.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_oswwuan5y68.css">
   </head>
   <body class="bg">
     <header style="width:750px;height:140px;text-align:center;margin: 0 auto;padding-top: 10px;"> 
@@ -55,35 +55,34 @@
     temp('eye2').onmouseover = function(){
       temp('password2').type="text";
     }
-     //添加数据
-     $('#resign').click(function(){
-            $.ajax({
-                url:'login',
-                method:'post',
-                data:{
-                  adminPhone: $('#userphone').val(),
-                  adminPwd1: $('#password1').val(),
-                  adminPwd2: $('#password2').val(),
-                },
-                success:function(data){
-                  if(data == 'success'){
-                      window.location.href='/login';
-                  }
-                  else if(data == 'phone-error'){
-                    alert('该手机号已注册过');
-                  }
-                  else if(data == 'pwd-null'){
-                    alert('密码为空');
-                  }
-                  else if(data == 'phone-null'){
-                    alert('手机号为空');
-                  }
-                  else if(data == 'pwd-error'){
-                    alert('密码输入不一致');
-                  }
-                }
-            })
-        })
-
+    //添加数据
+    $('#resign').click(function(){
+      $.ajax({
+        url:'resign',
+        method:'post',
+        data:{
+          adminPhone: $('#userphone').val(),
+          adminPwd1: $('#password1').val(),
+          adminPwd2: $('#password2').val(),
+        },
+        success:function(data){
+          if(data == 'success'){
+              window.location.href='/resignsuccess';
+          }
+          else if(data == 'phone-error'){
+            alert('该手机号已注册过');
+          }
+          else if(data == 'pwd-null'){
+            alert('密码为空');
+          }
+          else if(data == 'phone-null'){
+            alert('手机号为空');
+          }
+          else if(data == 'pwd-error'){
+            alert('密码输入不一致');
+          }
+        }
+      })
+    })
   </script>
 </html>

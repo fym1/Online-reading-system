@@ -20,7 +20,7 @@ router.get('/resign', function(req, res, next) {
   res.render('resign', { title: '注册' });
 });
 /**注册管理员 */
-router.post('/login', function(req, res, next) {
+router.post('/resign', function(req, res, next) {
   var data = req.body;
   var phone = data.adminPhone;
   var pwd1 = data.adminPwd1;
@@ -30,7 +30,23 @@ router.post('/login', function(req, res, next) {
       console.log(err);
     }
     else{
-      for(var i=0;i<result.length;i++){
+      if(result.length==0){
+        con.query("insert into adminlist(adminPhone,adminPwd) values(?,?)",[phone,pwd1],function (err,result) {
+          if(err){
+            console.log(err);
+          }else{  
+            con.query("insert into admininflist(adminPhone) values(?)",[phone],function (err,result) {
+              if(err){
+                console.log(err);
+              }else{   
+                res.end('success');
+              }
+            });
+          }
+        });
+      }
+      else{
+        for(var i=0;i<result.length;i++){
           if(phone == result[i].adminPhone){
             res.end('phone-error');
             break;
@@ -59,13 +75,17 @@ router.post('/login', function(req, res, next) {
                     res.end('success');
                   }
                 });
-                // res.end('success');
               }
             });
           }
         }
+      }
     } 
   })
+});
+/**注册成功 */
+router.get('/resignsuccess', function(req, res, next) {
+  res.render('resignsuccess', { title: '首页' });
 });
 /*验证身份 */
 router.post('/home', function(req, res, next) {
@@ -101,10 +121,27 @@ router.post('/home', function(req, res, next) {
     }
   });
 });
-/*首页*/
+//首页
 router.get('/home', function(req, res, next) {
-  res.render('home', { title: '首页' });
-});
+  let now='';
+  var time=new Date();
+  var year = time.getFullYear();
+  var month = time.getMonth() + 1;
+  var date = time.getDate();
+  now = year + '-' + conver(month) + "-" + conver(date);
+  function conver(s) {
+      return s < 10 ? '0' + s : s;
+  }
+  con.query("select * from user;select * from user where userDay =?;select * from book",[now],function(err,result){
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log(result[1]);
+        res.render('home',{userListall:result[0],userListnew:result[1],bookList:result[2]});
+      }
+    })
+}); 
 //用户管理
 /**获取用户--升序（默认） */
 router.get('/user', function(req, res, next) {
@@ -130,8 +167,8 @@ router.get('/userdesc', function(req, res, next) {
 });
 /**删除用户 */
 router.get('/deleteuser', function(req, res, next) {
-  var userId=req.query.userId;
-  con.query("delete from user where userId=?",[userId],function(err,result){
+  var userPhone=req.query.userPhone;
+  con.query("delete from user where userPhone=?",[userPhone],function(err,result){
     if(err){
       console.log(err);
     }
@@ -150,6 +187,106 @@ router.post('/searchuser', function(req, res, next) {
     else{
       res.render('User/searchUser', { userList:result,userPhone:userPhone });
     }
+  })
+});
+/**订阅详情 */
+router.get('/subscribe', function(req, res, next) {
+  var userPhone=req.query.userPhone;
+  var userName=req.query.userName;
+  con.query("select * from subscribe where userPhone=?",[userPhone],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("User/subscribe",{subList:result,userName:userName,userPhone:userPhone});
+    }
+  })
+});
+/**阅读记录 */
+router.get('/record', function(req, res, next) {
+  var userPhone=req.query.userPhone;
+  var bookId=req.query.bookId;
+  con.query("select * from record where userPhone=? and bookId=?",[userPhone,bookId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("User/record",{subList:result,userPhone:userPhone,bookId:bookId});
+    }
+  })
+});
+//评论管理
+/**获取评论 */
+router.get('/block', function(req, res, next) {
+  con.query("select distinct bookId,count(postId) as num from post group by bookId ",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log(result);
+      res.render("Block/block",{blockList:result});
+    }
+  })
+});
+/**搜索某个书的所有评论 */
+router.post('/searchBlock', function(req, res, next) {
+  var bookId=req.body.bookId;
+  con.query("select * from post where bookId=?",[bookId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log(result);
+      res.render("Block/searchblock",{blockList:result});
+    }
+  })
+});
+/**全部评论 */
+router.get('/comment', function(req, res, next) {
+  var bookId=req.query.bookId;
+  con.query("select * from post where bookId=?",[bookId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Block/comment",{CommentList:result,bookId:bookId});
+    }
+  })
+});
+/**获取回复内容 */
+router.get('/reply', function(req, res, next) {
+  var postId=req.query.postId;
+  con.query("select * from reply where postId=?",[postId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Block/reply",{ReplyList:result,postId:postId});
+    }
+  })
+});
+/**获取回复内容详情 */
+router.get('/replyIn', function(req, res, next) {
+  var replyId=req.query.replyId;
+  con.query("select * from reply where replyId=?",[replyId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Block/replyIn",{ReplyInList:result,replyId:replyId});
+    }
+  })
+});
+//期刊管理
+/**获取期刊 */
+router.get('/book', function(req, res, next) {
+  con.query("select * from book order by bookId asc",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Book/book', {bookList:result});
+     }
   })
 });
 //积分管理
@@ -174,7 +311,7 @@ router.get('/score/slist', function(req, res, next) {
   var sum0=0;
   var userPhone=req.query.userPhone;
   var userName=req.query.userName;
-  con.query("select * from slist where userName=?",[userName],function(err,result){
+  con.query("select * from slist where userPhone=?",[userPhone],function(err,result){
     if(err){
       console.log(err);
     }
@@ -193,18 +330,17 @@ router.get('/score/slist', function(req, res, next) {
 });
 /**搜索用户积分 */
 router.post('/searchuserscore', function(req, res, next) {
-  var userName=req.body.userName;
-  con.query("select * from score where userName=?",[userName],function(err,result){
+  var userPhone=req.body.userPhone;
+  con.query("select * from score where userPhone=?",[userPhone],function(err,result){
     if(err){
       console.log(err);
     }
     else{
-      res.render('Score/searchUserScore', { scoreList:result,userName:userName,});
+      res.render('Score/searchUserScore', { scoreList:result,userPhone:userPhone});
     }
   })
 });
 //积分任务管理
-
 /**获取任务 */
 router.get('/score/task', function(req, res, next) {
   con.query("select * from task",function(err,result){
@@ -292,9 +428,8 @@ router.get('/score/edit1', function(req, res, next) {
     }
   });
 });
-
-/*系统管理*/
-//显示管理员信息
+//系统管理
+/*显示管理员信息*/
 router.get('/system', function(req, res, next) {
   con.query("select * from admininflist where adminPhone=?",[manager],function(err,result){
     if(err){
@@ -305,7 +440,7 @@ router.get('/system', function(req, res, next) {
     }
   });
 });
-//编辑管理员信息
+/*编辑管理员信息*/
 router.post('/system', function(req, res, next) {
   var data = req.body; 
   var username = data.username;

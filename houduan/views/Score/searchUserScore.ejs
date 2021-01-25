@@ -48,7 +48,7 @@
                     </li> -->
                     <% for(var i = 0 ; i < scoreList.length; i++) {%>
                         <li>
-                            <p class='Listbody'><%= scoreList[i]["userName"] %></p>  
+                            <p class='Listbody'><%= scoreList[i]["userPhone"] %></p>  
                             <p class='Listbody'><%= scoreList[i]["updateTime"].slice(0,10) %></p>
                             <p class='Listbody'><%= scoreList[i]["sum"] %></p>            
                             <p class='Listbody'><%= i+1 %></p>  
@@ -88,10 +88,10 @@
             }
             $("#all").html("");//全部清空
             if(pageno==1){
-                var html="  <li ><div class='Listhead'><h3 class='Listhead1'><b>用户名</b></h3><h3 class='Listhead1'><b>更新时间</b></h3><h3 class='Listhead1' ><b>总分</b></h3><h3 class='Listhead1' ><b>排名</b></h3><h3 class='Listhead1'><b>个人积分</b></h3></div></li>";
+                var html="  <li ><div class='Listhead'><h3 class='Listhead1'><b>手机号</b></h3><h3 class='Listhead1'><b>更新时间</b></h3><h3 class='Listhead1' ><b>总分</b></h3><h3 class='Listhead1' ><b>排名</b></h3><h3 class='Listhead1'><b>个人积分</b></h3></div></li>";
             }
             else{
-                var html="  <li ><div class='Listhead'><h3 class='Listhead1'><b>用户名</b></h3><h3 class='Listhead1'><b>更新时间</b></h3><h3 class='Listhead1' ><b>总分</b></h3><h3 class='Listhead1' ><b>排名</b></h3><h3 class='Listhead1'><b>个人积分</b></h3></div></li>";
+                var html="  <li ><div class='Listhead'><h3 class='Listhead1'><b>手机号</b></h3><h3 class='Listhead1'><b>更新时间</b></h3><h3 class='Listhead1' ><b>总分</b></h3><h3 class='Listhead1' ><b>排名</b></h3><h3 class='Listhead1'><b>个人积分</b></h3></div></li>";
             }    for(var i=0;i<pagesize;i++){
                 html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';//创建一页的li列表
                 if(zz[(e-1)*pagesize+i+1]==null) break;//超出最后的范围跳出

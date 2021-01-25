@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>期刊管理</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <link rel='stylesheet' href='/stylesheets/score.css' />
+        <!-- 后端登录 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_oswwuan5y68.css">
+    </head>
+    <body class="bg">
+        <header style="width:100%;height:140px;"> 
+          <img src="./images/logo.png" style="width:120px;height:120px;float:left;margin-left: 30px;"/>
+          <p style="float:left;color:white;font-size:42px;line-height:130px;margin-left:40px;">图文期刊在线阅读管理系统</p>
+        </header>
+        <div class="left">
+            <div class="nav">
+                <a href="/user">用户管理</a>
+            </div>
+            <div class="nav">
+                <a href="/block">评论管理</a>
+            </div>
+            <div class="nav" style="background: rgba(255,255,255,0.5);">
+                <a href="/book">期刊管理</a>
+            </div>
+            <div class="nav">
+                <a href="/score">积分管理</a>
+            </div>
+            <div class="nav">
+                <a href="/system">系统管理</a>
+            </div>
+            <div class="nav">
+                <a href="/">返回</a>
+            </div>
+        </div>
+        <div class="right">
+            <div class="box1">
+                <span style="font-size: 30px;font-weight: bolder;">您搜索的结果是:</span>
+                <div style="margin-right:4%;float: right;">
+                    <a style="text-decoration:none" href='/book'>
+                        <button style="background-color: transparent;color:white;border: 1px solid white;width: 50px;height: 30px;border-radius: 10px;">返回</button>
+                    </a>
+                </div>
+            </div>
+            <div class='Bookbox3'>
+                <ul id="all">
+                    <% for(var i = 0 ; i < bookList.length; i++) {%>
+                        <li>
+                            <p class='Bookbody'><%= bookList[i]["bookId"] %></p>  
+                            <p class='Bookbody'><%= bookList[i]["bookName"] %></p>  
+                            <p class='Bookbody'><%= bookList[i]["bookDate"] %></p>  
+                            <p class='Bookbody'><%= bookList[i]["bookSize"] %></p>  
+                            <p class='Bookbody'><%= bookList[i]["bookType"] %></p>  
+                            <div class='Bookbody'>
+                                <div class='Topicoperation'>
+                                    <a href='/book/edit?bookId=<%= bookList[i].bookId%>'class='operation1'>
+                                        <button style="color: white;border:1px solid white;width: 50px;
+                                        height: 30px;background-color: transparent;    border-radius: 10px;">编辑
+                                            </button> 
+                                    </a>
+                                    <a href='/book/deletebook?bookId=<%= bookList[i]["bookId"]%>'><button  style=" width: 50px;
+                                        height: 30px;
+                                        background-color: #fff;
+                                        border:1px solid #fff;
+                                        border-radius: 10px;
+                                        color: black">移除</button></a>
+                                </div> 
+                            </div>                               
+                        </li>
+                    <%}%>
+                </ul>
+            </div>
+            <div style=" width: 92%;height:30px;text-align: center;margin:25px auto;color: #fff;"> 
+                <div class="page">
+                    <div id="page">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+    <script type="text/javascript">    
+      function getzz() {
+    var a = $("ul#all li");
+    var zz =new Array(a.length);
+    for(var i=0;i <a.length;i++){
+        zz[i]=a[i].innerHTML;
+    } //div的字符串数组付给zz
+    return zz;
+}
+function change(e){
+    pageno=e;
+    if(e<1){
+        e=1;pageno=1;//就等于第1页 ， 当前页为1
+    }
+    if(e>pageall){  //如果输入页大于最大页
+        e=pageall;pageno=pageall; //输入页和当前页都=最大页
+    }
+    $("#all").html("");//全部清空
+    if(pageno==1){
+        var html="<li><div class='Bookhead'><h3 class='Bookhead1'><b>编号</b></h3><h3 class='Bookhead1'><b>图文期刊名</b></h3><h3 class='Bookhead1'><b>上线日期</b></h3><h3 class='Bookhead1'><b>字数</b></h3><h3 class='Bookhead1'><b>分类</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
+    }
+    else{
+        var html="<li><div class='Bookhead'><h3 class='Bookhead1'><b>编号</b></h3><h3 class='Bookhead1'><b>图文期刊名</b></h3><h3 class='Bookhead1'><b>上线日期</b></h3><h3 class='Bookhead1'><b>字数</b></h3><h3 class='Bookhead1'><b>分类</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
+    }
+    for(var i=0;i<pagesize;i++){
+        html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';//创建一页的li列表
+        if(zz[(e-1)*pagesize+i+1]==null) break;//超出最后的范围跳出
+    }
+    $("ul#all").html(html);//给ul列表写入html
+    var ye="";
+    for(var j=1;j<=pageall;j++){
+            if(e==j){
+                ye=ye+"<span><a href='#' onClick='change("+j+")' style='background:rgba(255,255,255,0.5);color:white'>"+j+"</a></span> "
+            }else{
+                ye=ye+"<a href='#' style='color:#fff' onClick='change("+j+")'>"+j+"</a> "
+            }
+        }
+        var pageContent="";
+            pageContent +='第<span id=\"a2\">'+pageno+'</span>/';
+            pageContent +='<span id="a1">'+pageall+'</span>页';
+            pageContent +='<a href="#" style="margin-left:10px;color:white" onClick="change(--pageno)"><</a>';
+            pageContent +="<span id='a3' style='margin-left:10px'>"+ye+'</span>';
+            pageContent +='<a href="#" style="margin-left:5px;color:white" onClick="change(++pageno)">></a>';
+            $("#page").html(pageContent);
+}
+    var zz=getzz()
+    var pageno=1 ; //当前页
+    var pagesize=4; //每页多少条信息
+    if(zz.length%pagesize==0){
+        var  pageall =zz.length/pagesize ;
+    }else{
+        var  pageall =parseInt(zz.length/pagesize)+1;
+    }   //一共多少页
+    change(1);
+
+        </script>
+</html>

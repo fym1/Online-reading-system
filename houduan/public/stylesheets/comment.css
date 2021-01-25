@@ -1,5 +1,5 @@
-/* 用户管理 */
-.Userbox3{
+/* 评论管理 */
+.Blockbox3{
     width:92%;
     height: 295px;
     margin-left: 50px;
@@ -8,42 +8,36 @@
     margin-bottom: 10px;
     background-color: rgba(255,255,255,0.5);
   }
-  .Userbox3 ul{
+  .Blockbox3 ul{
     width: 100%;
     height: 300px;
     float: left;
   }
-  .Userbox3 li{
+  .Blockbox3 li{
     width: 100%;
     height: 58px;
     border-bottom:1px solid rgba(255,255,255,0.7);
     float: left;
   } 
-  .Userhead{
+  .Blockhead{
     background-color:white;
     color: white;
     text-align: center;
     line-height:3.7rem;
   }
-  .Userhead1{
+  .Blockhead1{
     float: left;
-    width: 12.5%;
+    width: 20%;
     color: white;
   } 
-  .Userimg{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin: 10px auto;
-  }
-  .Userbody{
+  .Blockbody{
     float: left;
-    width: 12.5%;
+    width: 20%;
     color: white;
     text-align: center;
     line-height:3.7rem;
   }
-  .Userdel{
+  .Blockdel{
     width: 50px;
     height: 30px;
     background-color: transparent;
