@@ -32,23 +32,31 @@
         </div>
         <div class="right">
             <div style="width:75%;height:420px;margin:40px auto;background: rgba(255,255,255,0.5);;font-size:20px;text-align: center;">
-                <p style="text-align:center;color:white;padding-top:20px;font-size: 30px;">回复编号<%= ReplyInList[0].replyId%>的回复信息</p>
+                <p style="text-align:center;color:white;padding-top:20px;font-size: 30px;">评论编号<%= commentInList[0].postId%>的详情</p>
                 <div style="width:530px;height: 350px;margin: 0 auto;">
                     <div style="width:530px;height:250px;margin:20px auto;text-align:left;">
                         <div class="systemText2">
-                            <p>回复用户手机号
-                                <span id="name"><%= ReplyInList[0].userPhone%></span>
+                            <p>评论用户手机号
+                                <span id="name"><%= commentInList[0].userPhone%></span>
                             </p>
                         </div>
                         <div class="systemText1">
                             <p>更新时间
-                                <span id="sex"><%= ReplyInList[0].postTime%></span>
+                                <span id="sex"><%= commentInList[0].postTime%></span>
                             </p>
                         </div>
+                        <div class="systemText2" style="margin-top: 10px;">
+                            <p>点赞数
+                                <span id="name"><%= commentInList[0].postPointNum%></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                回复数
+                                <span id="sex"><%= commentInList[0].postReplyNum%></span>
+                            </p>
+                        </div>
+                       
                         <div class="systemText3">
-                            <p>回复内容</p>
-                            <p style="border: 1px solid white;margin-top: 10px;border-radius: 10px;text-align: center;height:160px;font-size: 20px;">
-                                <span id="phone"><%= ReplyInList[0].replyContent%></span>
+                            <p>评论内容</p>
+                            <p style="border: 1px solid white;margin-top: 10px;border-radius: 10px;text-align: center;height:130px;font-size: 20px;">
+                                <span id="phone"><%= commentInList[0].postContent%></span>
                             </p>
                     </div>
                     </div>
@@ -56,7 +64,7 @@
                     <a href="/">
                         <button id="out" class="systemOut" style="margin-right: 30px;">删除</button>
                     </a>
-                    <a href='/reply?postId=<%= ReplyInList[0]["postId"] %>'>
+                    <a href='/comment?bookId=<%= commentInList[0]["bookId"] %>'>
                         <button id="out" class="systemOut">返回</button>
                     </a>
                 </div>

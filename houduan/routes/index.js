@@ -253,6 +253,18 @@ router.get('/comment', function(req, res, next) {
     }
   })
 });
+/**获取评论内容详情 */
+router.get('/commentIn', function(req, res, next) {
+  var postId=req.query.postId;
+  con.query("select * from post where postId=?",[postId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Block/commentIn",{commentInList:result,postId:postId});
+    }
+  })
+});
 /**获取回复内容 */
 router.get('/reply', function(req, res, next) {
   var postId=req.query.postId;

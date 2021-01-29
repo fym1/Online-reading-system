@@ -62,12 +62,11 @@
                     <li>
                         <p class='Userbody'><%= userList[i]["userId"] %></p>
                         <div class='Userbody'>
-                            <%if(userList[i]["userImage"]!="-"){%>
+                            <%if(userList[i]["userImage"]!=null){%>
                                 <img class="Userimg" src='<%= userList[i]["userImage"] %>'/>
-                            <%}
-                            else{%>
+                                <%}else{%>
                                 <img class="Userimg" src='http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png'/>
-                            <%}%>
+                                <%}%>
                         </div>
                         <p class='Userbody'><%= userList[i]["userPhone"] %></p>
                         <p class='Userbody'><%= userList[i]["userName"] %></p>

@@ -59,7 +59,7 @@
                     <% for(var i = 0 ; i < ReplyList.length; i++) {%>
                         <li>
                             <p class='Blockbody'><%=  ReplyList[i]["replyId"]%></p>
-                            <p class='Blockbody'><%= ReplyList[i]["replyContent"] %></p>
+                            <p class='Blockbody'><%= ReplyList[i]["replyContent"].slice(0,10) %>...</p>
                             <p class='Blockbody'><%= ReplyList[i]["postTime"]%></p>
                             <p class='Blockbody'><a style="text-decoration:none;color: white;" href='/replyIn?replyId=<%= ReplyList[i]["replyId"] %>'>回复详情</a></p>  
                         </li>
