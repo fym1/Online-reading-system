@@ -2,22 +2,22 @@ var express = require('express');
 var mysql = require('mysql');
 var router = express.Router();
 var dbconfig=require('../config/dbconfig.json');
-var manager = '';
+var manager ='';
 var login = false;
 var con = mysql.createConnection(dbconfig);
 con.connect();
-
 /*index欢迎页面 */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Online Reading Management System' });
 });
-/*登录页 */
+//登录
 router.get('/login', function(req, res, next) {
-  res.render('login', { title: '登录' });
+  res.render('login', { title: 'login' });
 });
+//注册
 /*注册页 */
 router.get('/resign', function(req, res, next) {
-  res.render('resign', { title: '注册' });
+  res.render('resign', { title: 'resign' });
 });
 /**注册管理员 */
 router.post('/resign', function(req, res, next) {
@@ -85,7 +85,7 @@ router.post('/resign', function(req, res, next) {
 });
 /**注册成功 */
 router.get('/resignsuccess', function(req, res, next) {
-  res.render('resignsuccess', { title: '首页' });
+  res.render('resignsuccess', { title: 'resignsucccess' });
 });
 /*验证身份 */
 router.post('/home', function(req, res, next) {
@@ -186,6 +186,18 @@ router.post('/searchuser', function(req, res, next) {
     }
     else{
       res.render('User/searchUser', { userList:result,userPhone:userPhone });
+    }
+  })
+});
+/**查看用户信息详情 */
+router.get('/userIn', function(req, res, next) {
+  var userPhone=req.query.userPhone;
+  con.query("select * from user where userPhone=?",[userPhone],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('User/userIn', { userList:result[0],userPhone:userPhone  });
     }
   })
 });
@@ -290,7 +302,7 @@ router.get('/replyIn', function(req, res, next) {
   })
 });
 //期刊管理
-/**获取期刊 */
+/**获取期刊--升序（默认） */
 router.get('/book', function(req, res, next) {
   con.query("select * from book order by bookId asc",function(err,result){
     if(err){
@@ -299,6 +311,298 @@ router.get('/book', function(req, res, next) {
     else{
       res.render('Book/book', {bookList:result});
      }
+  })
+});
+/**获取期刊--降序 */
+router.get('/bookdesc', function(req, res, next) {
+  con.query("select * from book order by bookId desc",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Book/book', {bookList:result});
+    }
+  })
+});
+/**按编号搜索某本期刊 */
+router.post('/searchbookId', function(req, res, next) {
+  var bookId=req.body.bookId;
+  con.query("select * from book where bookId=?",[bookId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Book/searchBook', { bookList:result,bookId:bookId});
+    }
+  })
+});
+/**按分类搜索某本期刊 */
+router.post('/searchbookType', function(req, res, next) {
+  var bookType=req.body.bookType;
+  con.query("select * from book where bookType=?",[bookType],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Book/searchBook', { bookList:result,bookType:bookType});
+    }
+  })
+});
+/**添加期刊 */
+router.post('/addbook', function(req, res, next) {
+  var bookName=req.body.bookName;
+  var bookWriter=req.body.bookWriter;
+  var bookType=req.body.bookType;
+  var bookApi=req.body.bookApi;
+  var bookIntro=req.body.bookIntro;
+  var bookImage=req.body.bookImage;
+  let now='';
+  var time=new Date();
+  var year = time.getFullYear();
+  var month = time.getMonth() + 1;
+  var date = time.getDate();
+  now = year + '-' + conver(month) + "-" + conver(date);
+  function conver(s) {
+      return s < 10 ? '0' + s : s;
+  }
+  con.query("insert into book( bookName,bookWriter,bookType,bookApi,bookIntro,bookDate,bookImage) values(?,?,?,?,?,?,?)",[bookName,bookWriter,bookType,bookApi,bookIntro,now,bookImage],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{      
+      con.query("select * from book order by bookId asc",function(err,result){
+        if(err){
+          console.log(err);
+        }
+        else{
+          res.render('Book/book', {bookList:result});
+         }
+      })
+    }
+  });
+});
+/**获取期刊详情 */
+router.get('/bookIn', function(req, res, next) {
+  var bookId=req.query.bookId;
+  con.query("select * from book where bookId=?",[bookId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Book/bookIn",{bookInList:result[0],bookId:bookId});
+    }
+  })
+});
+/**编辑某本期刊详情*/
+router.post('/editbook', function(req, res, next) {
+  var bookId=req.body.bookId;
+  var bookName=req.body.bookName;
+  var bookWriter=req.body.bookWriter;
+  var bookType=req.body.bookType;
+  var bookApi=req.body.bookApi;
+  var bookIntro=req.body.bookIntro;
+  var bookImage=req.body.bookImage;
+  var updatetime=new Date();
+  con.query("update book set bookName=?,bookWriter=?,bookType=?,bookApi=?,bookIntro=?,bookUpdateTime=?,bookImage=? where bookId=?",[bookName,bookWriter,bookType,bookApi,bookIntro,updatetime,bookImage,bookId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      con.query("select * from book where bookId=?",[bookId],function(err,result){
+        if(err){
+          console.log(err);
+        }
+        else{
+          res.render("Book/bookIn",{bookInList:result[0],bookId:bookId});
+        }
+      })
+    }
+  });
+});
+/**删除某本期刊 */
+router.get('/book/deletebook', function(req, res, next) {
+  var bookId=req.query.bookId;
+  con.query("delete from book where bookId=?",[bookId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Book/deleteBook', { title: 'bookId' });
+    }
+  })
+});
+/**某本期刊的所有期*/
+router.get('/bookJournal', function(req, res, next) {
+  var bookId=req.query.bookId;
+  con.query("select distinct bookTime from bookContent where bookId=?;",[bookId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Book/bookJournal",{bookJList:result,bookId:bookId});
+    }
+  })
+});
+/**添加某本期刊的某一期 */
+router.post('/addbookTime', function(req, res, next) {
+  var bookId=req.body.bookId;
+  var bookTime=req.body.bookTime;
+  var bookPage=1;
+  var updatetime=new Date();
+  console.log(bookTime);
+  con.query("insert into bookcontent( bookId,bookTime,bookPage) values(?,?,?)",[bookId,bookTime,bookPage],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{  
+      con.query("update book set bookUpdateTime=? where bookId=?",[updatetime,bookId],function (err,result) {
+        if(err){
+          console.log(err);
+        }else{
+          con.query("select distinct bookTime from bookContent where bookId=?;",[bookId],function(err,result){
+            if(err){
+              console.log(err);
+            }
+            else{
+              res.render("Book/bookJournal",{bookJList:result,bookId:bookId});
+            }
+          })        
+        }
+      });
+    }
+  });
+});
+/**删除某本期刊的某一期 */
+router.get('/deletebookTime', function(req, res, next) {
+  var bookId=req.query.bookId;
+  var bookTime=req.query.bookTime;
+  var updatetime=new Date();
+  con.query("delete  from bookcontent where bookId=?&&bookTime=?",[bookId,bookTime],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      con.query("update book set bookUpdateTime=? where bookId=?",[updatetime,bookId],function (err,result) {
+        if(err){
+          console.log(err);
+        }else{
+          con.query("select distinct bookTime from bookContent where bookId=?;",[bookId],function(err,result){
+            if(err){
+              console.log(err);
+            }
+            else{
+              res.render("Book/bookJournal",{bookJList:result,bookId:bookId});
+            }
+          })
+        }
+      });
+    }
+  });   
+});
+/**某本期刊的谋一期的所有页 */
+router.get('/bookJIn', function(req, res, next) {
+  var bookId=req.query.bookId;
+  var bookTime=req.query.bookTime;
+  console.log(bookTime,bookId);
+  con.query("select * from bookcontent where bookId=? and bookTime=? order by bookPage desc",[bookId,bookTime],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Book/bookJIn",{bookJList:result,bookId:bookId,bookTime:bookTime});
+    }
+  })
+});
+/**添加某本期刊的谋一期的某一页 */
+router.post('/addbookJIn', function(req, res, next) {
+  var bookId=req.body.bookId;
+  var bookTime=req.body.bookTime;
+  var bookContentApi=req.body.bookContentApi;
+  var bookChapter=req.body.bookChapter;
+  var bookPage=req.body.bookPage;
+  var updatetime=new Date();
+  con.query("insert into bookcontent( bookId,bookTime,bookContentApi,bookChapter,bookPage) values(?,?,?,?,?)",[bookId,bookTime,bookContentApi,bookChapter,bookPage],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{  
+      con.query("update book set bookUpdateTime=? where bookId=?",[updatetime,bookId],function (err,result) {
+        if(err){
+          console.log(err);
+        }else{
+          res.end('success');
+        }
+      });
+      res.render('Book/addbookJIn', { title: 'addbookJIn',bookId:bookId,bookTime:bookTime});
+    }
+  });
+});
+/**删除某本期刊的谋一期的某一页 */
+router.get('/deletebookJIn', function(req, res, next) {
+  var bookContentApi=req.query.bookContentApi;
+  var bookId=req.query.bookId;
+  var bookTime=req.query.bookTime;
+  var updatetime=new Date();
+  con.query("delete  from bookcontent where bookContentApi=?",[bookContentApi],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      con.query("update book set bookUpdateTime=? where bookId=?",[updatetime,bookId],function (err,result) {
+        if(err){
+          console.log(err);
+        }else{
+          res.end('success');
+        }
+      });
+      res.render('Book/deletebookJIn', { title: 'deletebookJIn',bookId:bookId,bookTime:bookTime});
+    }
+  });   
+});
+/**获取某本期刊的谋一期的某一页的编辑页面 */
+router.get('/editbookJIn', function(req, res, next) {
+  var bookId=req.query.bookId;
+  var bookTime=req.query.bookTime;
+  var bookContentApi=req.query.bookContentApi;
+  con.query("select * from bookcontent where bookId=? and bookTime=? order by bookPage desc;select * from bookcontent where bookContentApi=?",[bookId,bookTime,bookContentApi],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Book/editbookJIn",{bookJList:result[0],bookId:bookId,bookTime:bookTime,editdata:result[1][0]});
+    }
+  })
+});
+/**编辑某本期刊的谋一期的某一页 */
+router.post('/editbookJIn', function(req, res, next) {
+  var bookId=req.body.bookId;
+  var bookTime=req.body.bookTime;
+  var bookContentApi=req.body.bookContentApi;
+  var bookChapter=req.body.bookChapter;
+  var bookPage=req.body.bookPage;
+  var updatetime=new Date();
+  console.log(bookContentApi);
+  con.query("update bookcontent set bookContentApi=?, bookChapter=? where bookId=?&&bookTime=?&&bookPage=?",[bookContentApi,bookChapter,bookId,bookTime,bookPage],function (err,result) {
+    if(err){
+      console.log(err);
+    }else{
+      con.query("update book set bookUpdateTime=? where bookId=?",[updatetime,bookId],function (err,result) {
+        if(err){
+          console.log(err);
+        }else{
+          res.end('success');
+        }
+      });    
+    }
+  });
+});
+/**某本期刊的谋一期的某一页详情 */
+router.get('/bookJInI', function(req, res, next) {
+  var bookContentApi=req.query.bookContentApi;
+  con.query("select * from bookcontent where bookContentApi=?;",[bookContentApi],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Book/bookJInI",{bookInList:result[0],bookContentApi:bookContentApi});
+    }
   })
 });
 //积分管理
@@ -459,7 +763,6 @@ router.post('/system', function(req, res, next) {
   var name = data.name;
   var sex = data.sex;
   var email = data.email;
-  console.log(data);
   con.query("update admininflist set adminUsername=?,adminName=?,adminSex=?,adminEmail=? where adminPhone=?",[username,name,sex ,email,manager],function(err,result){
     if(err){
       console.log(err);
@@ -470,6 +773,7 @@ router.post('/system', function(req, res, next) {
           console.log(err);
         }
         else{
+          login == false
           res.render('System/system', { manager: result[0] });   
         }
       });   

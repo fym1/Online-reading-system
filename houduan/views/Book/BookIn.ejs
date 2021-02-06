@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>期刊管理</title>
+        <link rel='stylesheet' href='/stylesheets/style.css'/>
+        <link rel="stylesheet" href="/stylesheets/bookIn.css">
+    </head>
+    <body class="bg">
+        <header style="width:100%;height:140px;"> 
+          <img src="./images/logo.png" style="width:120px;height:120px;float:left;margin-left: 30px;"/>
+          <p style="float:left;color:white;font-size:42px;line-height:130px;margin-left:40px;">图文期刊在线阅读管理系统</p>
+        </header>
+        <div class="left">
+            <div class="nav">
+                <a href="/home">首页</a>
+            </div>
+            <div class="nav">
+                <a href="/user">用户管理</a>
+            </div>
+            <div class="nav">
+                <a href="/block">评论管理</a>
+            </div>
+            <div class="nav" style="background: rgba(255,255,255,0.5);">
+                <a href="/book">期刊管理</a>
+            </div>
+            <div class="nav">
+                <a href="/score">积分管理</a>
+            </div>
+            <div class="nav">
+                <a href="/system">系统管理</a>
+            </div>
+           
+        </div>
+        <div class="right">
+            <div style="width:75%;height:470px;margin:40px auto;background: rgba(255,255,255,0.5);;font-size:20px;text-align: center;">
+                <p style="text-align:center;color:white;padding-top:20px;font-size: 30px;">图文期刊<%= bookInList.bookId%>的信息
+                    <span style="float: right;padding-right: 5px;"><a style="text-decoration:none;color: white;" href='/book'>
+                       &#10006;
+                    </a>
+                    <span>
+                    </p>
+                <div style="width:530px;height: 350px;margin: 0 auto;">
+                <div style="width:130px;height:300px;margin:30px 10px;float: left;">
+                    <div style="width:130px;float:left;">
+                        <!-- <span style="float: left">Id:<%= bookInList.bookId%></span> -->
+                        <img  src='<%=  bookInList.bookImage%>' style="width:100%;margin: 10px auto;transition:all 0.5s;
+                        cursor:pointer;" id='img1'>
+                    </div>
+                    <div style="width:130px;float:left;margin-top:20px;color: white;text-align: center;">
+                        <button id="btn" class="systembianji">编辑期刊</button>
+                    </div> 
+                    <a href="/bookJournal?bookId=<%= bookInList.bookId%>">
+                        <button id="out" class="systemOut">查看期刊</button>
+                    </a>
+                </div>
+                <div style="width:335px;height:300px;margin:30px 20px;text-align:left;line-height:40px;float: left;">
+                    <div class="systemText">
+                        <p>图文期刊名称:
+                            <span id="bookName"><%= bookInList.bookName%></span>
+                        </p>
+                    </div>
+                    <div class="systemText">
+                        <p>图文期刊作者:
+                            <span id="bookWriter"><%= bookInList.bookWriter%></span>
+                        </p>
+                    </div>
+                    <div class="systemText">
+                        <p>上线日期:
+                            <span id="bookDate"><%= bookInList.bookDate%></span>
+                        </p>
+                    </div>
+                    <div class="systemText">
+                        <p>分类:
+                            <span id="bookType"><%= bookInList.bookType%></span>
+                        </p>
+                    </div>
+                    <div class="systemText">
+                        <p>图文期刊连接:
+                            <span id="bookApi"><%= bookInList.bookApi%></span>
+                        </p>
+                    </div>
+                    <div class="systemText">
+                        <p>图文期刊简介:
+                            <span id="bookIntro"><%=  bookInList.bookIntro%></span>
+                        </p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div id="pop-container">
+                <div id="cover-tier" class="popPosition"></div>
+                <div id="pop-tier" class="popPosition">
+                    <i id="close-pop">&#10006;</i>
+                    <form action="/editbook" method="post">
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;" >图文期刊编号</h2>
+                        <input type='text' id="bookId" style="width:265px;height:30px;margin-top:25px;"name='bookId' value='<%= bookInList.bookId%>'/>
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;" >图文期刊名称</h2>
+                        <input type='text' id="bookName1" style="width:265px;height:30px;margin-top:25px;"name='bookName'/>
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;" >图文期刊作者</h2>
+                        <input type='text' id="bookWriter1" style="width:265px;height:30px;margin-top:25px;"name='bookWriter'/>
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;" >图文期刊封面</h2>
+                        <input type='text' id="bookImage" style="width:265px;height:30px;margin-top:25px;"name='bookImage' value="<%=  bookInList.bookImage%>"/>
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;" >期刊上线日期</h2>
+                        <input type='text' id="bookDate1" style="width:265px;height:30px;margin-top:25px;"name='bookDate'/>
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;" >图文期刊分类</h2>
+                        <input type='text' id="bookType1" style="width:265px;height:30px;margin-top:25px;"name='bookType'/>
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;" >图文期刊连接</h2>
+                        <input type='text' id="bookApi1" style="width:265px;height:60px;margin-top:25px;"name='bookApi'/>
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;" >图文期刊简介</h2>
+                        <input type='text' id="bookIntro1" style="width:265px;height:60px;margin-top:25px;"name='bookIntro'/>
+                        <br/>
+                    <input value="保存" id="save" type="submit" style="float:right;border:'1px soild white';margin-right:20px;width:55px;height:30px;background-color:transparent;color:'#ffffff';margin-top: 10px;"/>
+                </form>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+    <script>
+        function temp(id) {
+            return document.getElementById(id);
+        }
+        // 点击按钮出现弹出层
+        temp('btn').onclick = function() {
+            temp('pop-container').style.display = 'block';
+            $('#bookName1').val($('#bookName').html());
+            $('#bookWriter1').val($('#bookWriter').html());
+            $('#bookDate1').val($('#bookDate').html());
+            $('#bookType1').val($('#bookType').html());
+            $('#bookApi1').val($('#bookApi').html());
+            $('#bookIntro1').val($('#bookIntro').html());
+        }
+        // 点击右上角X弹出层隐藏
+        temp('close-pop').onclick = function() {
+            temp('pop-container').style.display = 'none';
+        }
+    </script>
+</html>

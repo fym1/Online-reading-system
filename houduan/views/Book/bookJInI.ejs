@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>期刊管理</title>
+        <link rel='stylesheet' href='/stylesheets/style.css'/>
+        <link rel="stylesheet" href="/stylesheets/bookIn.css">
+    </head>
+    <body class="bg">
+        <header style="width:100%;height:140px;"> 
+          <img src="./images/logo.png" style="width:120px;height:120px;float:left;margin-left: 30px;"/>
+          <p style="float:left;color:white;font-size:42px;line-height:130px;margin-left:40px;">图文期刊在线阅读管理系统</p>
+        </header>
+        <div class="left">
+            <div class="nav">
+                <a href="/home">首页</a>
+            </div>
+            <div class="nav">
+                <a href="/user">用户管理</a>
+            </div>
+            <div class="nav">
+                <a href="/block">评论管理</a>
+            </div>
+            <div class="nav" style="background: rgba(255,255,255,0.5);">
+                <a href="/book">期刊管理</a>
+            </div>
+            <div class="nav">
+                <a href="/score">积分管理</a>
+            </div>
+            <div class="nav">
+                <a href="/system">系统管理</a>
+            </div>
+          
+        </div>
+        <div class="right">
+            <div style="width:75%;height:400px;margin:40px auto;background: rgba(255,255,255,0.5);;font-size:20px;text-align: center;">
+                <p style="text-align:center;color:white;padding-top:20px;font-size: 30px;">图文期刊<%= bookInList.bookId%>的<%= bookInList.bookTime%>期的第<%= bookInList.bookPage%>页的详细信息
+                    <span style="float: right;padding-right: 5px;"><a style="text-decoration:none;color: white;" href='/bookJIn?bookId=<%= bookInList.bookId%>&&bookTime=<%= bookInList.bookTime %>'>
+                       &#10006;
+                    </a>
+                    <span>
+                    </p>
+                <div style="width:530px;height: 350px;margin: 0 auto;">
+                <div style="width:130px;height:300px;margin:30px 10px;float: left;">
+                    <div style="width:130px;float:left;">
+                        <!-- <span style="float: left">Id:<%= bookInList.bookId%></span> -->
+                        <img  src='<%=  bookInList. bookContentApi%>' style="width:100%;margin: 10px auto;transition:all 0.5s;
+                        cursor:pointer;" id='img1'>
+                    </div>
+                </div>
+                <div style="width:335px;height:300px;margin:30px 20px;text-align:left;line-height:50px;float: left;">
+                    <div class="systemText">
+                        <p>图文期刊号:
+                            <span id="username"><%= bookInList.bookId%></span>
+                        </p>
+                    </div>
+                    <div class="systemText">
+                        <p>图文期刊期数:
+                            <span id="name"><%= bookInList.bookTime%></span>
+                        </p>
+                    </div>
+                    <div class="systemText">
+                        <p>内容api:
+                            <span id="name"><%= bookInList. bookContentApi%></span>
+                        </p>
+                    </div>
+                    <div class="systemText">
+                        <p>章节:
+                            <%if(bookInList["bookChapter"]!=null){%>
+                                <span id="name"><%= bookInList.bookChapter%></span>
+                                <%}else{%>
+                                    <span id="name">-</span>
+                                    <%}%>
+                        </p>
+                    </div>
+                    <div class="systemText">
+                        <p>页码:
+                            <span id="email"><%= bookInList.bookPage%></span>
+                        </p>
+                    </div>
+                   
+                </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+    <script>
+        function temp(id) {
+            return document.getElementById(id);
+        }
+        // 点击按钮出现弹出层
+        temp('btn').onclick = function() {
+            temp('pop-container').style.display = 'block';
+            $('#new-username').val($('#username').html());
+            $('#new-name').val($('#name').html());
+            $('#new-sex').val($('#sex').html());
+            $('#new-email').val($('#email').html());
+        }
+        // 点击右上角X弹出层隐藏
+        temp('close-pop').onclick = function() {
+            temp('pop-container').style.display = 'none';
+        }
+    </script>
+</html>

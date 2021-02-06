@@ -17,6 +17,9 @@
           <p style="float:left;color:white;font-size:42px;line-height:130px;margin-left:40px;">图文期刊在线阅读管理系统</p>
         </header>
         <div class="left">
+            <div class="nav">
+                <a href="/home">首页</a>
+            </div>
             <div class="nav" style="background: rgba(255,255,255,0.5);">
                 <a href="/user">用户管理</a>
             </div>
@@ -31,10 +34,7 @@
             </div>
             <div class="nav">
                 <a href="/system">系统管理</a>
-            </div>
-            <div class="nav">
-                <a href="/">返回</a>
-            </div>
+            </div>    
         </div>
         <div class="right">
             <div class="box1" >
@@ -47,11 +47,11 @@
                         </div>
                     </form>
                 </div>
-                <a href='/user' style="color: white;">
+                <a href='/user' style="color: white;"  title="按照ID升序&#13;排列">
                     <span style="margin-left:50px;font-size: 35px;line-height:1.8em" class="iconfont iconpaixu-shengxu" id="btn"></span>
                     <span style="font-size:20px;margin-left:5px;font-weight:lighter">ID升序</span>
                     </a>
-                    <a href="/userdesc"  style="color: white;">
+                    <a href="/userdesc"  style="color: white;" title="按照ID降序&#13;排列">
                     <span style="margin-left:50px;font-size: 35px;line-height:1.8em" class="iconfont iconpaixu-jiangxu" id="btn"></span>
                     <span style="font-size:20px;margin-left:5px;font-weight:lighter">ID降序</span>
                 </a>  
@@ -68,7 +68,12 @@
                                 <img class="Userimg" src='http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png'/>
                                 <%}%>
                         </div>
-                        <p class='Userbody'><%= userList[i]["userPhone"] %></p>
+                        <a style="color: white;">
+                        <p class='Userbody'>
+                            <a style="color: white;" href='/userIn?userPhone=<%= userList[i]["userPhone"]%>' title="点击查看&#13;用户详细信息">
+                                <%= userList[i]["userPhone"] %>
+                            </a>
+                        </p>
                         <p class='Userbody'><%= userList[i]["userName"] %></p>
                         <p class='Userbody'><%= userList[i]["userSex"] %></p>
                         <p class='Userbody'><%= userList[i]["userBir"].slice(0,10)%></p>

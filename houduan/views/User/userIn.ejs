@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>系统管理</title>
+        <title>用户管理</title>
         <link rel='stylesheet' href='/stylesheets/style.css'/>
         <link rel="stylesheet" href="/stylesheets/system.css">
     </head>
@@ -14,7 +14,7 @@
             <div class="nav">
                 <a href="/home">首页</a>
             </div>
-            <div class="nav">
+            <div class="nav" style="background: rgba(255,255,255,0.5);">
                 <a href="/user">用户管理</a>
             </div>
             <div class="nav">
@@ -26,54 +26,67 @@
             <div class="nav">
                 <a href="/score">积分管理</a>
             </div>
-            <div class="nav" style="background: rgba(255,255,255,0.5);">
+            <div class="nav">
                 <a href="/system">系统管理</a>
             </div>
            
         </div>
         <div class="right">
             <div style="width:75%;height:420px;margin:40px auto;background: rgba(255,255,255,0.5);;font-size:20px;text-align: center;">
-                <p style="text-align:center;color:white;padding-top:20px;font-size: 30px;">当前管理员信息</p>
+                <p style="text-align:center;color:white;padding-top:20px;font-size: 30px;">当前用户信息
+                    <span style="float: right;padding-right: 5px;"><a style="text-decoration:none;color: white;" href='/user'>
+                        &#10006;
+                     </a>
+                     <span></p>
                 <div style="width:530px;height: 350px;margin: 0 auto;">
                 <div style="width:130px;height:300px;margin:30px 10px;float: left;">
-                    <div style="width:130px;float:left;">
-                        <img  src='http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png' style="width:100%;border-radius:50%;margin: 10px auto;">
+                    <div style="width:130px;float:left; text-align: left;">
+                        <%if(userList.userImage!=null){%>
+                            <img  src='<%= userList.userImage %>'style="width:100%;border-radius:50%;margin: 10px auto;">
+                            <%}else{%>
+                                <img  src='http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png' style="width:100%;border-radius:50%;margin: 10px auto;">
+                                <%}%>
+                        
+                                <div class="systemText">
+                                    <p>用户Id：
+                                        <span id="username"><%= userList.userId%></span>
+                                    </p>
+                                </div>
+                                <div class="systemText">
+                                    <p>性别：
+                                        <span id="sex"><%= userList.userId%></span>
+                                    </p>
+                                </div>       
                     </div>
-                    <div style="width:130px;float:left;margin-top:20px;color: white;text-align: center;">
-                        <button id="btn" class="systembianji">编辑</button>
-
-                    </div> 
-                    <a href="/">
-                        <button id="out" class="systemOut">退出登录</button>
-                    </a>
                 </div>
                 <div style="width:335px;height:300px;margin:30px 20px;text-align:left;line-height:40px;float: left;">
+               
                     <div class="systemText">
                         <p>用户名：
-                            <span id="username"><%= manager.adminUsername%></span>
-                        </p>
-                    </div>
-                    <div class="systemText">
-                        <p>姓名：
-                            <span id="name"><%= manager.adminName%></span>
-                        </p>
-                    </div>
-                    <div class="systemText">
-                        <p>性别：
-                            <span id="sex"><%= manager.adminSex%></span>
+                            <span id="username"><%= userList.userName%></span>
                         </p>
                     </div>
                     <div class="systemText">
                         <p>手机号：
-                            <span id="phone"><%= manager.adminPhone%></span>
+                            <span id="phone"><%= userList.userPhone%></span>
                         </p>
                     </div>
+                 
                     <div class="systemText">
-                        <p>邮箱：
-                            <span id="email"><%= manager.adminEmail%></span>
+                        <p>生日：
+                            <span id="email"><%= userList.userBir%></span>
                         </p>
                     </div>
-                
+                    <div class="systemText" style="width:400px">
+                        <p>签名：
+                            <span id="email"><%= userList.userSign%></span>
+                        </p>
+                    </div>
+                    <div class="systemText" style="width:400px">
+                        <p>注册日期：
+                            <span id="email"><%= userList.userDay%></span>
+                        </p>
+                    </div>
                 </div>
                 </div>
             </div>

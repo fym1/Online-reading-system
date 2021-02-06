@@ -1,64 +1,64 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>积分任务管理</title>
+        <title>期刊管理</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel='stylesheet' href='/stylesheets/style.css' />
-        <link rel='stylesheet' href='/stylesheets/score.css' />
+        <link rel='stylesheet' href='/stylesheets/bookJournal.css' />
         <!-- 后端登录 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_oswwuan5y68.css">
     </head>
     <body class="bg">
         <header style="width:100%;height:140px;"> 
-          <img src="../images/logo.png" style="width:120px;height:120px;float:left;margin-left: 30px;"/>
+          <img src="./images/logo.png" style="width:120px;height:120px;float:left;margin-left: 30px;"/>
           <p style="float:left;color:white;font-size:42px;line-height:130px;margin-left:40px;">图文期刊在线阅读管理系统</p>
         </header>
         <div class="left">
             <div class="nav">
-                <a href="/score/list">积分表管理</a>
-            </div>
-            <div class="nav" style="background: rgba(255,255,255,0.5);">
-                <a href="/score/task">积分任务管理</a>
+                <a href="/home">首页</a>
             </div>
             <div class="nav">
-                <a href="/score">返回积分管理</a>
+                <a href="/user">用户管理</a>
             </div>
+            <div class="nav">
+                <a href="/block">评论管理</a>
+            </div>
+            <div class="nav" style="background: rgba(255,255,255,0.5);">
+                <a href="/book">期刊管理</a>
+            </div>
+            <div class="nav">
+                <a href="/score">积分管理</a>
+            </div>
+            <div class="nav">
+                <a href="/system">系统管理</a>
+            </div>
+          
         </div>
         <div class="right">
-            <div class="box1">
-                <div class='search'>
-                    <form style="line-height: 3em;"  method="post" action="/score/searchtask">
-                        <input class='Bar' placeholder="请输入要查找的任务编号" name='taskId'/>
-                        <div class="iconfont icon-xiaoxi-" style="float:left;">
-                            <input type="submit" value="搜索"style="height:30px;border:none; background:transparent; color:white;">
-                        </div>
-                    </form>
-                </div>
+            <div class="box1">    
+                <span style="font-size: 30px;font-weight: bolder;">图文期刊<%= bookId%>的所有期刊：</span>    
+
                 <span style="margin-left:50px;line-height:3.5em" class="iconfont icon-wuuiconxiangjifangda" id="btn"></span>
-                <span style="font-size:20px;margin-left:5px;font-weight:lighter">添加</span>
+                <span style="font-size:20px;margin-left:5px;font-weight:lighter">添加期数</span>
+                <div style="margin-right:4%;float: right;">
+                <a style="text-decoration:none" href='/bookIn?bookId=<%= bookId%>'>
+                    <button style="background-color: transparent;color:white;border: 1px solid white;width: 120px;height: 40px;    border-radius: 10px;
+                ">返回上一页</button>
+                    </a>
+                </div>
             </div>
-            <div class='Taskbox3'>
+            <div class='Bookbox3'>
                 <ul id="all">
-                    <% for(var i = 0 ; i < taskList.length; i++) {%>
+                    <% for(var i = 0 ; i < bookJList.length; i++) {%>
                         <li>
-                            <p class='Taskbody'><%= taskList[i]["taskId"] %></p>  
-                            <p class='Taskbody'><%= taskList[i]["taskContent"] %></p>  
-                            <p class='Taskbody'><%= taskList[i]["taskScore"] %></p>  
-                            <div class='Taskbody'>
-                                <div class='Topicoperation'>
-                                    <a href='/score/edit?taskId=<%= taskList[i].taskId%>'class='operation1'>
-                                        <button style="color: white;border:1px solid white;width: 50px;
-                                        height: 30px;background-color: transparent;    border-radius: 10px;
-">编辑
-                                            </button> 
-                                    </a>
-                                    <a href='/score/deletetask?taskId=<%= taskList[i]["taskId"]%>'><button  style=" width: 50px;
-                                        height: 30px;
-                                        background-color: #fff;
-                                        border:1px solid #fff;
-                                        border-radius: 10px;
-                                        color: black">移除</button></a>
-                                </div> 
+                            <p class='Bookbody' id='booki'><%= bookId%></p>  
+                            <p class='Bookbody'><%= bookJList[i]["bookTime"] %></p>  
+                            <p class='Bookbody'><a style="color:white" href='/bookJIn?bookId=<%= bookId%>&&bookTime=<%= bookJList[i]["bookTime"] %>'>查看详情</a></p> 
+                            <div class='Bookbody'>
+                                <a href='/deletebookTime?bookId=<%= bookId %>&&bookTime=<%= bookJList[i]["bookTime"] %>'>                                    
+                                    <button style="color: white;border:1px solid white;width: 50px;height: 30px;background-color: transparent;border-radius: 10px;margin: 15px auto;">
+                                    移除</button>
+                                </a>                            
                             </div>                               
                         </li>
                     <%}%>
@@ -76,13 +76,11 @@
                 <div id="cover-tier" class="popPosition"></div>
                 <div id="pop-tier" class="popPosition">
                     <i id="close-pop">&#10006;</i>
-                    <form action="/score/addtask" method="post">
-                    <div style="width:380px;float:left;">
-                        <h2 style="float:left;margin-left:20px;margin-top:25px;margin-bottom: 10px;">任务内容:</h2>
-                        <input type='text' id="content" style="width:340px;height:200px;"name="content"  />
-                    </div>
-                    <h2 style="float:left;margin-left:20px;margin-top:25px;" >分数:</h2>
-                    <input type='text' id="create" style="width:265px;height:30px;margin-top:25px;"name='score'/>
+                    <form action="/addbookTime" method="post">
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;margin-bottom: 10px;">图文期刊编号:</h2>
+                        <input type='text' id="bookId" style="width:340px;height:30px;"name="bookId"  />
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;" >期数</h2>
+                        <input type='text' id="bookTime" style="width:265px;height:30px;margin-top:25px;"name='bookTime'/>
                     <br/>
                     <input value="保存" id="save" type="submit" style="float:right;border:'1px soild white';margin-right:20px;width:55px;height:30px;background-color:transparent;color:'#ffffff';margin-top: 10px;"/>
                 </form>
@@ -97,6 +95,8 @@
     // 点击按钮出现弹出层
     temp('btn').onclick = function() {
         temp('pop-container').style.display = 'block';
+        $('#bookId').val($('#booki').html());
+
     }
     // 点击右上角X弹出层隐藏
     temp('close-pop').onclick = function() {
@@ -120,10 +120,10 @@
         }
         $("#all").html("");//全部清空
         if(pageno==1){
-            var html="<li><div class='Taskhead'><h3 class='Taskhead1'><b>任务编号</b></h3><h3 class='Taskhead1'><b>任务内容</b></h3><h3 class='Taskhead1'><b>分数</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
+            var html="<li><div class='Bookhead'><h3 class='Bookhead1'><b>图文期刊编号</b></h3><h3 class='Bookhead1'><b>图文期刊期数</b></h3><h3 class='Bookhead1'><b>图文期刊详情</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
         }
         else{
-            var html="<li><div class='Taskhead'><h3 class='Taskhead1'><b>任务编号</b></h3><h3 class='Taskhead1'><b>任务内容</b></h3><h3 class='Taskhead1'><b>分数</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
+            var html="<li><div class='Bookhead'><h3 class='Bookhead1'><b>图文期刊编号</b></h3><h3 class='Bookhead1'><b>图文期刊期数</b></h3><h3 class='Bookhead1'><b>图文期刊详情</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
         }
         for(var i=0;i<pagesize;i++){
             html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';//创建一页的li列表

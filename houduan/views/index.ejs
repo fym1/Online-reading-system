@@ -9,17 +9,77 @@
     </style>
   </head>
   <!-- <body style="background-image: url(./images/bg1.jpg);background-repeat: no-repeat;background-size:100%;"> -->
-    <body class="bg">
+    <body>
+      <ul class="cb-slideshow">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>  
     <div class="div1">
-      <h1 style="color: white;font-size: 38px;margin-bottom: 10px;">您好，欢迎来到图文期刊在线阅读管理系统</h1>
-      <h3 style="color: white;font-size: 24px;margin-bottom: 40px;">Hi，Welcome To Online Reading Management System</h3>
+      <h1 style="color: white;font-size: 38px;margin-bottom: 10px;" id="txtDom">您好，欢迎来到图文期刊在线阅读管理系统</h1>
+      <h3 style="color: white;font-size: 24px;margin-bottom: 40px;" id="txtDom1">Hi,Welcome&nbsp;To&nbsp;Online&nbsp;Reading&nbsp;Management&nbsp;System</h3>
       <div>
-        <h2><a style="color: white;font-size: 30px;" href="/login">点击进入 ></a></h2>
+        <h2><a style="color: white;font-size: 30px;" href="/login" title='点此进入' >点击进入 ></a></h2>
       </div>
     </div>
   </body>
   <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
   <script type="text/javascript"></script>
   <script>
+    var txtAnim = {
+    len: 0,
+    txtDom: "",
+    arrTxt: [],
+    init: function(obj) {
+        this.obj = obj;
+        this.txtDom = obj.innerHTML.replace(/\s+/g, "");
+        this.len = this.txtDom.length;
+        obj.innerHTML = "";
+        this.addDom();
+    },
+    addDom: function() {
+        for (var i = 0; i < this.len; i++) {
+            var spanDom = document.createElement("span");
+            spanDom.innerHTML = this.txtDom.substring(i, i + 1);
+            this.obj.appendChild(spanDom);
+            this.arrTxt.push(spanDom);
+        };
+        for (var j = 0; j < this.len; j++) {
+            this.arrTxt[j].style.position = "relative";
+        };
+        this.strat();
+    },
+    strat: function() {
+        for (var i = 0; i < this.len; i++) {
+            this.arrTxt[i].onmouseover = function() {
+                this.stop = 0;
+                this.speed = -1;
+                var $this = this;
+                this.timer = setInterval(function() {
+
+                    $this.stop += $this.speed; //0  += -1
+                    if ($this.stop <= -20) {
+                        $this.speed = 1;
+                    }
+
+                    $this.style.top = $this.stop + "px";
+
+                    if ($this.stop >= 0) {
+                        clearInterval($this.timer)
+                        $this.style.top = 0 + "px";
+                    };
+                }, 15);
+            };
+        }
+    }
+}
+
+var txtDom = document.getElementById("txtDom");
+var txtDom1 = document.getElementById("txtDom1");
+txtAnim.init(txtDom);
+
   </script>
 </html>

@@ -5,6 +5,8 @@
     background: rgba(0,0,0,0.5);
     z-index: 100;
     border:2px solid #FFFFF5;
+    box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;
+
 }
 .login{
     width: 500px;
@@ -61,4 +63,6 @@ input{
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
+    box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;
+
 }

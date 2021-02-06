@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>积分任务管理</title>
+        <title>期刊管理</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel='stylesheet' href='/stylesheets/style.css' />
         <link rel='stylesheet' href='/stylesheets/book.css' />
         <!-- 后端登录 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1506624_oswwuan5y68.css">
+        <!-- 后端用户 --><link rel="stylesheet" href="https://at.alicdn.com/t/font_1802183_38fatl16wi8.css">
     </head>
     <body class="bg">
         <header style="width:100%;height:140px;"> 
@@ -14,6 +15,9 @@
           <p style="float:left;color:white;font-size:42px;line-height:130px;margin-left:40px;">图文期刊在线阅读管理系统</p>
         </header>
         <div class="left">
+            <div class="nav">
+                <a href="/home">首页</a>
+            </div>
             <div class="nav">
                 <a href="/user">用户管理</a>
             </div>
@@ -28,50 +32,65 @@
             </div>
             <div class="nav">
                 <a href="/system">系统管理</a>
-            </div>
-            <div class="nav">
-                <a href="/">返回</a>
-            </div>
+            </div>  
         </div>
         <div class="right">
             <div class="box1">
                 <div class='search'>
-                    <form style="line-height: 3em;"  method="post" action="/book/searchbook">
-                        <input class='Bar' placeholder="请输入要查找的期刊编号" name='bookId'/>
+                    <form style="line-height: 3em;"  method="post" action="/searchbookId">
+                        <input class='Bar' placeholder="请输入要查找的图文期刊Id" name='bookId'/>
                         <div class="iconfont icon-xiaoxi-" style="float:left;">
                             <input type="submit" value="搜索"style="height:30px;border:none; background:transparent; color:white;">
                         </div>
                     </form>
                 </div>
                 <span style="margin-left:50px;line-height:3.5em" class="iconfont icon-wuuiconxiangjifangda" id="btn"></span>
-                <span style="font-size:20px;margin-left:5px;font-weight:lighter">添加</span>
+                <span style="font-size:20px;margin-left:5px;font-weight:lighter">添加期刊</span>
+                <div class='search1'>
+                    <form style="line-height: 3em;"  method="post" action="/searchbookType">
+                        <input class="Bar1" type="text" th:field="*{sex}" list="listItem" placeholder="请选择分类" name='bookType'>
+                        <datalist id="listItem">
+                                <option>期刊</option>
+                                <option>杂志</option>
+                                <option>vision</option>
+                                <option>人文</option>
+                                <option>娱乐</option>
+                                <option>生活</option>
+                                <option>经济</option>
+                                <option>音乐</option>
+                        </datalist>                          
+                        <div class="iconfont icon-fenlei" style="float:left;">
+                            <input type="submit" value="选择"style="height:30px;border:none; background:transparent; color:white;">
+                        </div>
+                    </form>
+                </div>
+                <a href='/book' style="color: white;"  title="按照ID升序&#13;排列">
+                    <span style="margin-left:50px;font-size: 35px;line-height:1.8em" class="iconfont iconpaixu-shengxu" id="btn"></span>
+                    <span style="font-size:20px;margin-left:5px;font-weight:lighter">Id升序</span>
+                    </a>
+                    <a href="/bookdesc"  style="color: white;" title="按照ID降序&#13;排列">
+                    <span style="margin-left:50px;font-size: 35px;line-height:1.8em" class="iconfont iconpaixu-jiangxu" id="btn"></span>
+                    <span style="font-size:20px;margin-left:5px;font-weight:lighter">Id降序</span>
+                </a>  
             </div>
             <div class='Bookbox3'>
                 <ul id="all">
                     <% for(var i = 0 ; i < bookList.length; i++) {%>
                         <li>
                             <p class='Bookbody'><%= bookList[i]["bookId"] %></p>  
-                            <p class='Bookbody'><%= bookList[i]["bookName"] %></p>  
-                            <p class='Bookbody'><%= bookList[i]["bookDate"] %></p>  
-                            <p class='Bookbody'><%= bookList[i]["bookSize"] %></p>  
+                            <p class='Bookbody'><%= bookList[i]["bookName"].slice(0,10) %></p>  
+                            <p class='Bookbody'><%= bookList[i]["bookDate"] %></p>   
                             <p class='Bookbody'><%= bookList[i]["bookType"] %></p>  
+                            <p class='Bookbody'><a style="color:white" href='/bookIn?bookId=<%= bookList[i]["bookId"] %>'>查看详情</a></p> 
                             <div class='Bookbody'>
-                                <div class='Topicoperation'>
-                                    <a href='/book/edit?bookId=<%= bookList[i].bookId%>'class='operation1'>
-                                        <button style="color: white;border:1px solid white;width: 50px;
-                                        height: 30px;background-color: transparent;    border-radius: 10px;">编辑
-                                            </button> 
-                                    </a>
-                                    <a href='/book/deletebook?bookId=<%= bookList[i]["bookId"]%>'><button  style=" width: 50px;
-                                        height: 30px;
-                                        background-color: #fff;
-                                        border:1px solid #fff;
-                                        border-radius: 10px;
-                                        color: black">移除</button></a>
-                                </div> 
+                                <a href='/book/deletebook?bookId=<%= bookList[i]["bookId"]%>'> 
+                                    <button style="color: white;border:1px solid white;width: 50px;height: 30px;background-color: transparent;border-radius: 10px;margin: 15px auto;">
+                                        移除
+                                    </button>
+                                </a>
                             </div>                               
                         </li>
-                    <%}%>
+                    <%}%> 
                 </ul>
             </div>
             <div style=" width: 92%;height:30px;text-align: center;margin:25px auto;color:white"> 
@@ -83,19 +102,26 @@
         </div>
         <div >
             <div id="pop-container">
-                <div id="cover-tier" class="popPosition"></div>
+                <div id="cover-tier" class="popPosition" ></div>
                 <div id="pop-tier" class="popPosition">
                     <i id="close-pop">&#10006;</i>
-                    <form action="/book/addbook" method="post">
-                    <div style="width:380px;float:left;">
-                        <h2 style="float:left;margin-left:20px;margin-top:25px;margin-bottom: 10px;">书籍内容:</h2>
-                        <input type='text' id="content" style="width:340px;height:200px;"name="content"  />
-                    </div>
-                    <h2 style="float:left;margin-left:20px;margin-top:25px;" >分数:</h2>
-                    <input type='text' id="create" style="width:265px;height:30px;margin-top:25px;"name='score'/>
-                    <br/>
-                    <input value="保存" id="save" type="submit" style="float:right;border:'1px soild white';margin-right:20px;width:55px;height:30px;background-color:transparent;color:'#ffffff';margin-top: 10px;"/>
-                </form>
+                    <form action="/addbook" method="post">
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;" >图文期刊名称</h2>
+                        <input type='text' id="bookName" style="width:265px;height:30px;margin-top:25px;"name='bookName'/>
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;" >图文期刊作者</h2>
+                        <input type='text' id="bookWriter" style="width:265px;height:30px;margin-top:25px;"name='bookWriter'/>
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;" >图文期刊分类</h2>
+                        <input type='text' id="bookType" style="width:265px;height:30px;margin-top:25px;"name='bookType'/>
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;" >图文期刊封面</h2>
+                        <input type='text' id="bookImage" style="width:265px;height:30px;margin-top:25px;"name='bookImage'/>
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;" >图文期刊连接</h2>
+                        <input type='text' id="bookApi" style="width:265px;height:90px;margin-top:25px;"name='bookApi'/>
+                        <h2 style="float:left;margin-left:20px;margin-top:25px;" >图文期刊简介</h2>
+                        <input type='text' id="bookIntro" style="width:265px;height:90px;margin-top:25px;"name='bookIntro'/>
+                        <br/>
+                        <input value="保存" id="save" type="submit" style="float:right;border:'1px soild white';margin-right:20px;width:55px;height:30px;background-color:transparent;color:'#ffffff';margin-top: 10px;"/>
+                    </form>
+                </div>
             </div>
         </div>
     </body>
@@ -130,10 +156,10 @@
         }
         $("#all").html("");//全部清空
         if(pageno==1){
-            var html="<li><div class='Bookhead'><h3 class='Bookhead1'><b>编号</b></h3><h3 class='Bookhead1'><b>图文期刊名</b></h3><h3 class='Bookhead1'><b>上线日期</b></h3><h3 class='Bookhead1'><b>字数</b></h3><h3 class='Bookhead1'><b>分类</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
+            var html="<li><div class='Bookhead'><h3 class='Bookhead1'><b>图文期刊Id</b></h3><h3 class='Bookhead1'><b>图文期刊名</b></h3><h3 class='Bookhead1'><b>上线日期</b></h3><h3 class='Bookhead1'><b>分类</b></h3><h3 class='Bookhead1'><b>图文期刊详情</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
         }
         else{
-            var html="<li><div class='Bookhead'><h3 class='Bookhead1'><b>编号</b></h3><h3 class='Bookhead1'><b>图文期刊名</b></h3><h3 class='Bookhead1'><b>上线日期</b></h3><h3 class='Bookhead1'><b>字数</b></h3><h3 class='Bookhead1'><b>分类</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
+            var html="<li><div class='Bookhead'><h3 class='Bookhead1'><b>图文期刊Id</b></h3><h3 class='Bookhead1'><b>图文期刊名</b></h3><h3 class='Bookhead1'><b>上线日期</b></h3><h3 class='Bookhead1'><b>分类</b></h3><h3 class='Bookhead1'><b>图文期刊详情</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
         }
         for(var i=0;i<pagesize;i++){
             html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';//创建一页的li列表

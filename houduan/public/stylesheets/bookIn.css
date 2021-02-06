@@ -1,0 +1,96 @@
+.systemOut{
+    width:110px;
+    height:40px;
+    border:1px solid white;
+    color:white;
+    font-size:17px;
+    margin:30px auto;
+    cursor: pointer;
+    background: transparent;
+    border-radius:15px;
+}
+.systemText{
+    width:400px;
+    margin-left:6%;
+    margin-top:10px;
+    color:white;
+    float:left;
+    font-size: 18px;
+    line-height: 28px;
+}
+.systembianji{
+    width:110px;
+    height:40px;
+    background:transparent;
+    border:1px solid white;
+    color:white;
+    font-size:18px;
+    margin-top: 10px;
+    border-radius:15px;
+    
+}
+
+#pop-container {
+    display: none;
+    z-index: 999;
+}
+/*遮盖层*/
+#cover-tier {
+    background-color: #D9D9D9;
+    opacity: 0.5; 
+}
+/*弹出层内容*/
+#pop-tier {
+    width: 500px;
+    height: 590px;
+    border: 2px solid #C3C3C3;
+    background-color: #fff;
+    margin: auto;
+    text-align: center;
+}
+
+/*关闭弹框*/
+#close-pop {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.popPosition {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.text{
+    width: 280px;
+    height: 32px;
+    margin: 20px auto;
+}
+.text h4{
+    width: 80px;
+    height: 32px;
+    float: left;
+    line-height: 30px;
+    text-align: left;
+}
+.text input{
+    width: 190px;
+    height: 30px;
+    border: 1px solid #a9a9a9;
+    float: left;
+    padding-left: 5px;
+}
+.systemSave{
+    border:1px solid black ;
+    width:50px;
+    height:30px;
+    background:transparent;
+    color:black;
+    margin-top:20px;
+}
+#img1:hover {
+    transform:scale(1.35);
+    /* 放大1.5倍 */
+}
