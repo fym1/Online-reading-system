@@ -17,14 +17,14 @@
             <div class="nav">
                 <a href="/user">用户管理</a>
             </div>
-            <div class="nav" style="background: rgba(255,255,255,0.5);">
+            <div class="nav" style="background: rgba(255,255,255,0.5);box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;">
                 <a href="/block">评论管理</a>
             </div>
             <div class="nav">
                 <a href="/book">期刊管理</a>
             </div>
             <div class="nav">
-                <a href="/score">积分管理</a>
+                <a href="/score">O币管理</a>
             </div>
             <div class="nav" >
                 <a href="/system">系统管理</a>
@@ -46,7 +46,7 @@
                                 <span id="sex"><%= ReplyInList[0].postTime%></span>
                             </p>
                         </div>
-                        <div class="systemText3">
+                        <div class="systemText3" style='overflow: hidden;'>
                             <p>回复内容</p>
                             <p style="border: 1px solid white;margin-top: 10px;border-radius: 10px;text-align: center;height:160px;font-size: 20px;">
                                 <span id="phone"><%= ReplyInList[0].replyContent%></span>
@@ -54,10 +54,10 @@
                     </div>
                     </div>
                 <div style="margin: 0 auto;">
-                    <a href="/">
+                    <a href="/deletereply?replyId=<%= ReplyInList[0].replyId%>&&bookId=<%= bookId%>&&postId=<%= postId%>">
                         <button id="out" class="systemOut" style="margin-right: 30px;">删除</button>
                     </a>
-                    <a href='/reply?postId=<%= ReplyInList[0]["postId"] %>'>
+                    <a href='/reply?postId=<%= ReplyInList[0]["postId"] %>&&bookId=<%= bookId%>'>
                         <button id="out" class="systemOut">返回</button>
                     </a>
                 </div>

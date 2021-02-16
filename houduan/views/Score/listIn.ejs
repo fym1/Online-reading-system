@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>积分表管理</title>
+    <title>O币表管理</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -17,19 +17,19 @@
       <p style="float:left;color:white;font-size:42px;line-height:130px;margin-left:40px;">图文期刊在线阅读管理系统</p>
     </header>
     <div class="left">
-        <div class="nav" style="background: rgba(255,255,255,0.5);">
-            <a href="/score/list">积分表管理</a>
+        <div class="nav" style="background: rgba(255,255,255,0.5);box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;">
+            <a href="/score/list">O币表管理</a>
         </div>
         <div class="nav" >
-            <a href="/score/task">积分任务管理</a>
+            <a href="/score/task">O币任务管理</a>
         </div>
         <div class="nav">
-            <a href="/score">返回积分管理</a>
+            <a href="/score">返回O币管理</a>
         </div>
     </div>
     <div class="right">
         <div class="box1" style="color:white">
-            <p style="font-size:35px;font-weight:bold;color: white;">个人积分明细
+            <p style="font-size:35px;font-weight:bold;color: white;">个人O币明细
                 <a href="/score/list" style="color:white"><span style="margin-left:30px;font-size: 28px;" class="iconfont icon-fanhui" id="btn"></span></a>
             </p>
         </div>
@@ -90,10 +90,10 @@ function change(e){
     }
     $("#all").html("");//全部清空
     if(pageno==1){
-        var html="<li ><div style='text-align: left;line-height:3.7rem;'><h1>用户名:<%= userName%>&nbsp;&nbsp;&nbsp;&nbsp;手机号:<%= userPhone%></h1></div> </li> <li ><div class='ListInhead'><h2 class='ListInhead1'>完成任务内容</h2><h2 class='ListInhead1'>积分变换</h2><h2 class='ListInhead1'>总积分</h2></div></li> ";
+        var html="<li ><div style='text-align: left;line-height:3.7rem;'><h1>用户名:<%= userName%>&nbsp;&nbsp;&nbsp;&nbsp;手机号:<%= userPhone%></h1></div> </li> <li ><div class='ListInhead'><h2 class='ListInhead1'>完成任务内容</h2><h2 class='ListInhead1'>O币变换</h2><h2 class='ListInhead1'>总O币</h2></div></li> ";
     }
     else{
-        var html="<li ><div style='text-align: left;line-height:3.7rem;'><h1>用户名:<%= userName%>&nbsp;&nbsp;&nbsp;&nbsp;手机号:<%= userPhone%></h1></div> </li> <li ><div class='ListInhead'><h2 class='ListInhead1'>完成任务内容</h2><h2 class='ListInhead1'>积分变换</h2><h2 class='ListInhead1'>总积分</h2></div></li> ";
+        var html="<li ><div style='text-align: left;line-height:3.7rem;'><h1>用户名:<%= userName%>&nbsp;&nbsp;&nbsp;&nbsp;手机号:<%= userPhone%></h1></div> </li> <li ><div class='ListInhead'><h2 class='ListInhead1'>完成任务内容</h2><h2 class='ListInhead1'>O币变换</h2><h2 class='ListInhead1'>总O币</h2></div></li> ";
     }    for(var i=0;i<pagesize;i++){
         html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';//创建一页的li列表
         if(zz[(e-1)*pagesize+i+1]==null) break;//超出最后的范围跳出

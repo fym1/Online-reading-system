@@ -20,7 +20,7 @@
         <div class="nav">
             <a href="/home">首页</a>
         </div>
-        <div class="nav" style="background: rgba(255,255,255,0.5);">
+        <div class="nav" style="background: rgba(255,255,255,0.5);box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;">
             <a href="/user">用户管理</a>
         </div>
         <div class="nav">
@@ -30,7 +30,7 @@
             <a href="/book">期刊管理</a>
         </div>
         <div class="nav">
-            <a href="/score">积分管理</a>
+            <a href="/score">O币管理</a>
         </div>
         <div class="nav">
             <a href="/system">系统管理</a>
@@ -48,9 +48,8 @@
                     <li>
                         <p class='ListInbody'><%= i+1 %></p>
                         <p class='ListInbody'><%= subList[i]["bookId"] %></p>
-                        <p class='ListInbody'><%= subList[i]["subDate"]%></p>
+                        <p class='ListInbody' style='overflow: hidden;'><%= String( subList[i]["subDate"]).slice(0,25)%></p>
                         <p class='ListInbody'><a style="color:white" href='/record?userPhone=<%=userPhone%>&&bookId=<%= subList[i]["bookId"]%>'>查看详情</a></p>  
-
                     </li>
                 <%}%>  
             </ul>
@@ -83,10 +82,10 @@ function change(e){
     }
     $("#all").html("");//全部清空
     if(pageno==1){
-        var html="<li ><div style='text-align: left;line-height:3.7rem;'><h1>用户名:<%=userName%>&nbsp;&nbsp;&nbsp;&nbsp;手机号:<%=userPhone%></h1></div> </li> <li ><div class='ListInhead'><h2 class='ListInhead1'>编号</h2><h2 class='ListInhead1'>图文期刊ID</h2><h2 class='ListInhead1'>订阅日期</h2><h2 class='ListInhead1'>阅读记录</h2></div></li> ";
+        var html="<li ><div style='text-align: left;line-height:3.7rem;'><h1>手机号:<%=userPhone%></h1></div> </li> <li ><div class='ListInhead'><h2 class='ListInhead1'>编号</h2><h2 class='ListInhead1'>图文期刊ID</h2><h2 class='ListInhead1'>订阅日期</h2><h2 class='ListInhead1'>阅读记录</h2></div></li> ";
     }
     else{
-        var html="<li ><div style='text-align: left;line-height:3.7rem;'><h1>用户名:<%=userName%>&nbsp;&nbsp;&nbsp;&nbsp;手机号:<%=userPhone%></h1></div> </li> <li ><div class='ListInhead'><h2 class='ListInhead1'>编号</h2><h2 class='ListInhead1'>图文期刊ID</h2><h2 class='ListInhead1'>订阅日期</h2><h2 class='ListInhead1'>阅读记录</h2></div></li> ";
+        var html="<li ><div style='text-align: left;line-height:3.7rem;'><h1>手机号:<%=userPhone%></h1></div> </li> <li ><div class='ListInhead'><h2 class='ListInhead1'>编号</h2><h2 class='ListInhead1'>图文期刊ID</h2><h2 class='ListInhead1'>订阅日期</h2><h2 class='ListInhead1'>阅读记录</h2></div></li> ";
     }    for(var i=0;i<pagesize;i++){
         html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';//创建一页的li列表
         if(zz[(e-1)*pagesize+i+1]==null) break;//超出最后的范围跳出

@@ -11,7 +11,7 @@
           <p style="float:left;color:white;font-size:42px;line-height:130px;margin-left:40px;">图文期刊在线阅读管理系统</p>
         </header>
         <div class="left">
-            <div class="nav" style="background: rgba(255,255,255,0.5);">
+            <div class="nav" style="background: rgba(255,255,255,0.5); box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;">
                 <a href="/home">首页</a>
             </div>
             <div class="nav">
@@ -24,7 +24,7 @@
                 <a href="/book">期刊管理</a>
             </div>
             <div class="nav">
-                <a href="/score">积分管理</a>
+                <a href="/score">O币管理</a>
             </div>
             <div class="nav">
                 <a href="/system">系统管理</a>
@@ -32,8 +32,8 @@
         </div>
         <div class="right">
             <div class="boxcenter">
-                <div class="box1" id='#box1' style='transition:all 0.5s;
-                cursor:pointer;'>
+                <div class="box1" id='box1' style='transition:all 0.5s;
+                cursor:pointer; box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;'>
                     <div class="box11">
                         <p style="color: white;">日注册用户数</p>
                     </div>
@@ -43,7 +43,7 @@
                     <div class="box123">
                     </div>  
                 </div>
-                <div class="box2">
+                <div class="box2" id='box2' style='cursor:pointer;transition:all 0.5s; box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;'>
                     <div class="box11">
                         <p style="color: white;">累计用户数量</p>
                     </div>
@@ -53,7 +53,7 @@
                     <div class="box123">
                     </div>  
                 </div>
-                <div class="box3">
+                <div class="box3" id='box3' style='cursor:pointer;transition:all 0.5s; box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;'>
                     <div class="box11">
                         <p style="color: white;">总图文期刊数</p>
                     </div>
@@ -144,5 +144,23 @@
             }
             return newStr;
         }
+        $('#box1').mouseover(function(){
+            $("#box1").css('transform','scale(1.25)');
+        });
+        $('#box1').mouseout(function(){
+            $("#box1").css('transform','scale(1)');
+        });
+        $('#box2').mouseover(function(){
+            $("#box2").css('transform','scale(1.25)');
+        });
+        $('#box2').mouseout(function(){
+            $("#box2").css('transform','scale(1)');
+        });
+        $('#box3').mouseover(function(){
+            $("#box3").css('transform','scale(1.25)');
+        });
+        $('#box3').mouseout(function(){
+            $("#box3").css('transform','scale(1)');
+        });
     </script>
 </html>

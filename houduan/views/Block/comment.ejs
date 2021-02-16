@@ -26,14 +26,14 @@
             <div class="nav">
                 <a href="/user">用户管理</a>
             </div>
-            <div class="nav" style="background: rgba(255,255,255,0.5);">
+            <div class="nav" style="background: rgba(255,255,255,0.5);box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;">
                 <a href="/block">评论管理</a>
             </div>
             <div class="nav">
                 <a href="/book">期刊管理</a>
             </div>
             <div class="nav">
-                <a href="/score">积分管理</a>
+                <a href="/score">O币管理</a>
             </div>
             <div class="nav">
                 <a href="/system">系统管理</a>
@@ -43,8 +43,8 @@
         <div class="right">
             <div class="box1" >
                 <div class='search'>
-                    <form style="line-height: 3em;" method="post" action="/searchBook">
-                        <input class='Bar' placeholder="请输入要查找的评论Id" name='bookId' />
+                    <form style="line-height: 3em;" method="post" action="/searchcomment">
+                        <input class='Bar' placeholder="请输入要查找的评论Id" name='postId' />
                         <div class="iconfont icon-xiaoxi-" style="float:left;">
                             <input type="submit" value="搜索"style="height:30px;border:none; color:white; background:transparent;
                             ">
@@ -60,11 +60,15 @@
                     <% for(var i = 0 ; i < CommentList.length; i++) {%>
                         <li>
                             <p class='Blockbody'><%=  CommentList[i]["postId"]%></p>
-                            <p class='Blockbody'><%= CommentList[i]["postContent"] %></p>
-                            <p class='Blockbody'><%= CommentList[i]["postReplyNum"]%></p>
-                            <p class='Blockbody'><a style="text-decoration:none;color: white;" href='/commentIn?postId=<%=  CommentList[i]["postId"]%>'>评论详情</a></p>  
-                            <p class='Blockbody'><a style="text-decoration:none;color: white;" href='/reply?postId=<%= CommentList[i]["postId"] %>'>所有回复</a></p>  
-                            <p class='Blockbody'><a href='/deletecomment?postId=<%=  CommentList[i]["postId"]%>'><button class='Userdel' >移除</button></a></p>
+                            <p class='Blockbody'><%= CommentList[i]["postContent"].slice(0,10) %></p>
+                            <%if(CommentList[i]["postReplyNum"]!=null){%>
+                                <p class='Blockbody'><%= CommentList[i]["postReplyNum"]%></p>
+                                <%}else{%>
+                                    <p class='Blockbody'>0</p>
+                                    <%}%>
+                            <p class='Blockbody'><a style="text-decoration:none;color: white;" href='/commentIn?postId=<%=  CommentList[i]["postId"]%>&&bookId=<%= bookId%>'>评论详情</a></p>  
+                            <p class='Blockbody'><a style="text-decoration:none;color: white;" href='/reply?postId=<%= CommentList[i]["postId"] %>&&bookId=<%= bookId%>'>所有回复</a></p>  
+                            <p class='Blockbody'><a href='/deletecomment?postId=<%=  CommentList[i]["postId"]%>&&bookId=<%= bookId%>'><button class='Userdel' >移除</button></a></p>
                         </li>
                     <%}%>  
                </ul>

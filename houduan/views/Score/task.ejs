@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>积分任务管理</title>
+        <title>O币任务管理</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -15,13 +15,13 @@
         </header>
         <div class="left">
             <div class="nav">
-                <a href="/score/list">积分表管理</a>
+                <a href="/score/list">O币表管理</a>
             </div>
-            <div class="nav" style="background: rgba(255,255,255,0.5);">
-                <a href="/score/task">积分任务管理</a>
+            <div class="nav" style="background: rgba(255,255,255,0.5);box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;">
+                <a href="/score/task">O币任务管理</a>
             </div>
             <div class="nav">
-                <a href="/score">返回积分管理</a>
+                <a href="/score">返回O币管理</a>
             </div>
         </div>
         <div class="right">
@@ -48,8 +48,7 @@
                                 <div class='Topicoperation'>
                                     <a href='/score/edit?taskId=<%= taskList[i].taskId%>'class='operation1'>
                                         <button style="color: white;border:1px solid white;width: 50px;
-                                        height: 30px;background-color: transparent;    border-radius: 10px;
-">编辑
+                                        height: 30px;background-color: transparent;    border-radius: 10px;">编辑
                                             </button> 
                                     </a>
                                     <a href='/score/deletetask?taskId=<%= taskList[i]["taskId"]%>'><button  style=" width: 50px;
@@ -81,7 +80,7 @@
                         <h2 style="float:left;margin-left:20px;margin-top:25px;margin-bottom: 10px;">任务内容:</h2>
                         <input type='text' id="content" style="width:340px;height:200px;"name="content"  />
                     </div>
-                    <h2 style="float:left;margin-left:20px;margin-top:25px;" >分数:</h2>
+                    <h2 style="float:left;margin-left:20px;margin-top:25px;" >O币:</h2>
                     <input type='text' id="create" style="width:265px;height:30px;margin-top:25px;"name='score'/>
                     <br/>
                     <input value="保存" id="save" type="submit" style="float:right;border:'1px soild white';margin-right:20px;width:55px;height:30px;background-color:transparent;color:'#ffffff';margin-top: 10px;"/>
@@ -120,10 +119,10 @@
         }
         $("#all").html("");//全部清空
         if(pageno==1){
-            var html="<li><div class='Taskhead'><h3 class='Taskhead1'><b>任务编号</b></h3><h3 class='Taskhead1'><b>任务内容</b></h3><h3 class='Taskhead1'><b>分数</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
+            var html="<li><div class='Taskhead'><h3 class='Taskhead1'><b>任务编号</b></h3><h3 class='Taskhead1'><b>任务内容</b></h3><h3 class='Taskhead1'><b>O币</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
         }
         else{
-            var html="<li><div class='Taskhead'><h3 class='Taskhead1'><b>任务编号</b></h3><h3 class='Taskhead1'><b>任务内容</b></h3><h3 class='Taskhead1'><b>分数</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
+            var html="<li><div class='Taskhead'><h3 class='Taskhead1'><b>任务编号</b></h3><h3 class='Taskhead1'><b>任务内容</b></h3><h3 class='Taskhead1'><b>O币</b></h3><h3 class='Taskhead1'><b>操作</b></h3></div></li>";
         }
         for(var i=0;i<pagesize;i++){
             html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';//创建一页的li列表

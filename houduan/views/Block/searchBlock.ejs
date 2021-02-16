@@ -3,7 +3,7 @@
     <head>
         <title>评论管理</title>
         <link rel='stylesheet' href='/stylesheets/style.css'/>
-        <link rel='stylesheet' href='/stylesheets/comment.css'/>
+        <link rel='stylesheet' href='/stylesheets/block.css'/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -24,14 +24,14 @@
             <div class="nav">
                 <a href="/user">用户管理</a>
             </div>
-            <div class="nav" style="background: rgba(255,255,255,0.5);">
+            <div class="nav" style="background: rgba(255,255,255,0.5);box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;">
                 <a href="/block">评论管理</a>
             </div>
             <div class="nav">
                 <a href="/book">期刊管理</a>
             </div>
             <div class="nav">
-                <a href="/score">积分管理</a>
+                <a href="/score">O币管理</a>
             </div>
             <div class="nav">
                 <a href="/system">系统管理</a>
@@ -50,13 +50,12 @@
             </div>
             <div class='Blockbox3' >
                 <ul id="all" >
-                    <% for(var i = 0 ; i < blockList.length; i++) {%>
+                    <% for(var i = 0 ; i < 1; i++) {%>
                         <li>
-                            <p class='Blockbody'><%= blockList[i]["postId"] %></p>
+                            <p class='Blockbody'><%= i+1 %></p>
                             <p class='Blockbody'><%= blockList[i]["bookId"] %></p>
-                            <p class='Blockbody'><%= blockList[i]["postTime"]%></p>
-                            <p class='Blockbody'><a style="text-decoration:none;color: white;" href='/commentIn?postId=<%=blockList[i]["bookId"] %>'>评论详情</a></p>  
-                            <p class='Blockbody'><a style="text-decoration:none;color: white;" href='/comment?bookId=<%= blockList[i]["bookId"] %>'>所有回复</a></p>  
+                            <p class='Blockbody'><%= blockList.length%></p>
+                            <p class='Blockbody'><a style="text-decoration:none;color: white;" href='/comment?bookId=<%= blockList[i]["bookId"] %>'>所有评论</a></p>  
                         </li>
                     <%}%>  
                </ul>
@@ -90,10 +89,10 @@
             }
             $("#all").html("");
             if(pageno==1){
-                var html=" <li><div class='Blockhead'><h3 class='Blockhead1'>评论编号</h3><h3 class='Blockhead1'>图文期刊编号</h3><h3 class='Blockhead1'>发布时间</h3><h3 class='Blockhead1'>查看详情</h3><h3 class='Blockhead1'>所有回复</h3></div></li> ";
+                var html=" <li><div class='Blockhead'><h3 class='Blockhead1'>编号</h3><h3 class='Blockhead1'>图文期刊编号</h3><h3 class='Blockhead1'>总评论数</h3><h3 class='Blockhead1'>所有评论</h3></div></li> ";
             }
             else{
-                var html=" <li><div class='Blockhead'><h3 class='Blockhead1'>评论编号</h3><h3 class='Blockhead1'>图文期刊编号</h3><h3 class='Blockhead1'>发布时间</h3><h3 class='Blockhead1'>查看详情</h3><h3 class='Blockhead1'>所有回复</h3></div></li> ";
+                var html=" <li><div class='Blockhead'><h3 class='Blockhead1'>编号</h3><h3 class='Blockhead1'>图文期刊编号</h3><h3 class='Blockhead1'>总评论数</h3><h3 class='Blockhead1'>所有评论</h3></div></li> ";
             }
             for(var i=0;i<pagesize;i++){
                 html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';

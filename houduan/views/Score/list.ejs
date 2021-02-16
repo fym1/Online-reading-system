@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>积分表管理</title>
+        <title>O币表管理</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -15,14 +15,14 @@
           <p style="float:left;color:white;font-size:42px;line-height:130px;margin-left:40px;">图文期刊在线阅读管理系统</p>
         </header>
         <div class="left">
-            <div class="nav" style="background: rgba(255,255,255,0.5);">
-                <a href="/score/list">积分表管理</a>
+            <div class="nav" style="background: rgba(255,255,255,0.5);box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;">
+                <a href="/score/list">O币表管理</a>
             </div>
             <div class="nav" >
-                <a href="/score/task">积分任务管理</a>
+                <a href="/score/task">O币任务管理</a>
             </div>
             <div class="nav">
-                <a href="/score">返回积分管理</a>
+                <a href="/score">返回O币管理</a>
             </div>
         </div>
         <div class="right">
@@ -56,7 +56,7 @@
                         <p class='Listbody'><%= scoreList[i]["updateTime"].slice(0,10) %></p>
                         <p class='Listbody'><%= scoreList[i]["sum"] %></p>            
                         <p class='Listbody'><%= i+1 %></p>  
-                        <p class='Listbody'><a style="text-decoration:none;color: white;" href='/score/slist?userPhone=<%= scoreList[i]["userPhone"]%>&&userName=<%= scoreList[i]["userName"]%>'>个人积分明细</a></p>  
+                        <p class='Listbody'><a style="text-decoration:none;color: white;" href='/score/slist?userPhone=<%= scoreList[i]["userPhone"]%>&&userName=<%= scoreList[i]["userName"]%>'>个人O币明细</a></p>  
                     </li>
                     <%}%>
                 </ul>
@@ -90,10 +90,10 @@
             }
             $("#all").html("");//全部清空
             if(pageno==1){
-                var html="  <li ><div class='Listhead'><h3 class='Listhead1'><b>手机号</b></h3><h3 class='Listhead1'><b>更新时间</b></h3><h3 class='Listhead1' ><b>总分</b></h3><h3 class='Listhead1' ><b>排名</b></h3><h3 class='Listhead1'><b>个人积分</b></h3></div></li>";
+                var html="  <li ><div class='Listhead'><h3 class='Listhead1'><b>手机号</b></h3><h3 class='Listhead1'><b>更新时间</b></h3><h3 class='Listhead1' ><b>总O币</b></h3><h3 class='Listhead1' ><b>排名</b></h3><h3 class='Listhead1'><b>个人O币</b></h3></div></li>";
             }
             else{
-                var html="  <li ><div class='Listhead'><h3 class='Listhead1'><b>手机号</b></h3><h3 class='Listhead1'><b>更新时间</b></h3><h3 class='Listhead1' ><b>总分</b></h3><h3 class='Listhead1' ><b>排名</b></h3><h3 class='Listhead1'><b>个人积分</b></h3></div></li>";
+                var html="  <li ><div class='Listhead'><h3 class='Listhead1'><b>手机号</b></h3><h3 class='Listhead1'><b>更新时间</b></h3><h3 class='Listhead1' ><b>总O币</b></h3><h3 class='Listhead1' ><b>排名</b></h3><h3 class='Listhead1'><b>个人O币</b></h3></div></li>";
             }    for(var i=0;i<pagesize;i++){
                 html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';//创建一页的li列表
                 if(zz[(e-1)*pagesize+i+1]==null) break;//超出最后的范围跳出

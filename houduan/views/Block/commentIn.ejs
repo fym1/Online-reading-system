@@ -17,14 +17,14 @@
             <div class="nav">
                 <a href="/user">用户管理</a>
             </div>
-            <div class="nav" style="background: rgba(255,255,255,0.5);">
+            <div class="nav" style="background: rgba(255,255,255,0.5);box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;">
                 <a href="/block">评论管理</a>
             </div>
             <div class="nav">
                 <a href="/book">期刊管理</a>
             </div>
             <div class="nav">
-                <a href="/score">积分管理</a>
+                <a href="/score">O币管理</a>
             </div>
             <div class="nav" >
                 <a href="/system">系统管理</a>
@@ -33,7 +33,12 @@
         </div>
         <div class="right">
             <div style="width:75%;height:420px;margin:40px auto;background: rgba(255,255,255,0.5);;font-size:20px;text-align: center;">
-                <p style="text-align:center;color:white;padding-top:20px;font-size: 30px;">评论编号<%= commentInList[0].postId%>的详情</p>
+                <p style="text-align:center;color:white;padding-top:20px;font-size: 30px;">评论编号<%= commentInList[0].postId%>的详情
+                    <span style="float: right;padding-right: 5px;"><a style="text-decoration:none;color: white;" href='/comment?bookId=<%= bookId %>'>
+                        &#10006;
+                     </a>
+                     <span>
+                </p>
                 <div style="width:530px;height: 350px;margin: 0 auto;">
                     <div style="width:530px;height:250px;margin:20px auto;text-align:left;">
                         <div class="systemText2">
@@ -53,10 +58,9 @@
                                 <span id="sex"><%= commentInList[0].postReplyNum%></span>
                             </p>
                         </div>
-                       
-                        <div class="systemText3">
+                        <div class="systemText3" style='overflow: hidden;'>
                             <p>评论内容</p>
-                            <p style="border: 1px solid white;margin-top: 10px;border-radius: 10px;text-align: center;height:130px;font-size: 20px;">
+                            <p style="border: 1px solid white;margin-top: 10px;border-radius: 10px;text-align: center;height:130px;font-size: 16px;">
                                 <span id="phone"><%= commentInList[0].postContent%></span>
                             </p>
                     </div>

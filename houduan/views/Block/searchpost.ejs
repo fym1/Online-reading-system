@@ -3,7 +3,7 @@
     <head>
         <title>评论管理</title>
         <link rel='stylesheet' href='/stylesheets/style.css'/>
-        <link rel='stylesheet' href='/stylesheets/block.css'/>
+        <link rel='stylesheet' href='/stylesheets/comment.css'/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -36,28 +36,32 @@
             <div class="nav">
                 <a href="/system">系统管理</a>
             </div>
-          
+           
         </div>
         <div class="right">
-            <div class="box1" >
-                <div class='search'>
-                    <form style="line-height: 3em;" method="post" action="/searchBlock">
-                        <input class='Bar' placeholder="请输入要查找的书号" name='bookId' />
-                        <div class="iconfont icon-xiaoxi-" style="float:left;">
-                            <input type="submit" value="搜索"style="height:30px;border:none; color:white; background:transparent;
-                            ">
-                        </div>
-                    </form>
+            <div class="box1">
+                <span style="font-size: 30px;font-weight: bolder;">您搜索的结果是:</span>
+                <div style="margin-right:4%;float: right;">
+                    <a style="text-decoration:none" href='/block'>
+                        <button style="background-color: transparent;color:white;border: 1px solid white;width: 50px;height: 30px;    border-radius: 10px;
+                        ">返回</button>
+                    </a>
                 </div>
             </div>
             <div class='Blockbox3' >
                 <ul id="all" >
-                    <% for(var i = 0 ; i < blockList.length; i++) {%>
+                    <% for(var i = 0 ; i < CommentList.length; i++) {%>
                         <li>
-                            <p class='Blockbody'><%= blockList[i]["postId"] %></p>
-                            <p class='Blockbody'><%= blockList[i]["bookId"] %></p>
-                            <p class='Blockbody'><%= blockList[i]["userPhone"]%></p>
-                            <p class='Blockbody'><a style="text-decoration:none;color: white;" href='/comment?bookId=<%= blockList[i]["bookId"] %>'>所有评论</a></p>  
+                            <p class='Blockbody'><%=  CommentList[i]["postId"]%></p>
+                            <p class='Blockbody'><%= CommentList[i]["postContent"].slice(0,10) %></p>
+                            <%if(CommentList[i]["postReplyNum"]!=null){%>
+                                <p class='Blockbody'><%= CommentList[i]["postReplyNum"]%></p>
+                                <%}else{%>
+                                    <p class='Blockbody'>0</p>
+                                    <%}%>
+                            <p class='Blockbody'><a style="text-decoration:none;color: white;" href='/commentIn?postId=<%=  CommentList[i]["postId"]%>'>评论详情</a></p>  
+                            <p class='Blockbody'><a style="text-decoration:none;color: white;" href='/reply?postId=<%= CommentList[i]["postId"] %>'>所有回复</a></p>  
+                            <p class='Blockbody'><a href='/deletecomment?postId=<%=  CommentList[i]["postId"]%>'><button class='Userdel' >移除</button></a></p>
                         </li>
                     <%}%>  
                </ul>
@@ -91,10 +95,10 @@
             }
             $("#all").html("");
             if(pageno==1){
-                var html=" <li><div class='Blockhead'><h3 class='Blockhead1'>编号</h3><h3 class='Blockhead1'>图文期刊编号</h3><h3 class='Blockhead1'>总评论数</h3><h3 class='Blockhead1'>查看详情</h3></div></li> ";
+                var html="<li><div class='Blockhead'><h3 class='Blockhead1'>评论编号</h3><h3 class='Blockhead1'>评论内容</h3><h3 class='Blockhead1'>总回复数</h3><h3 class='Blockhead1'>评论详情</h3><h3 class='Blockhead1'>所有回复</h3><h3 class='Blockhead1'>操作</h3></div></li> ";
             }
             else{
-                var html=" <li><div class='Blockhead'><h3 class='Blockhead1'>编号</h3><h3 class='Blockhead1'>图文期刊编号</h3><h3 class='Blockhead1'>总评论数</h3><h3 class='Blockhead1'>查看详情</h3></div></li> ";
+                var html="<li><div class='Blockhead'><h3 class='Blockhead1'>评论编号</h3><h3 class='Blockhead1'>评论内容</h3><h3 class='Blockhead1'>总回复数</h3><h3 class='Blockhead1'>评论详情</h3><h3 class='Blockhead1'>所有回复</h3><h3 class='Blockhead1'>操作</h3></div></li> ";
             }
             for(var i=0;i<pagesize;i++){
                 html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';

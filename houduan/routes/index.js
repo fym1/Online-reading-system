@@ -235,7 +235,6 @@ router.get('/block', function(req, res, next) {
       console.log(err);
     }
     else{
-      console.log(result);
       res.render("Block/block",{blockList:result});
     }
   })
@@ -248,7 +247,6 @@ router.post('/searchBlock', function(req, res, next) {
       console.log(err);
     }
     else{
-      console.log(result);
       res.render("Block/searchblock",{blockList:result});
     }
   })
@@ -265,41 +263,85 @@ router.get('/comment', function(req, res, next) {
     }
   })
 });
-/**获取评论内容详情 */
-router.get('/commentIn', function(req, res, next) {
+/**删除评论 */
+router.get('/deletecomment', function(req, res, next) {
   var postId=req.query.postId;
+  var bookId=req.query.bookId;
+  con.query("delete  from post where postId=?",[postId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Block/deletecomment', { title: 'deletecomment',postId:postId,bookId:bookId});
+    }
+  });   
+});
+/**按评论编号搜索某本书的某个评论 */
+router.post('/searchcomment', function(req, res, next) {
+  var postId=req.body.postId;
   con.query("select * from post where postId=?",[postId],function(err,result){
     if(err){
       console.log(err);
     }
     else{
-      res.render("Block/commentIn",{commentInList:result,postId:postId});
+      res.render("Block/searchpost",{CommentList:result});
+    }
+  })
+});
+/**获取评论内容详情 */
+router.get('/commentIn', function(req, res, next) {
+  var postId=req.query.postId;
+  var bookId=req.query.bookId;
+  con.query("select * from post where postId=?",[postId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("Block/commentIn",{commentInList:result,postId:postId,bookId:bookId});
     }
   })
 });
 /**获取回复内容 */
 router.get('/reply', function(req, res, next) {
   var postId=req.query.postId;
+  var bookId=req.query.bookId;
   con.query("select * from reply where postId=?",[postId],function(err,result){
     if(err){
       console.log(err);
     }
     else{
-      res.render("Block/reply",{ReplyList:result,postId:postId});
+      res.render("Block/reply",{ReplyList:result,postId:postId,bookId:bookId});
     }
   })
 });
+
 /**获取回复内容详情 */
 router.get('/replyIn', function(req, res, next) {
   var replyId=req.query.replyId;
+  var bookId=req.query.bookId;
+  var postId=req.query.postId;
   con.query("select * from reply where replyId=?",[replyId],function(err,result){
     if(err){
       console.log(err);
     }
     else{
-      res.render("Block/replyIn",{ReplyInList:result,replyId:replyId});
+      res.render("Block/replyIn",{ReplyInList:result,replyId:replyId,bookId:bookId,postId:postId});
     }
   })
+});
+/**删除回复内容*/
+router.get('/deletereply', function(req, res, next) {
+  var replyId=req.query.replyId;
+  var bookId=req.query.bookId;
+  var postId=req.query.postId;
+  con.query("delete  from reply where replyId=?",[replyId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('Block/deletereply', { title: 'deletereply',bookId:bookId,postId:postId});
+    }
+  });   
 });
 //期刊管理
 /**获取期刊--升序（默认） */
