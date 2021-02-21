@@ -17,7 +17,7 @@
             <div class="nav">
                 <a href="/user">用户管理</a>
             </div>
-            <div class="nav" style="background: rgba(255,255,255,0.5);box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;">
+            <div class="nav" style="background: rgba(0,0,0,0.5);box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;">
                 <a href="/block">评论管理</a>
             </div>
             <div class="nav">
@@ -32,7 +32,8 @@
             
         </div>
         <div class="right">
-            <div style="width:75%;height:420px;margin:40px auto;background: rgba(255,255,255,0.5);;font-size:20px;text-align: center;">
+            <div style="width:75%;height:420px;margin:40px auto;box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;
+            background: rgba(0,0,0,0.5); font-size:20px;text-align: center;">
                 <p style="text-align:center;color:white;padding-top:20px;font-size: 30px;">评论编号<%= commentInList[0].postId%>的详情
                     <span style="float: right;padding-right: 5px;"><a style="text-decoration:none;color: white;" href='/comment?bookId=<%= bookId %>'>
                         &#10006;
@@ -67,10 +68,10 @@
                     </div>
                 <div style="margin: 0 auto;">
                     <a href="/">
-                        <button id="out" class="systemOut" style="margin-right: 30px;">删除</button>
+                        <button id="out" class="systemOut" style="margin-right: 30px;box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;" >删除</button>
                     </a>
                     <a href='/comment?bookId=<%= commentInList[0]["bookId"] %>'>
-                        <button id="out" class="systemOut">返回</button>
+                        <button id="out" class="systemOut" style='box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;'>返回</button>
                     </a>
                 </div>
                 </div>

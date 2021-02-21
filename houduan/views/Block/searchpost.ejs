@@ -24,7 +24,7 @@
             <div class="nav">
                 <a href="/user">用户管理</a>
             </div>
-            <div class="nav" style="background: rgba(255,255,255,0.5);box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;">
+            <div class="nav" style="background: rgba(0,0,0,0.5);box-shadow:0px 0px 15px 1px rgba(255,255,255,0.89) inset;">
                 <a href="/block">评论管理</a>
             </div>
             <div class="nav">
@@ -54,13 +54,7 @@
                         <li>
                             <p class='Blockbody'><%=  CommentList[i]["postId"]%></p>
                             <p class='Blockbody'><%= CommentList[i]["postContent"].slice(0,10) %></p>
-                            <%if(CommentList[i]["postReplyNum"]!=null){%>
-                                <p class='Blockbody'><%= CommentList[i]["postReplyNum"]%></p>
-                                <%}else{%>
-                                    <p class='Blockbody'>0</p>
-                                    <%}%>
                             <p class='Blockbody'><a style="text-decoration:none;color: white;" href='/commentIn?postId=<%=  CommentList[i]["postId"]%>'>评论详情</a></p>  
-                            <p class='Blockbody'><a style="text-decoration:none;color: white;" href='/reply?postId=<%= CommentList[i]["postId"] %>'>所有回复</a></p>  
                             <p class='Blockbody'><a href='/deletecomment?postId=<%=  CommentList[i]["postId"]%>'><button class='Userdel' >移除</button></a></p>
                         </li>
                     <%}%>  
@@ -95,10 +89,10 @@
             }
             $("#all").html("");
             if(pageno==1){
-                var html="<li><div class='Blockhead'><h3 class='Blockhead1'>评论编号</h3><h3 class='Blockhead1'>评论内容</h3><h3 class='Blockhead1'>总回复数</h3><h3 class='Blockhead1'>评论详情</h3><h3 class='Blockhead1'>所有回复</h3><h3 class='Blockhead1'>操作</h3></div></li> ";
+                var html="<li><div class='Blockhead'><h3 class='Blockhead1'>评论编号</h3><h3 class='Blockhead1'>评论内容</h3><h3 class='Blockhead1'>评论详情</h3><h3 class='Blockhead1'>操作</h3></div></li> ";
             }
             else{
-                var html="<li><div class='Blockhead'><h3 class='Blockhead1'>评论编号</h3><h3 class='Blockhead1'>评论内容</h3><h3 class='Blockhead1'>总回复数</h3><h3 class='Blockhead1'>评论详情</h3><h3 class='Blockhead1'>所有回复</h3><h3 class='Blockhead1'>操作</h3></div></li> ";
+                var html="<li><div class='Blockhead'><h3 class='Blockhead1'>评论编号</h3><h3 class='Blockhead1'>评论内容</h3><h3 class='Blockhead1'>评论详情</h3><h3 class='Blockhead1'>操作</h3></div></li> ";
             }
             for(var i=0;i<pagesize;i++){
                 html += '<li>' + zz[(e-1)*pagesize+i] +'</li>';
