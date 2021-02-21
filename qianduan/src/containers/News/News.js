@@ -86,8 +86,7 @@ export default class News extends Component {
           onChange={this.onTabChanged}
           className='tabstyle'
         >
-          <TabPane tab="消息评论" key="" forceRender>
-            {/* <Route exact path="/news" component={First}/> */}
+          {/* <TabPane tab="消息评论" key="" forceRender>
             <div style={{backgroundColor:'#EEE3E1',width:'100%',height:'100%'}}>
               <Grid data={this.state.xiaoxi}
                 columnNum={2}
@@ -100,19 +99,17 @@ export default class News extends Component {
                       <p style={{color:'#fff'}}>{dataItem.tit}</p>
                     </div>
                     <div style={{height:'15%',width:'100%',backgroundColor:'#fff'}}>          
-                      {/* <div style={{backgroundColor:'#fff',width:'100%',height:'100%'}}> */}
                         <img src={dataItem.tou} style={{float:'left',height:'100%',marginLeft:'8%'}}/>
                         <p style={{float:'left',marginLeft:'10%',fontSize:'10%',color:'#686868',marginTop:'3%'}}>{dataItem.username}</p>
-                      {/* </div>                   */}
                     </div>                    
                   </div>
                 )}
               />
             </div>
             <div style={{width:'100%',height:'70px'}}></div>
-          </TabPane>
-          <TabPane tab="书籍更新" key="secondTab" forceRender>
-            <Route exact path="/news/secondTab" component={Second}/>
+          </TabPane> */}
+          <TabPane tab="书籍更新" key="" forceRender>
+            <Route exact path="/news" component={Second}/>
           </TabPane>
           <TabPane tab="系统通知" key="thirdTab" forceRender>
             <Route exact path="/news/thirdTab" component={Third}/>

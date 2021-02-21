@@ -28,11 +28,15 @@ export default class Shelf extends Component {
         {feng:'./images/1.jpg',tit:'评论4',username:'用户名4',tou:'./images/3.jpg'},
       ],
       lunbo:['1','2','3','4'],
-      tui:['./images/tui1.jpg','./images/tui2.jpg','./images/tui3.jpg']
+      tui:[],
+      tui1:[]
     }
   }
   jump(value){
     this.props.history.push(value)
+  }
+  jump1(value){
+    this.props.history.push({pathname:value,query:{page:this.state.page,shelf:'/market'}})
   }
   onTabChanged = (key) => {
     this.setState({tabKey:key});
@@ -55,6 +59,25 @@ export default class Shelf extends Component {
     }
     var logif =  sessionStorage.getItem("logif");
     console.log(logif);
+    fetch('http://localhost:8001/all')
+      .then((res)=>res.json())
+      .then((res)=>{
+        var tuijian = [];
+        var tuijian1 = [];
+        for(var i = 0;i<3;i++){
+          tuijian[i] = res[i];
+        }
+        for(var k = 3;k<6;k++){
+          tuijian1[k-3] = res[k];
+        }
+        this.setState({
+          tui:tuijian,
+          tui1:tuijian1
+        })
+        console.log(this.state.tui1)
+        console.log(this.state.tui)
+
+      })
   }
   render() {
     let {url} = this.props.match;
@@ -133,7 +156,7 @@ export default class Shelf extends Component {
                   hasLine={false}
                   itemStyle={{backgroundColor:'#EEE3E1'}}
                   renderItem={dataItem=>(
-                    <img src={dataItem} style={{width:'85%',height:'155px'}}/>
+                    <img src={dataItem.bookImage} style={{width:'85%',height:'155px'}} onClick={() => this.jump1(`/xiangxi/${dataItem.bookId}`)}/>
                   )}
                 />
               </div>
@@ -143,12 +166,12 @@ export default class Shelf extends Component {
                 <p style={{fontSize:'20px',color:'#F54577',marginLeft:'5px'}}>经典图书</p>
               </div>
               <div style={{width:'100%',height:'155px',marginTop:'10px'}}>
-                <Grid data={this.state.tui}
+                <Grid data={this.state.tui1}
                   columnNum={3}
                   hasLine={false}
                   itemStyle={{backgroundColor:'#EEE3E1'}}
                   renderItem={dataItem=>(
-                    <img src={dataItem} style={{width:'85%',height:'155px'}}/>
+                    <img src={dataItem.bookImage} style={{width:'85%',height:'155px'}} onClick={() => this.jump1(`/xiangxi/${dataItem.bookId}`)}/>
                   )}
                 />
               </div>

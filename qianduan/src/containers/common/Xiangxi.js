@@ -316,7 +316,7 @@ export default class Xiangxi extends Component {
             value={this.state.v}
             type='text'
             onKeyDown={this.handleInput}
-            maxLength='10px'
+            // maxLength='10px'
             onChange={this.handleChange}
             style={{width:'70%',height:'40px',border:'1px solid #888888',borderRadius:'5px',marginLeft:'15px',float:'left'}}
           />
