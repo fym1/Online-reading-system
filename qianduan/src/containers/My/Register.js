@@ -6,12 +6,13 @@ class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            username:'',
             phone:'',
             password:'',
             repwd: '', // 确认密码
             type: 'worker', // 用户类型 默认求职者
-            trueNum:"",
-            checkNum:"点击输入验证码"
+            trueNum:"点击输入验证码",
+            checkNum:""
         }
     }
      /*
@@ -43,7 +44,7 @@ class Register extends Component {
     getConnect(){ //api请求函数
         var myDate = new Date();
         console.log(myDate);       
-        let text = {phone:this.state.phone,password:this.state.password,repwd:this.state.repwd,Uday:myDate} //获取数据
+        let text = {phone:this.state.phone,password:this.state.password,repwd:this.state.repwd,userDay:myDate,username:this.state.username} //获取数据
         let send = JSON.stringify(text);   //重要！将对象转换成json字符串
         console.log(this.state.checkNum);
         if(this.state.checkNum==""){
@@ -87,7 +88,7 @@ class Register extends Component {
         }
         console.log(str);
         this.setState({
-          checkNum:str
+          trueNum:str
         })
     }
     ifshow=()=>{
@@ -119,17 +120,6 @@ class Register extends Component {
                 <WhiteSpace></WhiteSpace>
                 <WhiteSpace></WhiteSpace>
                 <WhiteSpace></WhiteSpace>
-                {/* <div style={{backgroundColor:"#fff",width:'90%',margin:'0 auto',overflow:'auto',opacity:'0.7'}}>
-                    <List style={{width:'90%',float:'left'}}>
-                        <InputItem onChange={value => this.handleChange('phone', value)} type='text' name='phone' id='phone'>手机号</InputItem>
-                        <InputItem onChange={value => this.handleChange('password', value) }type='password' name="password" id="password">密码</InputItem>
-                        <InputItem onChange={value => this.handleChange('repwd', value)} type='password' name='repwd' id='repwd'>确认</InputItem>
-                        <InputItem onChange={value => this.handleChange('username', value)} type='text' name='username' id='username'>用户名</InputItem>
-                        <InputItem onChange={value => this.handleChange('checkNum', value)} type='password' name='yanzheng' id='yanzheng'>验证码</InputItem>
-                    </List>
-                    <i className='icon-changyongicon- iconfont' style={{height:'30px',width:'30px',float:'left',marginTop:'55px'}} onClick={this.ifshow}></i>
-                    <i className='icon-changyongicon- iconfont' style={{height:'30px',width:'30px',float:'left',marginTop:'15px'}} onClick={this.ifshow1}></i>
-                </div> */}
                 <div style={{backgroundColor:"#fff",width:'75%',margin:'0 auto',overflow:'auto',opacity:'0.7',borderRadius:'20px',border:'1px #000 solid',marginTop:'50px'}}> 
                     <List style={{width:'90%',float:'left'}}>
                         <InputItem onChange={value => this.handleChange('username', value)} type='text' name='username' id='username'>用户名</InputItem>
@@ -152,17 +142,17 @@ class Register extends Component {
                 </div>
                 <div style={{backgroundColor:"#fff",width:'75%',margin:'0 auto',overflow:'auto',opacity:'0.7',borderRadius:'20px',border:'1px #000 solid',marginTop:'20px'}}> 
                     <List style={{width:'90%',float:'left'}}>
-                        <InputItem onChange={value => this.handleChange('checkNum', value)} type='password' name='yanzheng' id='yanzheng'>验证码</InputItem>
+                        <InputItem onChange={value => this.handleChange('checkNum', value)} type='text' name='yanzheng' id='yanzheng'>验证码</InputItem>
                     </List>                
                 </div>
                 <div style={{backgroundColor:"#fff",width:'75%',margin:'0 auto',overflow:'auto',opacity:'0.7',borderRadius:'20px',border:'1px #000 solid',marginTop:'20px'}}> 
-                    <Button onClick={this.getcode.bind(this)}>{this.state.checkNum}</Button>
+                    <Button onClick={this.getcode.bind(this)}>{this.state.trueNum}</Button>
                 </div>
                 <WingBlank> 
                     <Button type="primary" onClick={this.handleGoLogin.bind(this)} style={{backgroundColor:"#000",width:'30%',float:'left',overflow:'auto',opacity:'0.5',borderRadius:'15px',border:'1px #000 solid',marginTop:'20px',marginLeft:'10%'}}>返回</Button>
                 </WingBlank>
                 <WingBlank> 
-                    <Button type="primary" onClick={this.handleGoLogin.bind(this)} style={{backgroundColor:"#000",width:'30%',float:'right',overflow:'auto',opacity:'0.5',borderRadius:'15px',border:'1px #000 solid',marginTop:'20px',marginRight:'10%'}}>注册</Button>
+                    <Button type="primary" onClick={this.submit.bind(this)} style={{backgroundColor:"#000",width:'30%',float:'right',overflow:'auto',opacity:'0.5',borderRadius:'15px',border:'1px #000 solid',marginTop:'20px',marginRight:'10%'}}>注册</Button>
                 </WingBlank>
             </div>
         )

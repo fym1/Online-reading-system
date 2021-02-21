@@ -24,34 +24,34 @@ export default class Login extends Component {
     }
 
     submit(){
-        // this.getConnect();
-        this.props.history.push('/shelf')
+        this.getConnect();
     }
-
-    // getConnect(){  //api请求函数
-    //     let text = {phone:this.state.phone,password:this.state.password} //获取数据
-    //     let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-    //     fetch(`http://127.0.0.1:8001/login`,{   //Fetch方法y
-    //         method: 'POST',
-    //         headers: {'Content-Type': 'application/json; charset=utf-8'},
-    //         body: send
-    //     })
-    //     .then(res => res.json())
-    //     .then(
-    //         data => {
-    //             if(data.success){
-    //                 sessionStorage.setItem("user",text.phone);
-    //                 sessionStorage.setItem("logif",true);
-    //                 Toast.success('登录成功，即将跳转到我的页面', 1);
-    //                 his.push('/my')
-    //                 window.location.reload();
-    //             }
-    //             else{
-    //                 Toast.fail('手机号或密码错误，请重新登录', 1);
-    //             }
-    //         }
-    //     )
-    // }
+    getConnect(){  //api请求函数
+        let text = {phone:this.state.phone,password:this.state.password} //获取数据
+        console.log(text);
+        let send = JSON.stringify(text);   //重要！将对象转换成json字符串
+        fetch(`http://127.0.0.1:8001/`,{   //Fetch方法y
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: send
+        })
+        .then(res => res.json())
+        .then(
+            data => {
+                console.log(data)
+                if(data.success){
+                    sessionStorage.setItem("user",text.phone);
+                    sessionStorage.setItem("logif",true);
+                    Toast.success('登录成功，即将跳转到书架页面', 1);
+                    his.push('/')
+                    window.location.reload();
+                }
+                else{
+                    Toast.fail('手机号或密码错误，请重新登录', 1);
+                }
+            }
+        )
+    }
     componentDidMount(){
         sessionStorage.setItem("logif",false);
     }
@@ -81,7 +81,7 @@ export default class Login extends Component {
                 <WhiteSpace></WhiteSpace>
                 <div style={{backgroundColor:"#fff",width:'75%',margin:'0 auto',overflow:'auto',opacity:'0.7',borderRadius:'20px',border:'1px #000 solid',marginTop:'170px'}}> 
                     <List style={{width:'90%',float:'left'}}>
-                        <InputItem onChange={value => this.handleChange('phone', value)} type='text' name='phone' id='phone'>用户名：</InputItem>
+                        <InputItem onChange={value => this.handleChange('phone', value)} type='text' name='phone' id='phone'>手机号：</InputItem>
                     </List>                
                 </div>
                 <div style={{backgroundColor:"#fff",width:'75%',margin:'0 auto',overflow:'auto',opacity:'0.7',borderRadius:'20px',border:'1px #000 solid',marginTop:'20px'}}> 

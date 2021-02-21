@@ -1,0 +1,61 @@
+.word1{
+  height: 12px;
+  color: gray;
+  text-align: left;
+}
+.word2{
+  font-size: 20px;
+  height: 20px;
+  text-align: left;
+  margin-top: 5px;
+}
+.word4{
+  height: 12px;
+  color: gray;
+  text-align: right;
+}
+.word3{
+  text-align: right;
+  margin-top: 10px;
+  color: #F54577;
+}
+.block0{
+  width: 100%;
+  height: 200px;
+  background-color: #FFF;
+  padding: 5px;
+  margin-top: 10px;
+}
+.block1{
+  width: 100%;
+  height: 60px;
+  background-color: #FFF;
+  padding: 5px 10%;
+  margin-top: 10px;
+}
+.kuai1{
+  padding:5px;
+  background-color: #fff;
+  width:100%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+.left0{
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+.login-no{
+  text-align: center;
+  margin-top: 5%;
+}
+.login-yes{
+  display: none;
+}
+.login-yes-p{
+  font-size: 15px;
+  color: #bbb;
+  margin-right: 15px;
+  float: right;
+  margin-top: 5px;
+}

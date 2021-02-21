@@ -1,0 +1,65 @@
+.block{
+  width: 100%;
+  padding: 5px 10px 5px 10px;
+  background-color: #EEE3E1;
+  margin-top: 15px;
+}
+.word5{
+  height: 10px;
+  color: gray;
+  text-align: left;
+}
+.word6{
+  font-size: 20px;
+  height: 20px;
+  text-align: left;
+  margin-top: 3px;
+}
+.word4{
+  height: 12px;
+  color: gray;
+  text-align: right;
+}
+.word3{
+  text-align: right;
+  margin-top: 10px;
+  color: #F54577;
+}
+.block0{
+  width: 100%;
+  height: 200px;
+  background-color: #FFF;
+  padding: 5px;
+  margin-top: 10px;
+}
+.block11{
+  width: 100%;
+  height: 60px;
+  background-color: #FFF;
+  padding: 5px 10%;
+}
+.kuai2{
+  padding:5px;
+  background-color: #fff;
+  width:100%;
+  margin: 0 auto;
+}
+.left0{
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+.login-no{
+  text-align: center;
+  margin-top: 10%;
+}
+.login-yes{
+  display: none;
+}
+.login-yes-p{
+  font-size: 15px;
+  color: #bbb;
+  margin-right: 15px;
+  float: right;
+  margin-top: 5px;
+}

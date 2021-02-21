@@ -1,0 +1,6 @@
+{
+    "host":"localhost",
+    "database":"orms",
+    "user":"root",
+    "password":""
+}

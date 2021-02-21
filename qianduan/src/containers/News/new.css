@@ -1,0 +1,7 @@
+.tabstyle{
+  width: 100%;
+  margin: 0 auto;
+}
+.tabstyle >>> .ant-tabs-tab{
+     background-color: red !important;
+}

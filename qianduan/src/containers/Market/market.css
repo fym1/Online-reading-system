@@ -1,0 +1,51 @@
+.tabstyle{
+  width: auto;
+  margin: 0 auto;
+  background-color: #EEE3E1;
+}
+.tabstyle >>> .ant-tabs-tab{
+     background-color: red !important;
+}
+.wordstyle{
+  border: 1px gray solid;
+  padding: 2px;
+}
+word{
+  float: left;
+  background-color:  #EEE3E1;
+  padding: 2px;
+  margin-left: 5px;
+  border-radius: 3px;
+}
+.word1{
+  height: 12px;
+  color: gray;
+  text-align: left;
+}
+.word2{
+  font-size: 20px;
+  height: 20px;
+  text-align: left;
+  margin-top: 5px;
+}
+.intro{
+  width:35%;
+  float:left;
+  height:100%
+}
+.tupian{
+  width:80%;
+  height:80%;
+  margin-left:5%;
+  margin-top:10%
+}
+.tupian1{
+  width:30%;
+  float:left;
+  height:100%
+}
+.addblock{
+  background-color:#EEE3E1;
+  width:100%;
+  height:150px
+}
