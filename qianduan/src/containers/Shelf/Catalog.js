@@ -16,7 +16,7 @@ export default class Catalog extends Component {
     time = this.props.match.params.time;
     let text1 = {bookId:id,bookTime:time} //获取数据
     let send1 = JSON.stringify(text1);   //重要！将对象转换成json字符串
-    fetch(`http://127.0.0.1:8001/getcatalog`,{   //Fetch方法y
+    fetch(`http://127.0.0.1:3001/users/getcatalog`,{   //Fetch方法y
       method: 'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: send1

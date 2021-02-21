@@ -24,7 +24,6 @@ import Rank from '../containers/My/Rank'
 import UpdateUser from '../containers/My/Update'
 import Signin from '../containers/My/SignIn'
 import Help from '../containers/My/Help'
-import Pa from './../containers/Shelf/Pa';
 import Xiangxi from './../containers/common/Xiangxi';
 import Booktime from './../containers/Shelf/Booktime';
 export default class Bottom extends Component {
@@ -80,7 +79,6 @@ export default class Bottom extends Component {
         <Route path='/detail' component={Detail}/>
         <Route path={`/content/:id/:time`} component={Content}/>
         <Route path='/catalog/:id/:time' component={Catalog}/>
-        <Route path='/pa' component={Pa}/>
         <Route path={`/xiangxi/:id`} component={Xiangxi}/>
         <Route path={`/booktime/:id`} component={Booktime}/>
         <Route path='/market' component={Market}/>

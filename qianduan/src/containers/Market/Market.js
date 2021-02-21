@@ -59,7 +59,7 @@ export default class Shelf extends Component {
     }
     var logif =  sessionStorage.getItem("logif");
     console.log(logif);
-    fetch('http://localhost:8001/all')
+    fetch('http://127.0.0.1:3001/users/all')
       .then((res)=>res.json())
       .then((res)=>{
         var tuijian = [];

@@ -23,7 +23,7 @@ export default class Booktime extends Component {
     console.log(id)
     let text = {bookId:id} //获取数据
     let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-    fetch(`http://127.0.0.1:8001/xiangxi`,{   //Fetch方法y
+    fetch(`http://127.0.0.1:3001/users/xiangxi`,{   //Fetch方法y
       method: 'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: send
@@ -37,7 +37,7 @@ export default class Booktime extends Component {
         })
       }
     )
-    fetch(`http://127.0.0.1:8001/getdate`,{   //Fetch方法y
+    fetch(`http://127.0.0.1:3001/users/getdate`,{   //Fetch方法y
       method: 'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: send
@@ -56,7 +56,7 @@ export default class Booktime extends Component {
         })
       }
     )
-    fetch(`http://127.0.0.1:8001/getall`,{   //Fetch方法y
+    fetch(`http://127.0.0.1:3001/users/getall`,{   //Fetch方法y
       method: 'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: send

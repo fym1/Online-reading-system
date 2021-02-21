@@ -48,7 +48,7 @@ export default class SignIn extends Component {
             // localStorage.setItem('click',that.state.isClick);
             let text = {userName:this.state.username,updateTime:new Date(),taskId:1,taskContent:'签到',taskScore:10,phone:this.state.phone} //获取数据
             let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-            fetch(`http://127.0.0.1:8001/getscore`,{   //Fetch方法y
+            fetch(`http://127.0.0.1:3001/users/getscore`,{   //Fetch方法y
                 method: 'POST',
                 headers: {'Content-Type': 'application/json; charset=utf-8'},
                 body: send
@@ -83,7 +83,7 @@ export default class SignIn extends Component {
         })
         let text = {userName:this.state.username,updateTime:new Date(),taskId:1,taskContent:'发帖',taskScore:10,phone:this.state.phone} //获取数据
         let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-        fetch(`http://127.0.0.1:8001/getscore`,{   //Fetch方法y
+        fetch(`http://127.0.0.1:3001/users/getscore`,{   //Fetch方法y
                 method: 'POST',
                 headers: {'Content-Type': 'application/json; charset=utf-8'},
                 body: send
@@ -109,7 +109,7 @@ export default class SignIn extends Component {
         })
         let text = {userName:this.state.username,updateTime:new Date(),taskId:1,taskContent:'搜索攻略',taskScore:10,phone:this.state.phone} //获取数据
         let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-        fetch(`http://127.0.0.1:8001/getscore`,{   //Fetch方法y
+        fetch(`http://127.0.0.1:3001/users/getscore`,{   //Fetch方法y
                 method: 'POST',
                 headers: {'Content-Type': 'application/json; charset=utf-8'},
                 body: send
@@ -127,7 +127,7 @@ export default class SignIn extends Component {
             )
     }
     componentDidMount(){
-        fetch('http://localhost:8001/getscore')
+        fetch('http://127.0.0.1:3001/users/getscore')
         .then((res)=>res.json())
         .then((res)=>{
             console.log(res)

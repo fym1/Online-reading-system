@@ -50,7 +50,7 @@ class Register extends Component {
         if(this.state.checkNum==""){
             Toast.fail('验证码不能为空', 1);
         }else if(this.state.checkNum == this.state.trueNum){
-            fetch(`http://127.0.0.1:8001/register`,{   //Fetch方法y
+            fetch(`http://127.0.0.1:3001/users/register`,{   //Fetch方法y
                 method: 'POST',
                 headers: {'Content-Type': 'application/json; charset=utf-8'},
                 body: send

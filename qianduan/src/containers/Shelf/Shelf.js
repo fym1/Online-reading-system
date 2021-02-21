@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Popover, NavBar,Grid,Toast} from 'antd-mobile';
 import {Link,Route,Redirect} from 'react-router-dom';
-import Pa from './Pa';
 export default class Shelf extends Component {
   constructor(props){
     super(props);
@@ -16,7 +15,7 @@ export default class Shelf extends Component {
     let userphone = sessionStorage.getItem("user");
     let text = {userPhone:userphone} //获取数据
     let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-    fetch(`http://127.0.0.1:8001/mybooks`,{   //Fetch方法y
+    fetch(`http://127.0.0.1:3001/users/mybooks`,{   //Fetch方法y
       method: 'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: send
@@ -37,7 +36,7 @@ export default class Shelf extends Component {
     )
     let text1 = {userPhone:sessionStorage.getItem("user")} //获取数据
     let send1 = JSON.stringify(text1);   //重要！将对象转换成json字符串
-    fetch(`http://127.0.0.1:8001/getlast`,{   //Fetch方法y
+    fetch(`http://127.0.0.1:3001/users/getlast`,{   //Fetch方法y
       method: 'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: send1

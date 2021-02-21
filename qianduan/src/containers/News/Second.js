@@ -21,7 +21,7 @@ export default class Second extends Component {
     }
   }
   componentDidMount(){
-    fetch('http://localhost:8001/updatebook')
+    fetch('http://127.0.0.1:3001/users/updatebook')
       .then((res)=>res.json())
       .then((res)=>{
         console.log(res);

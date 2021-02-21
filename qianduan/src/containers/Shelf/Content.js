@@ -45,7 +45,7 @@ export default class Content extends Component {
     time = this.props.match.params.time;
     let text = {bookId:id} //获取数据
     let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-    fetch(`http://127.0.0.1:8001/xiangxi`,{   //Fetch方法y
+    fetch(`http://127.0.0.1:3001/users/xiangxi`,{   //Fetch方法y
       method: 'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: send
@@ -62,7 +62,7 @@ export default class Content extends Component {
     )
     let text1 = {bookId:id,bookTime:time} //获取数据
     let send1 = JSON.stringify(text1);   //重要！将对象转换成json字符串
-    fetch(`http://127.0.0.1:8001/content`,{   //Fetch方法y
+    fetch(`http://127.0.0.1:3001/users/content`,{   //Fetch方法y
       method: 'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: send1
@@ -135,7 +135,7 @@ export default class Content extends Component {
             console.log(readProgress);
             let text = {userPhone:userPhone,bookId:bookId,readDate:readDate,bookName:bookName,bookPage:bookPage,readProgress:readProgress,bookTime:time} //获取数据
             let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-            fetch(`http://127.0.0.1:8001/addrecord`,{   //Fetch方法y
+            fetch(`http://127.0.0.1:3001/users/addrecord`,{   //Fetch方法y
               method: 'POST',
               headers: {'Content-Type': 'application/json; charset=utf-8'},
               body: send

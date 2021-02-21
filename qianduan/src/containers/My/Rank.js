@@ -12,7 +12,7 @@ export default class Rank extends Component {
     }
     componentDidMount(){
         // 发起请求
-        fetch('http://localhost:8001/rank')
+        fetch('http://127.0.0.1:3001/users/rank')
         .then((res)=>res.json())
         .then((res)=>{
             var d0 = [];

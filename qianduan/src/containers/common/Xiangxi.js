@@ -49,7 +49,7 @@ export default class Xiangxi extends Component {
     id = this.props.match.params.id;
     let text = {bookId:id} //获取数据
     let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-    fetch(`http://127.0.0.1:8001/xiangxi`,{   //Fetch方法y
+    fetch(`http://127.0.0.1:3001/users/xiangxi`,{   //Fetch方法y
       method: 'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: send
@@ -107,7 +107,7 @@ export default class Xiangxi extends Component {
       }
     )
     //如果没有记录
-    fetch(`http://127.0.0.1:8001/getdate`,{   //Fetch方法y
+    fetch(`http://127.0.0.1:3001/users/getdate`,{   //Fetch方法y
       method: 'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: send
@@ -135,7 +135,7 @@ export default class Xiangxi extends Component {
         }
       }
     )
-    fetch(`http://127.0.0.1:8001/getpost`,{   //Fetch方法y
+    fetch(`http://127.0.0.1:3001/users/getpost`,{   //Fetch方法y
       method: 'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: send
@@ -158,7 +158,7 @@ export default class Xiangxi extends Component {
     //如果有记录
     let text1 = {bookId:id,userPhone:sessionStorage.getItem("user")} //获取数据
     let send1 = JSON.stringify(text1);   //重要！将对象转换成json字符串
-    fetch(`http://127.0.0.1:8001/getrecord`,{   //Fetch方法y
+    fetch(`http://127.0.0.1:3001/users/getrecord`,{   //Fetch方法y
       method: 'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: send1
@@ -198,7 +198,7 @@ export default class Xiangxi extends Component {
       let userphone = sessionStorage.getItem("user");
       let text = {bookId:id,userPhone:userphone} //获取数据
       let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-      fetch(`http://127.0.0.1:8001/addshelf`,{   //Fetch方法y
+      fetch(`http://127.0.0.1:3001/users/addshelf`,{   //Fetch方法y
         method: 'POST',
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         body: send
@@ -225,7 +225,7 @@ export default class Xiangxi extends Component {
       console.log(content);
       let text = {bookId:id,userPhone:sessionStorage.getItem('user'),postContent:content} //获取数据
       let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-      fetch(`http://127.0.0.1:8001/addpost`,{   //Fetch方法y
+      fetch(`http://127.0.0.1:3001/users/addpost`,{   //Fetch方法y
         method: 'POST',
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         body: send

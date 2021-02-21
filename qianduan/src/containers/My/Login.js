@@ -30,7 +30,7 @@ export default class Login extends Component {
         let text = {phone:this.state.phone,password:this.state.password} //获取数据
         console.log(text);
         let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-        fetch(`http://127.0.0.1:8001/`,{   //Fetch方法y
+        fetch(`http://127.0.0.1:3001/users/`,{   //Fetch方法y
             method: 'POST',
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             body: send

@@ -12,7 +12,7 @@ export default class More extends Component {
     }
     componentDidMount(){
         // 发起请求
-        fetch('http://localhost:8001/more')
+        fetch('http://127.0.0.1:3001/users/more')
         .then((res)=>res.json())
         .then((res)=>{
             this.setState({

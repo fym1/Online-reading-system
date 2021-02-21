@@ -55,7 +55,7 @@ export default class Collect extends Component {
     let userphone = sessionStorage.getItem("user");
     let text = {userPhone:userphone} //获取数据
     let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-    fetch(`http://127.0.0.1:8001/mybooks`,{   //Fetch方法y
+    fetch(`http://127.0.0.1:3001/users/mybooks`,{   //Fetch方法y
       method: 'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: send

@@ -87,7 +87,7 @@ export default class Search extends Component {
         localStorage.setItem(time,this.state.value);
         let text = {bookName:this.state.value} //获取数据
         let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-        fetch(`http://127.0.0.1:8001/search`,{   //Fetch方法y
+        fetch(`http://172.17.100.2:3001/users/search`,{   //Fetch方法y
           method: 'POST',
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           body: send
@@ -146,7 +146,7 @@ export default class Search extends Component {
       localStorage.setItem(time,this.state.value);
       let text = {bookName:this.state.value} //获取数据
       let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-      fetch(`http://127.0.0.1:8001/search`,{   //Fetch方法y
+      fetch(`http://172.17.100.2:3001/users/search`,{   //Fetch方法y
         method: 'POST',
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         body: send

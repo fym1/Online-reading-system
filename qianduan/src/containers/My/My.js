@@ -32,7 +32,7 @@ export default class My extends Component {
   componentDidMount(){
     var nowuser = sessionStorage.getItem("user");
     console.log(nowuser);
-    fetch('http://localhost:8001/my')
+    fetch('http://127.0.0.1:3001/users/my')
       .then((res)=>res.json())
       .then((res)=>{
         console.log(res);
@@ -54,7 +54,7 @@ export default class My extends Component {
       let text = {phone:nowuser} //获取数据
       console.log(text);
       let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-      fetch(`http://127.0.0.1:8001/my`,{   //Fetch方法y
+      fetch(`http://127.0.0.1:3001/users/my`,{   //Fetch方法y
         method: 'POST',
         headers: {'Content-Type': 'application/json; charset=utf-8'},
         body: send
@@ -105,7 +105,7 @@ export default class My extends Component {
   }
   render() {
     return (
-      <div style={{backgroundColor:'#fff',width:'100%',height:'1000px'}}>
+      <div style={{backgroundColor:'#fff',width:'100%',height:height}}>
         <NavBar
           mode="dark"
           style={{backgroundColor:'#EEE3E1',color:'#000',height:'60px'}}
@@ -207,13 +207,13 @@ export default class My extends Component {
             )}
           />
         </div>
-        <div className='block4'>
+        {/* <div className='block4'>
           <p style={{fontSize:'20px',textAlign:'center'}}>我的阅读情况</p>
           <div style={{width:'100%',height:'150px'}}>
             <div className='xian'></div>
             <div className='bing'></div>
           </div>
-        </div>
+        </div> */}
         <div style={{marginBottom:'80px',width:'100%',height:'350px',marginTop:'20px'}}>
             <List>
               <Item1 onClick={this.logout.bind(this)}>退出登录</Item1>

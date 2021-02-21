@@ -37,7 +37,7 @@ export default class Update extends Component {
         this.signChange = this.signChange.bind(this);
     }
     componentDidMount(){
-        fetch('http://localhost:8001/updateuser')
+        fetch('http://127.0.0.1:3001/users/updateuser')
         .then((res)=>res.json())
         .then((res)=>{
             var data={};
@@ -130,7 +130,7 @@ export default class Update extends Component {
         }
         let send = JSON.stringify(text);   //重要！将对象转换成json字符串
         console.log(text);
-        fetch(`http://127.0.0.1:8001/updateuser`,{   //Fetch方法y
+        fetch(`http://127.0.0.1:3001/users/updateuser`,{   //Fetch方法y
             method: 'POST',
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             body: send

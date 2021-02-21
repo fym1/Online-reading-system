@@ -60,7 +60,7 @@ export default class All extends Component {
     }
   }
   componentDidMount(){
-    fetch('http://localhost:8001/all')
+    fetch('http://127.0.0.1:3001/users/all')
       .then((res)=>res.json())
       .then((res)=>{
         for(var i = 0;i<res.length;i++){
@@ -84,7 +84,7 @@ export default class All extends Component {
     let page = this.props.match.params.id;
     let text = {bookType:value} //获取数据
     let send = JSON.stringify(text);   //重要！将对象转换成json字符串
-    fetch(`http://127.0.0.1:8001/market/bookType`,{   //Fetch方法y
+    fetch(`http://127.0.0.1:3001/users/market/bookType`,{   //Fetch方法y
       method: 'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: send
