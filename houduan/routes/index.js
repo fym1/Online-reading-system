@@ -787,6 +787,17 @@ router.get('/score/edit1', function(req, res, next) {
   });
 });
 //系统管理
+/**系统管理 */
+router.get('/sys', function(req, res, next) {
+  con.query("select * from admininflist",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('System/sys', {title:'list'});   
+    }
+  });
+});
 /*显示管理员信息*/
 router.get('/system', function(req, res, next) {
   con.query("select * from admininflist where adminPhone=?",[manager],function(err,result){
@@ -795,6 +806,16 @@ router.get('/system', function(req, res, next) {
     }
     else{
       res.render('System/system', { manager: result[0] });   
+    }
+  });
+});
+router.get('/syslist', function(req, res, next) {
+  con.query("select * from admininflist ",function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('System/syslist', { sysList:result });   
     }
   });
 });

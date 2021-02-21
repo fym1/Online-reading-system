@@ -33,7 +33,7 @@
             <a href="/score">O币管理</a>
         </div>
         <div class="nav">
-            <a href="/system">系统管理</a>
+            <a href="/sys">系统管理</a>
         </div>
     </div>
     <div class="right">
@@ -47,7 +47,11 @@
                 <% for(var i = 0 ; i < subList.length; i++) {%>
                     <li>
                         <p class='ListInbody'><%= i+1 %></p>
-                        <p class='ListInbody'><%= subList[i]["readProgress"] %></p>
+                         <%if(subList[i]["readProgress"] !=null){%>
+                            <p class='ListInbody'><%= subList[i]["readProgress"] %></p>
+                            <%}else{%>
+                                <p class='ListInbody'>暂无</p>
+                                <%}%>
                         <p class='ListInbody'><%= subList[i]["readDate"] %></p>
 
                     </li>
