@@ -613,6 +613,26 @@ router.post('/dellast', function (req, res) {  //接收POST请求
       }
   })
 })
+router.post('/more', function (req, res) {  //接收POST请求
+    /**获取请求体数据 */
+    let data = req.body;   //解析body中的信息
+    console.log(data);
+    phonenum=data.phone;
+    /**连接数据库 */
+    var con = mysql.createConnection(dbconfig);
+    con.connect();
+    console.log(data);
+    // select * from table where dateline IN ( select max(dateline) from table GROUP BY uid ) ORDER BY dateline DESC
+    con.query('select * from slist where userPhone=?',[data.userPhone],(err,result)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+            console.log(result)
+        }
+    })
+})
 // var server = router.listen(3001, function () {
 //   var host = server.address().address
 //   var port = server.address().port

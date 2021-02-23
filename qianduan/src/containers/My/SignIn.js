@@ -180,7 +180,7 @@ export default class SignIn extends Component {
                     <div onClick={this.successToast}>
                         <Item >每日签到</Item>
                     </div>                    
-                    <Item extra="去读书" arrow="horizontal" onClick={() => this.jump1('/')}>阅读时长超过30min</Item>
+                    <Item extra="去读书" arrow="horizontal" onClick={() => this.jump1('/')}>阅读期刊</Item>
                     <Item extra="去添加书籍" arrow="horizontal" onClick={() => this.jump2('/')}>添加书籍</Item>
                 </List>
             </div>
