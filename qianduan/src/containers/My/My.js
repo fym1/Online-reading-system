@@ -14,7 +14,7 @@ export default class My extends Component {
       data1:[
         {class:'iconfont icon-ziyuan',tit:'书籍',num:0,color:'#FF8E14',dan:'本'},
         {class:'iconfont icon-pinglun',tit:'评论',num:0,color:'#67E5FB',dan:'个'},
-        {class:'iconfont icon-jifen',tit:'积分',num:0,color:'#DC5A80',dan:'分'},
+        {class:'iconfont icon-jifen',tit:'O币',num:0,color:'#DC5A80',dan:'枚'},
       ],
       // 积分排名
       data2:[],
@@ -71,6 +71,61 @@ export default class My extends Component {
           })
         }
       )
+    }
+    if(sessionStorage.getItem("user") != null || sessionStorage.getItem("logif") == true){
+      let userphone = sessionStorage.getItem("user");
+      let text = {userPhone:userphone} //获取数据
+      let send = JSON.stringify(text);   //重要！将对象转换成json字符串
+      fetch(`http://127.0.0.1:3001/users/mybooks`,{   //Fetch方法y
+        method: 'POST',
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        body: send
+      })
+      .then(res => res.json())
+      .then(
+        data => {
+          var data1 = this.state.data1;
+          data1[0].num = data.length
+          this.setState({
+            data1:data1
+          }) 
+        }
+      )
+      fetch(`http://127.0.0.1:3001/users/getmypost`,{   //Fetch方法y
+        method: 'POST',
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        body: send
+      })
+      .then(res => res.json())
+      .then(
+        data => {
+          var data2 = this.state.data1;
+          data2[1].num = data.length
+          this.setState({
+            data1:data2
+          }) 
+        }
+      )
+      let text1 = {userPhone:sessionStorage.getItem("user")} //获取数据
+      let send1 = JSON.stringify(text1);   //重要！将对象转换成json字符串
+          fetch(`http://127.0.0.1:3001/users/getmyscore`,{   //Fetch方法y
+          method: 'POST',
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          body: send1
+      })
+      .then(res => res.json())
+      .then(
+          data => {
+            var data3 = this.state.data1;
+            data3[2].num = data[0].sum
+            this.setState({
+              data1:data3
+            }) 
+          }
+      )
+    }
+    else{
+      console.log('未登录');
     }
   }
   onSelect = (opt) => {
@@ -165,7 +220,7 @@ export default class My extends Component {
                 </div>
               </div>
               <div className={this.state.logif?"signin":"touxiang00"}>
-                <div onClick={() => this.jump1('/getscore')}>签到领积分</div>
+                <div onClick={() => this.jump1('/getscore')}>签到领O币</div>
               </div>
             </div>
           </div>     
@@ -202,7 +257,7 @@ export default class My extends Component {
                   <img src={dataItem.userImage} alt="暂无" style={{height:'30px',width:'30px',marginTop:'3%',borderRadius:'50%',float:"left",marginLeft:'3%',overflow:'hidden'}}/>
                 </div>
                 <p style={{float:'left',marginLeft:'20%'}}>{dataItem.userName}</p>
-                <p style={{float:'right',marginRight:'15%'}}>{dataItem.sum}分</p>
+                <p style={{float:'right',marginRight:'15%'}}>{dataItem.sum}枚</p>
               </div>
             )}
           />

@@ -73,7 +73,9 @@ export default class Last extends Component {
           var progress = result[j].readProgress*100;
           progress = String(progress).substr(0,5);
           progress = progress+'%';
-          result[j].readProgress = progress
+          var readdate = String(result[j].readDate).slice(0,11);
+          result[j].readProgress = progress;
+          result[j].readDate = readdate;
         }
         this.setState({
           list:result,
@@ -87,6 +89,22 @@ export default class Last extends Component {
   classes(value){
     console.log(value)
   }
+  del(value){
+    let text1 = {userPhone:sessionStorage.getItem("user"),bookId:value} //获取数据
+    let send1 = JSON.stringify(text1);   //重要！将对象转换成json字符串
+    fetch(`http://127.0.0.1:3001/users/dellast`,{   //Fetch方法y
+      method: 'POST',
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      body: send1
+    })
+    .then(res => res.json())
+    .then(
+      data => {
+        console.log(data);
+        window.location.reload()
+      }
+    )
+  }
   render() {
     return (
       <div style={{width:'100%',height:height,backgroundColor:'#EEE3E1'}}>
@@ -99,7 +117,7 @@ export default class Last extends Component {
         </NavBar>
         <Grid data={this.state.list}
           columnNum={1}
-          itemStyle={{height:'150px',width:'100%',backgroundColor:'#EEE3E1'}}
+          itemStyle={{height:'180px',width:'100%',backgroundColor:'#EEE3E1'}}
           renderItem={dataItem=>(
             <div style={{marginTop:'0px',backgroundColor:'#fff',width:'100%',height:'100%'}}>
               <div style={{width:'30%',float:'left',height:'100%'}}>
@@ -110,10 +128,14 @@ export default class Last extends Component {
                 <p className='word1'>作者：{dataItem.bookWriter?dataItem.bookWriter:'暂无'}</p>
                 <p className='word1'>类别：{dataItem.bookType}</p>
                 <p className='word1'>上线日期：{dataItem.bookDate}</p>
+                <p className='word1'>阅读日期：{dataItem.readDate}</p>
               </div>
-              <div style={{width:'25%',float:'left',height:'100%'}}>
+              <div style={{width:'25%',float:'left',height:'100%',paddingTop:'20px'}}>
                 <p className='word3'>{dataItem.readProgress}</p>
                 <p className='word4'>已完结</p>
+              </div>
+              <div style={{width:'10%',float:'left',height:'100%'}}>
+                <div className="iconfont icon-shanchu" id="del" style={{width:'100%',marginTop:'9px',marginRight:'-100%'}} onClick={() => this.del(dataItem.bookId)}></div>
               </div>
             </div>
           )}

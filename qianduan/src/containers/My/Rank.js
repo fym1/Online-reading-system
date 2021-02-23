@@ -48,7 +48,7 @@ export default class Rank extends Component {
                                 <img src={dataItem.userImage} alt='该用户暂时没有设置头像' style={{height:'30px',width:'30px',marginTop:'3%',borderRadius:'50%',float:"left",marginLeft:'3%',overflow:'hidden'}}/>
                             </div>
                             <p style={{float:'left',marginLeft:'10%'}}>{dataItem.userName}</p>
-                            <p style={{float:'right',marginRight:'15%'}}>{dataItem.sum}分</p>
+                            <p style={{float:'right',marginRight:'15%'}}>{dataItem.sum}枚</p>
                         </div>
                     )}
                 />

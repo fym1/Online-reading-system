@@ -8,7 +8,9 @@ export default class Shelf extends Component {
     this.state = {
       tui:['./images/tui1.jpg','./images/tui2.jpg','./images/tui3.jpg'],
       logif:logif,
-      shelf:[]
+      shelf:[],
+      shelfempty:0,
+      lastempty:0
     }
   }
   componentDidMount(){
@@ -27,6 +29,16 @@ export default class Shelf extends Component {
         // for(var i = 0;i < data.length;i++){
         //   shelf1.push(data[i].bookImage);
         // }
+        if(data.length==0){
+          this.setState({
+            shelfempty:0,
+          }) 
+        }
+        else{
+          this.setState({
+            shelfempty:data.length,
+          }) 
+        }
         this.setState({
           shelf:data.slice(0,3),
           shelflen:data.length
@@ -54,6 +66,16 @@ export default class Shelf extends Component {
           }
         }
         console.log(result);
+        if(result.length==0){
+          this.setState({
+            lastempty:0,
+          }) 
+        }
+        else{
+          this.setState({
+            lastempty:result.length,
+          }) 
+        }
         this.setState({
           tui:result.slice(0,3),
           lastlen:result.length
@@ -74,6 +96,10 @@ export default class Shelf extends Component {
     }
   }
   jump(value){
+    this.props.history.push(value);
+    // this.props.history.push({pathname:value,query:{page:this.state.page,shelf:'/'}})
+  }
+  jump1(value){
     // this.props.history.push(value);
     this.props.history.push({pathname:value,query:{page:this.state.page,shelf:'/'}})
   }
@@ -117,14 +143,7 @@ export default class Shelf extends Component {
           <div style={{width:'100%',height:'205px',borderBottom:'1px grey solid',marginTop:'10px',backgroundColor:'#EEE3E1'}}>
             <div style={{width:'100%',height:'35px',borderLeft:'3px #F54577 solid',marginTop:'5px'}}>
               <p style={{fontSize:'20px',color:'#F54577',marginLeft:'5px',width:'100px',height:'20px',float:'left'}}>最近阅读</p>
-              <p className={this.state.logif?"login-yes-p":"login-yes"} onClick={() => {
-                if(this.state.lastlen>2){
-                  this.jump("/last");
-                }
-                else{
-                  Toast.fail('已无更多最近阅读', 1);
-                }
-              }}>更多></p>
+              <p className={this.state.logif?"login-yes-p":"login-yes"} onClick={() => {this.jump("/last");}}>更多></p>
             </div>
             <div style={{width:'100%',height:'155px',marginTop:'10px'}}>
               <Grid data={this.state.tui}
@@ -132,9 +151,11 @@ export default class Shelf extends Component {
                 hasLine={false}
                 itemStyle={this.state.logif?{backgroundColor:'#EEE3E1'}:{display:'none'}}
                 renderItem={dataItem=>(
-                  <img src={dataItem.bookImage} style={{width:'85%',height:'155px'}} onClick={() => this.jump(`/xiangxi/${dataItem.bookId}`)}/>
+                  <img src={dataItem.bookImage} style={{width:'85%',height:'155px'}} onClick={() => this.jump1(`/xiangxi/${dataItem.bookId}`)}/>
                 )}
               />
+              <p className={this.state.lastempty!=0?"login-yes":"login-no"}>暂无最近阅读，去书城看看吧~~</p>
+              <p className={this.state.lastempty!=0?"login-yes":"login-no"} onClick={() => this.jump('/shelf')}>去书城</p>
               <p className={this.state.logif?"login-yes":"login-no"}>登录后即可获取阅读记录哦~~</p>
               <p className={this.state.logif?"login-yes":"login-no"} onClick={() => this.jump('/login')}>去登录></p>
             </div>
@@ -142,14 +163,7 @@ export default class Shelf extends Component {
           <div style={{width:'100%',height:'205px',borderBottom:'1px grey solid',marginTop:'10px',backgroundColor:'#EEE3E1'}}>
             <div style={{width:'100%',height:'35px',borderLeft:'3px #F54577 solid',marginTop:'5px'}}>
               <p style={{fontSize:'20px',color:'#F54577',marginLeft:'5px',width:'100px',height:'20px',float:'left'}}>我的书架</p>
-              <p className={this.state.logif?"login-yes-p":"login-yes"} onClick={() => {
-                if(this.state.shelflen>2){
-                  this.jump("/collect");
-                }
-                else{
-                  Toast.fail('书架中已无更多书籍', 1);
-                }
-              }}>更多></p>
+              <p className={this.state.logif?"login-yes-p":"login-yes"} onClick={() => {this.jump("/collect");}}>更多></p>
             </div>
             <div style={{width:'100%',height:'155px',marginTop:'10px'}}>
               <Grid data={this.state.shelf}
@@ -158,32 +172,16 @@ export default class Shelf extends Component {
                 itemStyle={this.state.logif?{backgroundColor:'#EEE3E1'}:{display:'none'}}
                 renderItem={dataItem=>(
                   // <Link to={`/xiangxi/${dataItem.bookId}`}>
-                    <img src={dataItem.bookImage} style={{width:'85%',height:'155px'}} onClick={() => this.jump(`/xiangxi/${dataItem.bookId}`)}/>
+                    <img src={dataItem.bookImage} style={{width:'85%',height:'155px'}} onClick={() => this.jump1(`/xiangxi/${dataItem.bookId}`)}/>
                   // </Link>
                 )}
               />
+              <p className={this.state.shelfempty!=0?"login-yes":"login-no"}>书架中暂无书籍，去书城看看吧~~</p>
+              <p className={this.state.shelfempty!=0?"login-yes":"login-no"} onClick={() => this.jump('/shelf')}>去书城</p>
               <p className={this.state.logif?"login-yes":"login-no"}>登录后即可建立书架哦~~</p>
               <p className={this.state.logif?"login-yes":"login-no"} onClick={() => this.jump('/login')}>去登录></p>
             </div>
           </div>
-          {/* <div style={{width:'100%',height:'205px',borderBottom:'1px grey solid',marginTop:'10px',backgroundColor:'#EEE3E1'}}>
-            <div style={{width:'100%',height:'35px',borderLeft:'3px #F54577 solid',marginTop:'5px'}}>
-              <p style={{fontSize:'20px',color:'#F54577',marginLeft:'5px',width:'100px',height:'20px',float:'left'}}>本地导入</p>
-              <p className={this.state.logif?"login-yes-p":"login-yes"} onClick={() => this.jump('/last')}>更多></p>
-            </div>
-            <div style={{width:'100%',height:'155px',marginTop:'10px'}}>
-              <Grid data={this.state.tui}
-                columnNum={3}
-                hasLine={false}
-                itemStyle={this.state.logif?{backgroundColor:'#EEE3E1'}:{display:'none'}}
-                renderItem={dataItem=>(
-                  <img src={dataItem} style={{width:'85%',height:'155px'}}/>
-                )}
-              />
-              <p className={this.state.logif?"login-yes":"login-no"}>登录后即可本地导入哦~~</p>
-              <p className={this.state.logif?"login-yes":"login-no"} onClick={() => this.jump('/login')}>去登录></p>
-            </div>
-          </div> */}
         </div>
       </div>
     )

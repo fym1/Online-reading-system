@@ -63,6 +63,10 @@ export default class Collect extends Component {
     .then(res => res.json())
     .then(
       data => {
+        for(var j =0; j<data.length; j++){
+          var subdate = String(data[j].subDate).slice(0,10);
+          data[j].subDate = subdate;
+        }
         this.setState({
           list:data,
           ben:data.length
@@ -77,6 +81,22 @@ export default class Collect extends Component {
   classes(value){
     console.log(value)
   }
+  del(value){
+    let text1 = {userPhone:sessionStorage.getItem("user"),bookId:value} //获取数据
+    let send1 = JSON.stringify(text1);   //重要！将对象转换成json字符串
+    fetch(`http://127.0.0.1:3001/users/delbook`,{   //Fetch方法y
+      method: 'POST',
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      body: send1
+    })
+    .then(res => res.json())
+    .then(
+      data => {
+        console.log(data);
+        window.location.reload()
+      }
+    )
+  }
   render() {
     return (
       <div style={{width:'100%',height:height,backgroundColor:'#EEE3E1'}}>
@@ -87,19 +107,19 @@ export default class Collect extends Component {
           style={{backgroundColor:'#EEE3E1',color:'#000',height:'60px',borderBottom:'1px gray solid'}}
           >我的书架
         </NavBar>
-        <div style={{width:'100%',height:'60px',padding:'10px'}}>
-          <div style={{border:'1px gray solid',width:'90px',height:'40px',padding:'7px 10px 7px 10px',borderRadius:'5px',backgroundColor:'#fff',float:'left',marginLeft:'10px'}}>
+        <div style={{width:'100%',height:'40px',padding:'0px'}}>
+          {/* <div style={{border:'1px gray solid',width:'90px',height:'40px',padding:'7px 10px 7px 10px',borderRadius:'5px',backgroundColor:'#fff',float:'left',marginLeft:'10px'}}>
             <Dropdown overlay={this.state.menu} trigger={['click']}>
               <a className="ant-dropdown-link" onClick={this.class.bind(this)}>
                 点我分类<DownOutlined />
               </a>
             </Dropdown>
-          </div>
-          <p style={{float:'right',marginRight:'20px',fontSize:'18px',marginTop:'5px',height:'20px'}}>共{this.state.ben}本</p>
+          </div> */}
+          <div style={{float:'right',marginRight:'20px',fontSize:'18px',marginTop:'5px',height:'20px'}}>共{this.state.ben}本</div>
         </div>
         <Grid data={this.state.list}
           columnNum={1}
-          itemStyle={{height:'150px',width:'100%',backgroundColor:'#EEE3E1'}}
+          itemStyle={{height:'180px',width:'100%',backgroundColor:'#EEE3E1'}}
           renderItem={dataItem=>(
             <div style={{marginTop:'0px',backgroundColor:'#fff',width:'100%',height:'100%'}}>
               <div style={{width:'30%',float:'left',height:'100%'}}>
@@ -110,10 +130,13 @@ export default class Collect extends Component {
                 <p className='word1'>作者：{dataItem.bookWriter?dataItem.bookWriter:'暂无'}</p>
                 <p className='word1'>类别：{dataItem.bookType}</p>
                 <p className='word1'>上线日期：{dataItem.bookDate}</p>
+                <p className='word1'>订阅日期：{dataItem.subDate}</p>
               </div>
-              <div style={{width:'25%',float:'left',height:'100%'}}>
-                <p className='word3'>{dataItem.readProgress}</p>
+              <div style={{width:'25%',float:'left',height:'100%',paddingTop:'11%'}}>
                 <p className='word4'>已完结</p>
+              </div>
+              <div style={{width:'10%',float:'left',height:'100%'}}>
+                <div className="iconfont icon-shanchu" id="del" style={{width:'100%',marginTop:'9px',marginRight:'-100%'}} onClick={() => this.del(dataItem.bookId)}></div>
               </div>
             </div>
           )}

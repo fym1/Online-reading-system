@@ -31,7 +31,6 @@ router.get('/my',function(req,res,next){
             console.log(err);
         }
         else{
-            console.log(result);
             res.send(result);
         }
     })
@@ -63,7 +62,6 @@ router.get('/rank',function(req,res,next){
         }
         else{
             console.log("111111111")
-            console.log(result);
             res.send(result);
         }
     })
@@ -77,7 +75,6 @@ router.get('/more',function(req,res,next){
             console.log(err);
         }
         else{
-            console.log(result);
             res.send(result);
         }
     })
@@ -111,8 +108,7 @@ router.post('/getscore', function (req, res) {  //接收POST请求
           console.log(err);
         }
         else{
-          //显示到页面--渲染方法--render,
-          console.log(result);
+          //显示到页面--渲染方法--render
             con.query("update score set sum=?,updateTime=? where userName=?",[result[0].sumsum,new Date(),data.userName],function(err,result){
             if(err){
               console.log(err);
@@ -184,7 +180,7 @@ router.post('/register',(req,res)=>{
                         throw err;
                     }
                     else{
-                        console.log(result);    
+              
                     }
                 })
               }
@@ -243,15 +239,17 @@ router.get('/updateuser',function(req,res,next){
         }
     })
 })
-router.get('/getscore',function(req,res,next){
+router.post('/getmyscore',function(req,res,next){
+    let data = req.body;
+    let message1 = {success:true};
+    let message2 = {success:false};
     var con = mysql.createConnection(dbconfig);
     con.connect();
-    con.query('select * from score where userPhone=?',[phonenum],(err,result)=>{
+    con.query('select * from score where userPhone=?',[data.userPhone],(err,result)=>{
         if(err){
             console.log(err);
         }
         else{
-            console.log(result);
             res.send(result);
         }
     })
@@ -557,6 +555,63 @@ router.post('/addpost', function (req, res) {  //接收POST请求
             res.send(message1);
         }
     })
+})
+router.post('/getmypost', function (req, res) {  //接收POST请求
+  /**获取请求体数据 */
+  let data = req.body;   //解析body中的信息
+  console.log(data);
+  phonenum=data.phone;
+  /**连接数据库 */
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  console.log(data);
+  con.query('select * from post where userPhone = ?',[data.userPhone],(err,result)=>{
+      if(err){
+          console.log(err);
+      }
+      else{
+          res.send(result);
+          console.log(result)
+      }
+  })
+})
+router.post('/delbook', function (req, res) {  //接收POST请求
+  /**获取请求体数据 */
+  let data = req.body;   //解析body中的信息
+  console.log(data);
+  phonenum=data.phone;
+  /**连接数据库 */
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  console.log(data);
+  con.query('delete from subscribe where userPhone=? and bookId = ?',[data.userPhone,data.bookId],(err,result)=>{
+      if(err){
+          console.log(err);
+      }
+      else{
+          res.send(result);
+          console.log(result)
+      }
+  })
+})
+router.post('/dellast', function (req, res) {  //接收POST请求
+  /**获取请求体数据 */
+  let data = req.body;   //解析body中的信息
+  console.log(data);
+  phonenum=data.phone;
+  /**连接数据库 */
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  console.log(data);
+  con.query('delete from record where userPhone=? and bookId = ?',[data.userPhone,data.bookId],(err,result)=>{
+      if(err){
+          console.log(err);
+      }
+      else{
+          res.send(result);
+          console.log(result)
+      }
+  })
 })
 // var server = router.listen(3001, function () {
 //   var host = server.address().address

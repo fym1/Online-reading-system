@@ -46,7 +46,7 @@ export default class SignIn extends Component {
             const seconds = (60-now2)*1000;
             const time = hour+minutes+seconds;
             // localStorage.setItem('click',that.state.isClick);
-            let text = {userName:this.state.username,updateTime:new Date(),taskId:1,taskContent:'签到',taskScore:10,phone:this.state.phone} //获取数据
+            let text = {userName:this.state.username,updateTime:new Date(),taskId:1,taskContent:'签到',taskScore:10,phone:sessionStorage.getItem("user")} //获取数据
             let send = JSON.stringify(text);   //重要！将对象转换成json字符串
             fetch(`http://127.0.0.1:3001/users/getscore`,{   //Fetch方法y
                 method: 'POST',
@@ -81,7 +81,8 @@ export default class SignIn extends Component {
         this.setState({
             score:s 
         })
-        let text = {userName:this.state.username,updateTime:new Date(),taskId:1,taskContent:'发帖',taskScore:10,phone:this.state.phone} //获取数据
+        let text = {userName:this.state.username,updateTime:new Date(),taskId:1,taskContent:'去读书',taskScore:10,phone:sessionStorage.getItem("user")} //获取数据
+        console.log(text);
         let send = JSON.stringify(text);   //重要！将对象转换成json字符串
         fetch(`http://127.0.0.1:3001/users/getscore`,{   //Fetch方法y
                 method: 'POST',
@@ -107,7 +108,7 @@ export default class SignIn extends Component {
         this.setState({
             score:s 
         })
-        let text = {userName:this.state.username,updateTime:new Date(),taskId:1,taskContent:'搜索攻略',taskScore:10,phone:this.state.phone} //获取数据
+        let text = {userName:this.state.username,updateTime:new Date(),taskId:1,taskContent:'去添加书籍',taskScore:10,phone:sessionStorage.getItem("user")} //获取数据
         let send = JSON.stringify(text);   //重要！将对象转换成json字符串
         fetch(`http://127.0.0.1:3001/users/getscore`,{   //Fetch方法y
                 method: 'POST',
@@ -127,19 +128,27 @@ export default class SignIn extends Component {
             )
     }
     componentDidMount(){
-        fetch('http://127.0.0.1:3001/users/getscore')
-        .then((res)=>res.json())
-        .then((res)=>{
-            console.log(res)
-            let tupian = '';
-            (res[0].userImage==null)?tupian="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png":tupian=res[0].userImage
-            this.setState({
-                username:res[0].userName,
-                score:res[0].sum,
-                phone:res[0].userPhone,
-                img:tupian
-            })
+        let text1 = {userPhone:sessionStorage.getItem("user")} //获取数据
+        let send1 = JSON.stringify(text1);   //重要！将对象转换成json字符串
+            fetch(`http://127.0.0.1:3001/users/getmyscore`,{   //Fetch方法y
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: send1
         })
+        .then(res => res.json())
+        .then(
+            res => {
+                console.log(res)
+                let tupian = '';
+                (res[0].userImage==null)?tupian="http://img2.3png.com/eebe5ef277285d150546fd77d248786d2a9e.png":tupian=res[0].userImage
+                this.setState({
+                    username:res[0].userName,
+                    score:res[0].sum,
+                    phone:res[0].userPhone,
+                    img:tupian
+                })
+            }
+        )
     }
     render() {
         return (
@@ -149,7 +158,7 @@ export default class SignIn extends Component {
                     leftContent="&lt;"
                     onLeftClick={()=>window.history.back()}
                     style={{backgroundColor:'#EEE3E1',color:'#000',height:'60px'}}
-                    >签到领积分
+                    >签到领O币
                 </NavBar>
                 <WhiteSpace></WhiteSpace>
                 <WhiteSpace></WhiteSpace>
@@ -160,8 +169,8 @@ export default class SignIn extends Component {
                     <p style={{textAlign:'center'}}>{this.state.username}</p>
                 </div>  
                 <div style={{marginLeft:'40%',marginTop:'20px'}}>
-                    <div style={{fontSize:'20px'}}>{this.state.score}分</div>
-                    <button style={{fontSize:'8px',color:'#708090',border:'none'}} onClick={()=>window.location.href='/more'}>积分></button>
+                    <div style={{fontSize:'20px'}}>{this.state.score}枚</div>
+                    <button style={{fontSize:'8px',color:'#708090',border:'none'}} onClick={()=>window.location.href='/more'}>O币></button>
                 </div>
                 <WhiteSpace></WhiteSpace>
                 <WhiteSpace></WhiteSpace>
